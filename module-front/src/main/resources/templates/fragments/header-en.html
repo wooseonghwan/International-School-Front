@@ -1,116 +1,116 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="common">
-  <header id="header">
-    <div class="container-fluid h-100">
-      <div class="h-100 d-flex justify-content-between align-items-center flex-wrap">
-        <div class="logo d-flex gap-3 flex-column flex-md-row align-items-start align-items-md-end">
-          <a href="/fo/main1-en">
-            <div class="img"><img src="/static/images/logo.svg" alt="" /></div>
-          </a>
-          <span class="d-none d-lg-block">Experts & Talents Fit to All Angles</span>
-        </div>
-        <div class="hstack gap-2 gap-lg-10 d-none d-lg-flex">
-          <!-- <ul class="nav nav-underline">
-            <li class="nav-item">
-              <a href="#" class="nav-link active" aria-current="page">가나다라</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">가나다라</a>
-            </li>
-          </ul> -->
-          <div class="hstack gap-2">
-            <a href="/fo/client-add-en">
-              <button type="button" class="btn btn-primary">
-                <div class="hstack gap-2">
-                  <i class="icon-send-18"></i>
-                  Client Registration
+    <header id="header">
+        <div class="wrap">
+            <header class="pc-header">
+                <div class="">
+                    <div class="header-top">
+                        <div class="header-logo">
+                            <a href="/fo/main1-en">
+                                <img src="/static/images/logo.svg" alt=""/>
+                            </a>
+                        </div>
+                        <ul class="gnb">
+                            <li>
+                                <a href="/fo/lunch-payment-en">Charge/Pay</a>
+                            </li>
+                            <li>
+                                <a href="/fo/lunch-payment-history-en">Charge Breakdown</a>
+                            </li>
+                            <li>
+                                <a href="/fo/use-history-en">Details Of Usage</a>
+                            </li>
+                            <li>
+                                <a href="/fo/menu-en">Menu</a>
+                            </li>
+                            <li>
+                                <a href="/fo/notice-board-en">Bulletin Board</a>
+                            </li>
+                            <li>
+                                <a href="/fo/notice-announcement-en">Notice</a>
+                            </li>
+                            <li>
+                                <a href="/fo/myinfo-en">My Profile</a>
+                            </li>
+                        </ul>
+                        <div class="header-info">
+                            <button type="button" class="btn-logout">
+                                <i class="icon-logout"></i>
+                            </button>
+                            <div class="toggle-wrapper active" id="langToggle">
+                                <div class="label">
+                                    <span class="ko">Ko</span>
+                                    <span class="en">En</span>
+                                </div>
+                                <div class="toggle-ball">en</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </button>
-            </a>
-            <a href="/fo/expert-add-en">
-              <button type="button" class="btn btn-dark">
-                <div class="hstack gap-2">
-                  <i class="icon-mail-20"></i>
-                  Expert Registration
+            </header>
+            <header class="mo-header">
+                <div class="header-top">
+                    <a href="/fo/main1-en" class="logo">
+                        <img src="/static/images/logo.svg" alt=" 로고"/>
+                    </a>
+                    <div class="d-flex align-items-center gap-4">
+                        <div class="toggle-wrapper active" id="langToggleMobile">
+                            <div class="label">
+                                <span class="ko">Ko</span>
+                                <span class="en">En</span>
+                            </div>
+                            <div class="toggle-ball">en</div>
+                        </div>
+                        <button type="button" class="menu-btn">
+                            <i class="icon-m-menu"></i>
+                        </button>
+                    </div>
                 </div>
-              </button>
-            </a>
-          </div>
-          <select class="form-select select-language">
-            <option value="KOR">KOR</option>
-            <option value="ENG" selected>ENG</option>
-          </select>
+            </header>
+            <!-- Side Menu -->
+            <div class="side-menu">
+                <div>
+                    <div class="side-menu-header">
+                        <div class="content">
+                            <p class="title">Menu</p>
+                            <button type="button" class="close-btn">
+                                <i class="icon-m-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="side-menu-body">
+                        <ul class="gnb">
+                            <li>
+                                <a href="/fo/lunch-payment-en">Charge/Pay</a>
+                            </li>
+                            <li>
+                                <a href="/fo/lunch-payment-history-en">Charge Breakdown</a>
+                            </li>
+                            <li>
+                                <a href="/fo/use-history-en">Details Of Usage</a>
+                            </li>
+                            <li>
+                                <a href="/fo/menu-en">Menu</a>
+                            </li>
+                            <li>
+                                <a href="/fo/notice-board-en">Bulletin Board</a>
+                            </li>
+                            <li>
+                                <a href="/fo/notice-announcement-en">Notice</a>
+                            </li>
+                            <li>
+                                <a href="/fo/myinfo-en">My Profile</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="side-menu-footer">
+                    <button type="button" class="btn-logout">
+                        <i class="icon-logout"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="mobile-menu d-block d-lg-none">
-          <button type="button" class="mobile-menu-btn">
-            <i class="icon-menu"></i>
-          </button>
-        </div>
-      </div>
-      <div class="mobile-menu-dropdown">
-        <div class="btn-wrap">
-          <!-- <button type="button" class="btn btn-light">
-            Platform & Network
-          </button>
-          <button type="button" class="btn btn-white">
-            About aESK
-          </button> -->
-          <a href="/fo/client-add-en">
-            <button type="button" class="btn btn-primary w-100">
-              <div class="hstack gap-2">
-                <i class="icon-send-18"></i>
-                Client Registration
-              </div>
-            </button>
-          </a>
-          <a href="/fo/expert-add-en">
-            <button type="button" class="btn btn-dark w-100">
-              <div class="hstack gap-2">
-                <i class="icon-mail-20"></i>
-                Expert Registration
-              </div>
-            </button>
-          </a>
-        </div>
-        <div class="d-flex justify-content-center">
-          <select class="form-select select-language mt-6">
-            <option value="KOR">KOR</option>
-            <option value="ENG" selected>ENG</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <script>
-      // 모든 select.language 요소에 대해 이벤트 리스너 등록
-      const languageSelectors = document.querySelectorAll('.select-language');
-
-      languageSelectors.forEach(selector => {
-        selector.addEventListener('change', function () {
-          const selectedLanguage = this.value;
-
-          // 현재 페이지 파일명 가져오기
-          const currentPath = window.location.pathname;
-          const fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-          const fileWithoutExtension = fileName.replace('.html', '');
-
-          let targetFile = '';
-
-          // ENG가 선택되면 -en 파일을, KOR가 선택되면 -en 제거한 파일로 이동
-          if (selectedLanguage === 'ENG') {
-            targetFile = fileWithoutExtension + '-en';
-          } else {
-            // 파일명이 -en으로 끝나는 경우 -en 제거
-            targetFile = fileWithoutExtension.endsWith('-en')
-                    ? fileWithoutExtension.replace('-en', '') + ''
-                    : fileWithoutExtension + '';
-          }
-
-          // 페이지 리다이렉트
-          window.location.href = targetFile;
-        });
-      });
-    </script>
-  </header>
-
+    </header>
 </th:block>
 </html>

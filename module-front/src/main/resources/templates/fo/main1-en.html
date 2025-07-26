@@ -2,384 +2,204 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/mainLayout-en}">
 <div layout:fragment="contents" th:remove="tag">
+    <body>
     <div id="wrap">
         <main id="main">
-            <section class="main-visual">
-                <div class="main-banner">
-                    <div class="dim"></div>
-                    <video src="/static/images/main-video.mp4" autoplay muted loop playsinline>
-                    </video>
-                    <div class="container desc">
-                        <div class="txt">Linking-pin knowledge/experience <br />just in time with best money-value<br />(Expertise as a Service)</div>
-                        <div class="btn-wrap">
-                            <a href="/fo/client-add-en">
-                                <button type="button" class="btn btn-primary">
-                                    <div class="hstack gap-2">
-                                        <i class="icon-send-24"></i>
-                                        Client Registration
+            <div class="main-container main-page">
+                <section class="main-slide-section">
+                    <div class="main-slider">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="text-box">
+                                        <div class="title">
+                                            <p class="brand">Cezars,</p>
+                                            <p>
+                                                A Meal That<br/>Ensures a Healthy<br/>
+                                                Day for Kids
+                                            </p>
+                                        </div>
+                                        <p class="desc">Safe and nutritious meals <br/>our promise for your children.
+                                        </p>
                                     </div>
-                                </button>
+                                    <div class="img">
+                                        <img src="/static/images/slide-img-01.svg" alt=""/>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="text-box">
+                                        <div class="title">
+                                            <p class="brand">Cezars,</p>
+                                            <p>
+                                                A Meal That<br/>Ensures a Healthy<br/>
+                                                Day for Kids
+                                            </p>
+                                        </div>
+                                        <p class="desc">Safe and nutritious meals <br/>our promise for your children.
+                                        </p>
+                                    </div>
+                                    <div class="img">
+                                        <img src="/static/images/slide-img-01.svg" alt=""/>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="text-box">
+                                        <div class="title">
+                                            <p class="brand">Cezars,</p>
+                                            <p>
+                                                A Meal That<br/>Ensures a Healthy<br/>
+                                                Day for Kids
+                                            </p>
+                                        </div>
+                                        <p class="desc">Safe and nutritious meals <br/>our promise for your children.
+                                        </p>
+                                    </div>
+                                    <div class="img">
+                                        <img src="/static/images/slide-img-01.svg" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <!-- Prev/Next Buttons -->
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="container">
+                        <div class="link-page">
+                            <a href="">
+                                <i class="icon-lunch"></i>
+                                Charge/Pay
                             </a>
-                            <a href="/fo/expert-add-en">
-                                <button type="button" class="btn btn-dark">
-                                    <div class="hstack gap-2">
-                                        <i class="icon-mail-24"></i>
-                                        Expert Registration
-                                    </div>
-                                </button>
+                            <a href="">
+                                <i class="icon-payment"></i>
+                                Charge Breakdown
+                            </a>
+                            <a href="">
+                                <i class="icon-history"></i>
+                                Details Of Usage
+                            </a>
+                            <a href="">
+                                <i class="icon-myinfo"></i>
+                                My Profile
                             </a>
                         </div>
                     </div>
-                    <div class="img">
-                        <img src="/static/images/main-banner-icon.svg" alt="" class="d-none d-lg-block">
-                        <img src="/static/images/main-banner-icon-mo.svg" alt="" class="d-block d-lg-none">
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="item-wrap">
-                        <div class="item active">
-                            <i class="icon-specialty"></i>
-                            <div class="item-bottom">
-                                <div class="title">Advanced Sector Specialist Consulting</div>
-                                <div class="sub-title">Specialty-Only Expert House</div>
-                                <ul class="desc">
-                                    <li>
-                                        <div class="d-flex gap-2">
-                                            <span>·</span>
-                                            AI, DX, Smart-X(mobility, factory,..)
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex gap-2">
-                                            <span>·</span>
-                                            Clean Energy/Alternative Energy (Secondary Batteries, SMR, Solar)
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex gap-2">
-                                            <span>·</span>
-                                            Autonomous Driving (Land/Sea/Air), Robotics, Unmanned Solutions
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex gap-2">
-                                            <span>·</span>
-                                            Data Centers, Communication Networks (Subsea, LEO)
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="d-flex gap-2">
-                                            <span>·</span>
-                                            Beauty Tech, Cosmeceuticals
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="left-item-wrap">
-                            <div class="item">
-                                <i class="icon-delivery"></i>
-                                <div class="item-bottom">
-                                    <div class="title">Early Morning Delivery Consulting Services</div>
-                                    <div class="sub-title">Flex Edge</div>
-                                    <ul class="desc">
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Fastest Expert Matching: Fast & Fit Delivery
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Customer-Centric 24/7 Flex Plan
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Comprehensive Support Services for Customer Success
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Multi-Dimensional Expert Pool: Current/Former, Corporate/Research, Domestic/International
-                                            </div>
-                                        </li>
-                                    </ul>
+                </section>
+                <section class="notice-section">
+                    <div class="container">
+                        <div class="notice-wrap row">
+                            <div class="col-12 col-lg-6">
+                                <div class="notice-head">
+                                    <div class="title">
+                                        <i class="icon-announcement"></i>
+                                        Notice
+                                    </div>
+                                    <a href="" class="more-link">More <i class="icon-right-arrow"></i></a>
                                 </div>
+                                <table class="table">
+                                    <colgroup>
+                                        <col/>
+                                        <col width="20%"/>
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-start">
+                                            <p class="text-truncate">August Meal Service Schedule</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="date">2025.07.04</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">
+                                            <p class="text-truncate">Information on updating the school lunch menu</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="date">2025.07.04</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">
+                                            <p class="text-truncate">System Maintenance Notice (2:00-4:00 AM, 8/10)</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="date">2025.07.04</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="item">
-                                <i class="icon-target"></i>
-                                <div class="item-bottom">
-                                    <div class="title">Customer-Specific Problem Solving</div>
-                                    <div class="sub-title">Solution DBO Platform</div>
-                                    <ul class="desc">
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Comprehensive Solution Offering: Specialized Consulting, Project Leader/Member, Expert Search, M&A
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Mission Critical, HRD, AI-Human Mix<br />
-                                                Mindfulness Coaching
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex gap-2">
-                                                <span>·</span>
-                                                Customer-Specific Solution DBO Platform
-                                            </div>
-                                    </ul>
+                            <div class="col-12 col-lg-6">
+                                <div class="notice-head">
+                                    <div class="title">
+                                        <i class="icon-board"></i>
+                                        Bulletin Board
+                                    </div>
+                                    <a href="" class="more-link">More <i class="icon-right-arrow"></i></a>
                                 </div>
+                                <table class="table">
+                                    <colgroup>
+                                        <col/>
+                                        <col width="20%"/>
+                                    </colgroup>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-start">
+                                            <p class="text-truncate">These days, my child is completely obsessed with
+                                                this side dish :)</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="date">2025.07.04</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">
+                                            <p class="text-truncate">I was so happy to see the lunch today! It reminded
+                                                me of my old school days.</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="date">2025.07.04</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-start">
+                                            <p class="text-truncate">Has anyone tried following the recipes from school
+                                                lunches at home?</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <p class="date">2025.07.04</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section class="section section-platform bg-gray6">
-                <div class="container">
-                    <div class="section-title" data-aos="fade-up" data-aos-duration="500">
-                        Platform & Network
-                    </div>
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" data-aos="fade-up" data-aos-delay="500">
-                                <div class="item">
-                                    <div class="img">
-                                        <img src="/static/images/platform01.png" alt="">
-                                    </div>
-                                    <div class="name">
-                                        Expert Consulting
-                                    </div>
-                                    <ul class="desc">
-                                        <li>· AI, DX, 5G, Smart-X (mobility, factory..)</li>
-                                        <li>· Alternative Energy, Secondary Batteries</li>
-                                        <li>· Self-driving, Robotics, Unmanned Systems</li>
-                                        <li>· IDC, Communication Networks</li>
-                                        <li>· Bio, Cosmetics, Beauty Tech</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-aos="fade-up" data-aos-delay="800">
-                                <div class="item">
-                                    <div class="img">
-                                        <img src="/static/images/platform02.png" alt="">
-                                    </div>
-                                    <div class="name">Project Consulting</div>
-                                    <ul class="desc">
-                                        <li>· New Ventures, Global Expansion, Alliances</li>
-                                        <li>· Startup Management Strategy</li>
-                                        <li>· Channel Mix Strategy</li>
-                                        <li>· Education, Training, Mentoring, Coaching</li>
-                                        <li>· Finance, Investment, IPO</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide" data-aos="fade-up" data-aos-delay="1100">
-                                <div class="item">
-                                    <div class="img">
-                                        <img src="/static/images/platform03.png" alt="">
-                                    </div>
-                                    <div class="name">
-                                        Outplacement
-                                    </div>
-                                    <ul class="desc">
-                                        <li>· Board Members</li>
-                                        <li>· Task Force Members</li>
-                                        <li>· Mindfulness Leaders</li>
-                                        <li>· Management Advisors, Consultants</li>
-                                        <li>· Global Region/Industry Experts</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section section-about text-center">
-                <div class="container">
-                    <div class="section-title" data-aos="fade-up" data-aos-duration="500">
-                        <div class="d-flex align-items-baseline justify-content-center gap-2 gap-lg-4">
-                            <span>About</span>
-                            <img class="logo-img" src="/static/images/logo.svg" alt="" />
-                        </div>
-                    </div>
-                    <div class="item-wrap">
-                        <div class="item" data-aos="fade-up" data-aos-delay="500">
-                            <div class="img">
-                                <img src="/static/images/about01.png" alt="">
-                            </div>
-                            <div class="name">Linking-pin knowledge/<br />experience delivery</div>
-                            <div class="desc">Experts & talents platform providing clients with knowledge and experience assets tailored to each specific needs and context.</div>
-                        </div>
-                        <div class="item" data-aos="fade-up" data-aos-delay="800">
-                            <div class="img">
-                                <img src="/static/images/about02.png" alt="">
-                            </div>
-                            <div class="name">Top-tier Expert Pool</div>
-                            <div class="desc">Edge experts in latest growth sectors</div>
-                        </div>
-                        <div class="item" data-aos="fade-up" data-aos-delay="1100">
-                            <div class="img">
-                                <img src="/static/images/about03.png" alt="">
-                            </div>
-                            <div class="name">Pin-pointing, Barrier-free, Tailored</div>
-                            <div class="desc">Quick and pin-pointing delivery without boundaries of region, time, or language.</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section section-services">
-                <div class="container">
-                    <div class="row align-items-center gy-8">
-                        <div class="col-12 col-xl-5">
-                            <div class="section-title text-start">Our Services</div>
-                            <div thumbsSlider="" class="swiper swiper-services-1">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="hstack gap-4 cursor-pointer">
-                                            <i class="icon-expert"></i>
-                                            <p>Expert Consulting</p>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="hstack gap-4 cursor-pointer">
-                                            <i class="icon-head-hunting"></i>
-                                            Head Hunting /<br />
-                                            Outplacement
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="hstack gap-4 cursor-pointer">
-                                            <i class="icon-hr"></i>
-                                            HR Build-up
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="hstack gap-4 cursor-pointer">
-                                            <i class="icon-mna"></i>
-                                            M&A Consulting
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-xl-7">
-                            <div class="swiper swiper-services-2">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="img-wrap">
-                                            <img src="/static/images/services-01.png" alt="" />
-                                            <p class="name">Expert Consulting</p>
-                                            <p class="desc">Placing expertise and talents on clients' hands to solve problems and answer critical questions</p>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="img-wrap">
-                                            <img src="/static/images/services-02.png" alt="" />
-                                            <p class="name">Head Hunting / Outplacement</p>
-                                            <p class="desc">Expert/talent searching and outplacement service with best fits and records</p>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="img-wrap">
-                                            <img src="/static/images/services-03.png" alt="" />
-                                            <p class="name">HR Build-up</p>
-                                            <p class="desc">Providing HRD solutions for in-house build-up of expeertise in new business, growth strategy and global expansion</p>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="img-wrap">
-                                            <img src="/static/images/services-04.png" alt="" />
-                                            <p class="name">M&A Consulting</p>
-                                            <p class="desc">M&A consulting and brokerage service in latest AI, DX, IDC, and energy</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="section section-partners">
-                <div class="section-title">
-                    Our Partners
-                </div>
-                <div class="swiper">
-                    <div class="swiper-wrapper" id="swiperWrapper1">
-                        <!-- JavaScript로 동적으로 슬라이드 추가 -->
-                    </div>
-                </div>
-            </section>
-            <section class="section section-add overflow-hidden">
-                <div class="container">
-                    <div class="item-wrap">
-                        <a href="/fo/client-add-en" class="item" data-aos="fade-up"
-                           data-aos-delay="1100">
-                            <div>
-                                <div class="name">Client Registration</div>
-                                <div class="desc">
-                                    Tell us your challenges. aESK will provide<br/>
-                                    solutions tailored to your budget,<br/>
-                                    timeline, and context.
-                                </div>
-                            </div>
-                            <i class="icon-arrow-diagonal"></i>
-                        </a>
-                        <a href="/fo/expert-add-en" class="item" data-aos="fade-up"
-                           data-aos-delay="1400">
-                            <div>
-                                <div class="name">Expert Registration</div>
-                                <div class="desc">
-                                    We seek experts with professional knowledge<br/>
-                                    and experience assets to support<br/>
-                                    our clients' business growth.
-                                </div>
-                            </div>
-                            <i class="icon-arrow-diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <script>
-                // 슬라이드를 추가할 부모 요소
-                var swiperWrapper1 = document.getElementById('swiperWrapper1');
-
-                // 슬라이드 생성 함수
-                function createSlides() {
-                    for (var i = 1; i < 10; i++) {
-                        // swiper-slide 요소 생성
-                        var slide = document.createElement('div');
-                        slide.className = 'swiper-slide';
-
-                        // 로고 div 생성
-                        var logoDiv = document.createElement('div');
-                        logoDiv.className = 'logo';
-
-                        // 이미지 태그 생성 및 경로 설정
-                        var img = document.createElement('img');
-                        img.src = `/static/images/partners-logo-${i}.svg`;
-                        img.alt = `Partner ${i}`;
-
-                        // 로고 div에 이미지 추가
-                        logoDiv.appendChild(img);
-
-                        // 슬라이드에 로고 div 추가
-                        slide.appendChild(logoDiv);
-
-                        // swiper-wrapper에 슬라이드 추가
-                        swiperWrapper1.appendChild(slide);
-                    }
-                }
-                // 슬라이드 생성 함수 호출
-                createSlides();
-            </script>
+                </section>
+            </div>
         </main>
     </div>
+    <script>
+        $(document).ready(function () {
+            // Swiper 초기화
+            const swiper = new Swiper('.swiper', {
+                slidesPerView: 1,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true, // dot 클릭 가능
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 3000, // 3초마다 자동 슬라이드
+                    disableOnInteraction: false, // 사용자 조작 이후에도 계속 자동재생
+                },
+            });
+        });
+    </script>
+    </body>
 </div>
 </html>

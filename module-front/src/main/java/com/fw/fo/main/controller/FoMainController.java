@@ -37,14 +37,8 @@ public class FoMainController {
 		return "fo/main1";
 	}
 
-	/*@GetMapping({ "/fo/main1" })
-	public String main1(ModelMap modelMap) {
-		return "fo/main1";
-	}
-
 	@GetMapping({ "/fo/main1-en" })
 	public String main1En(ModelMap modelMap) {
 		return "fo/main1-en";
-	}*/
-
+	}
 }

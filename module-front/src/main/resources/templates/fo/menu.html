@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="payment-wrap">
+            <div class="payment-head">
+                <p class="title">메뉴</p>
+                <p class="desc">균형 잡힌 영양을 고려한 급식 메뉴, 특별한 행사를 위한 케이터링과 핑거푸드,<br class="d-none d-lg-block"/>그리고 간단한 간식까지,
+                    모두를 위한 메뉴를 소개합니다.</p>
+            </div>
+            <div class="menu-list">
+                <div class="menu-content">
+                    <div class="title">
+                        <div class="dot-box">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <p>월간 메뉴</p>
+                    </div>
+                    <div class="img">
+                        <img src="/static/images/banner-01.svg" alt=""/>
+                    </div>
+                    <button type="button" class="move-arrow">
+                        <i class="icon-menu-arrow"></i>
+                    </button>
+                </div>
+                <div class="menu-content">
+                    <div class="title">
+                        <div class="dot-box">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <p>케이터링 메뉴</p>
+                    </div>
+                    <div class="img">
+                        <img src="/static/images/banner-02.svg" alt=""/>
+                    </div>
+                    <button type="button" class="move-arrow">
+                        <i class="icon-menu-arrow"></i>
+                    </button>
+                </div>
+                <div class="menu-content">
+                    <div class="title">
+                        <div class="dot-box">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <p>핑거푸드 메뉴</p>
+                    </div>
+                    <div class="img">
+                        <img src="/static/images/banner-03.svg" alt=""/>
+                    </div>
+                    <button type="button" class="move-arrow">
+                        <i class="icon-menu-arrow"></i>
+                    </button>
+                </div>
+                <div class="menu-content">
+                    <div class="title">
+                        <div class="dot-box">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <p>간편식 & 가격</p>
+                    </div>
+                    <div class="img">
+                        <img src="/static/images/banner-04.svg" alt=""/>
+                    </div>
+                    <button type="button" class="move-arrow">
+                        <i class="icon-menu-arrow"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

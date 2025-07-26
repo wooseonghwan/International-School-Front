@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="container">
+            <div class="info-card-wrap row">
+                <div class="col-12 col-lg-6">
+                    <div class="img-card">
+                        <img src="/static/images/info-img-card.svg" alt=""/>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="desc-card info">
+                        <div>
+                            <div class="form-wrap disabled">
+                                <p class="form-title">이름</p>
+                                <input type="text" class="form-control form-lg" placeholder="" value="Byoung Gul Cho"
+                                       disabled/>
+                            </div>
+                            <div class="form-wrap disabled">
+                                <p class="form-title">카드ID번호</p>
+                                <input type="text" class="form-control form-lg" placeholder="" value="110323" disabled/>
+                            </div>
+                            <div class="form-wrap disabled">
+                                <p class="form-title">고객번호</p>
+                                <input type="text" class="form-control form-lg" placeholder="" value="00001247"
+                                       disabled/>
+                            </div>
+                            <div class="form-wrap disabled">
+                                <p class="form-title">아이디</p>
+                                <input type="text" class="form-control form-lg" placeholder="" value="sougetsu"
+                                       disabled/>
+                            </div>
+                            <div class="form-wrap">
+                                <p class="form-title">새 비밀번호</p>
+                                <input type="password" class="form-control form-lg" placeholder="새 비밀번호를 입력해주세요."
+                                       value=""/>
+                            </div>
+                            <div class="form-wrap">
+                                <p class="form-title">새 비밀번호 확인</p>
+                                <input type="password" class="form-control form-lg" placeholder="새 비밀번호를 다시 입력해주세요."
+                                       value=""/>
+                            </div>
+                        </div>
+                        <div class="btns">
+                            <button type="button" class="btn btn-dark btn-lg w-100">정보수정</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
