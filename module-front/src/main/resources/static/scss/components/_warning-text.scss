@@ -1,0 +1,11 @@
+.warning-text{
+  background: #F1F7FC;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: $info;
+  display: flex;gap: 6px;
+  @include typography(14px, 500);
+  svg{
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.core.mapper.db1.fo.FoExpertMapper">
+
+    <select id="selectIdCheck" parameterType="FoExpertDTO" resultType="int">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.selectIdCheck, 24.10.08, wsh, FoExpertMapper.xml */
+        SELECT COUNT(1)
+        FROM tb_expert
+        WHERE id = #{id}
+    </select>
+
+    <insert id="inserExpert" parameterType="FoExpertDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserExpert, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_expert (
+               form_status
+             , id
+             , password
+             , name
+             , gender
+             , phone
+             , birth
+             , email
+             , nation
+             , need_time
+             , job_category
+             , linkedin_url
+             , self_intro_kr
+             , self_intro_en
+        <if test="fileSeq!=null and fileSeq!=''">
+             , file_seq
+        </if>
+        <if test="subSeq!=null and subSeq!=''">
+             , sub_seq
+        </if>
+             , advisory_lang1
+             , advisory_lang2
+             , time_advisory
+             , time_advisory_option
+             , info_agree_yn
+             , use_agree_yn
+             , expert_solution_yn
+             , area
+             , area_etc
+        ) VALUES (
+               'SUCCESS'
+             , #{id}
+             , #{password}
+             , #{name}
+             , #{gender}
+             , #{phone}
+             , #{birth}
+             , #{email}
+             , #{nation}
+             , #{needTime}
+             , #{jobCategory}
+             , #{linkedinUrl}
+             , #{selfIntroKr}
+             , #{selfIntroEn}
+         <if test="fileSeq!=null and fileSeq!=''">
+             , #{fileSeq}
+         </if>
+         <if test="subSeq!=null and subSeq!=''">
+             , #{subSeq}
+         </if>
+             , #{advisoryLang1}
+             , #{advisoryLang2}
+             , #{timeAdvisory}
+             , #{timeAdvisoryOption}
+             , #{infoAgreeYn}
+             , #{useAgreeYn}
+             , #{expertSolutionYn}
+             , #{area}
+             , #{areaEtc}
+        )
+        <selectKey resultType="String" keyProperty="expertSeq" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="inserExpertTemp" parameterType="FoExpertDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserExpertTemp, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_expert (
+               form_status
+             , id
+             , password
+             , name
+             , gender
+             , phone
+             , birth
+             , email
+             , nation
+             , need_time
+             , job_category
+             , linkedin_url
+             , self_intro_kr
+             , self_intro_en
+             <if test="fileSeq!=null and fileSeq!=''">
+                 , file_seq
+             </if>
+             <if test="subSeq!=null and subSeq!=''">
+                 , sub_seq
+             </if>
+             , advisory_lang1
+             , advisory_lang2
+             , time_advisory
+             , time_advisory_option
+             , info_agree_yn
+             , use_agree_yn
+             , expert_solution_yn
+             , area
+             , area_etc
+        ) VALUES (
+               'TEMP'
+             , #{id}
+             , #{password}
+             , #{name}
+             , #{gender}
+             , #{phone}
+             , #{birth}
+             , #{email}
+             , #{nation}
+             , #{needTime}
+             , #{jobCategory}
+             , #{linkedinUrl}
+             , #{selfIntroKr}
+             , #{selfIntroEn}
+             <if test="fileSeq!=null and fileSeq!=''">
+                 , #{fileSeq}
+             </if>
+             <if test="subSeq!=null and subSeq!=''">
+                 , #{subSeq}
+             </if>
+             , #{advisoryLang1}
+             , #{advisoryLang2}
+             , #{timeAdvisory}
+             , #{timeAdvisoryOption}
+             , #{infoAgreeYn}
+             , #{useAgreeYn}
+             , #{expertSolutionYn}
+             , #{area}
+             , #{areaEtc}
+        )
+        <selectKey resultType="String" keyProperty="expertSeq" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="inserExpertCareer" parameterType="FoExpertDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserExpertCareer, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_career (
+               expert_seq
+             , company_name
+             , rank_name
+        <if test="careerStartDt!=null and careerStartDt!=''">
+             , career_start_dt
+        </if>
+        <if test="careerEndDt!=null and careerEndDt!=''">
+            , career_end_dt
+        </if>
+             , job
+        ) VALUES (
+               #{expertSeq}
+             , #{companyName}
+             , #{rankName}
+        <if test="careerStartDt!=null and careerStartDt!=''">
+             , #{careerStartDt}
+        </if>
+        <if test="careerEndDt!=null and careerEndDt!=''">
+             , #{careerEndDt}
+        </if>
+             , #{job}
+                 )
+    </insert>
+
+    <insert id="inserAdvisory" parameterType="FoExpertDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserAdvisory, 24.10.10, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_adivisory_time (
+               expert_seq
+             , advisory_need_time
+             , weekday_option
+             , weekday_advisory_start_dt
+             , weekday_advisory_end_dt
+             , weekend_option
+             , weekend_advisory_start_dt
+             , weekend_advisory_end_dt
+        ) VALUES (
+               #{expertSeq}
+             , #{advisoryNeedTimeDb}
+             , #{weekDayOption}
+             , #{weekDayAdvisoryStartDt}
+             , #{weekDayAdvisoryEndDt}
+             , #{weekendOption}
+             , #{weekendAdvisoryStartDt}
+             , #{weekendAdvisoryEndDt}
+                 )
+    </insert>
+    <insert id="insertJobCategoryDetail" parameterType="FoExpertDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.insertJobCategoryDetail, 24.10.17, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_job_category_detail (
+                                           expert_seq
+                                         , job_category_detail
+                                         , job_category_etc
+        ) VALUES (
+                     #{expertSeq}
+                 , #{jobCategoryDetailDb}
+                 , #{jobCategoryEtc}
+                 )
+    </insert>
+</mapper>

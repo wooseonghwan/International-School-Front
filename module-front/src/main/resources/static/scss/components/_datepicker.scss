@@ -1,0 +1,142 @@
+.ui-datepicker-inline{
+  width: 100%;padding: 0;
+  &.ui-widget-content{
+    border: 0;
+  }
+  table{
+    margin-bottom: 0;font-size: 14px;
+  }
+  .ui-widget-header{
+    background: transparent;border: 0;padding: 0;text-align: center;margin-bottom: 1rem;
+    .ui-icon{display: none;}
+  }
+  .ui-datepicker-title {
+    line-height: 32px;display: inline-flex;align-items: center;justify-content: center;
+  }
+  th{
+    font-weight: 700;
+  }
+  .ui-datepicker-prev,
+  .ui-datepicker-next{
+    width: 32px;height: 32px;top: 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin: 0 8px;
+  }
+  .ui-datepicker-prev{
+    background-image: url("data:image/svg+xml,%3Csvg width='8' height='12' viewBox='0 0 8 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.64853 11.6899C7.1799 12.1034 6.4201 12.1034 5.95147 11.6899L0.351473 6.7487C0.126429 6.55013 5.15612e-07 6.28082 5.40929e-07 6C5.66246e-07 5.71918 0.126429 5.44987 0.351473 5.2513L5.95147 0.310122C6.4201 -0.103375 7.1799 -0.103375 7.64853 0.310122C8.11716 0.723619 8.11716 1.39403 7.64853 1.80752L2.89706 6L7.64853 10.1925C8.11716 10.606 8.11716 11.2764 7.64853 11.6899Z' fill='black'/%3E%3C/svg%3E%0A");
+  }
+  .ui-datepicker-next{
+    background-image: url("data:image/svg+xml,%3Csvg width='8' height='12' viewBox='0 0 8 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.351472 11.6899C0.820101 12.1034 1.5799 12.1034 2.04853 11.6899L7.64853 6.7487C7.87357 6.55013 8 6.28082 8 6C8 5.71918 7.87357 5.44987 7.64853 5.2513L2.04853 0.310122C1.5799 -0.103375 0.8201 -0.103375 0.351471 0.310122C-0.117158 0.723619 -0.117158 1.39403 0.351471 1.80752L5.10294 6L0.351472 10.1925C-0.117157 10.606 -0.117157 11.2764 0.351472 11.6899Z' fill='black'/%3E%3C/svg%3E%0A");
+  }
+
+  .ui-state-default,
+  .ui-widget-content .ui-state-default{
+    background: none;border: 0;
+  }
+
+  tbody{
+    td, a{
+      .readonly &{
+        pointer-events: none !important;
+      }
+    }
+    td{
+      //padding: .25rem;
+      padding: 0;
+      > span,
+      > a{
+        padding: 0;aspect-ratio: 1/1;display: flex;align-items: center;justify-content: center;
+        z-index: 1;
+        position: relative;
+      }
+    }
+  }
+
+  .ui-datepicker-month{
+    &::after{content: '월';}
+  }
+
+  .ui-datepicker-today{
+    a{
+      position: relative;
+      color: $white;
+      &::before{
+        content: '';position: absolute;left: 4px;right: 4px;top: 4px;bottom: 4px;z-index: -1;
+        border-radius: 50%;
+        background: $gray3;
+        border: 1px solid $gray3;
+      }
+    }
+  }
+}
+
+.hasDatepicker:not(.readonly){
+  .ui-datepicker-current-day .ui-state-active{
+    &::before{
+      content: '';position: absolute;left: 4px;right: 4px;top: 4px;bottom: 4px;z-index: -1;
+      border-radius: 50%;
+      color: $white;
+      background: $primary;
+      border: 1px solid $primary;
+    }
+  }
+}
+
+.start-day,
+.end-day{
+  color: $white !important;position: relative;
+  a.ui-state-default{
+    color: $white !important;
+  }
+  &::after{
+    content: '';position: absolute;left: 4px;right: 4px;top: 4px;bottom: 4px;
+    border-radius: 50%;
+    background: $primary;
+    border: 1px $primary;
+  }
+}
+.start-day{
+  &::before{
+    content: '';position: absolute;right: 0;top: 4px;bottom: 4px;width: 50%;
+    background: $gray6 !important;
+  }
+  .ui-state-default{
+    &::before{
+      background: $primary !important;
+      border-color: $primary !important;
+    }
+  }
+}
+.end-day{
+  &::before{
+    content: '';position: absolute;left: 0;top: 4px;bottom: 4px;width: 50%;
+    background: $gray6;
+  }
+}
+.disabled-day{
+  pointer-events: none;
+  a{
+    pointer-events: none;
+    opacity: .4;
+  }
+}
+
+.ui-priority-secondary,
+.ui-widget-content .ui-priority-secondary,
+.ui-widget-header .ui-priority-secondary{
+  opacity: .4;
+}
+
+.datepicker-area {
+  flex-grow: 1;
+  border-top: 1px solid $border-color;
+  padding-top: 1rem;
+  @include media-breakpoint-up(lg){
+    padding-top: 0;
+    border: 0;
+    border-left: 1px solid $border-color;
+    margin-left: 2rem;
+    padding-left: .75rem;
+  }
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+    <div th:fragment="common">
+
+
+        <!--/* 각 페이지에서 추가되는 script */-->
+        <script layout:fragment="javascript"></script>
+
+        <!--
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/control.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/validator.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/fileUtils.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/dateUtils.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/messageUtils.js}"></script>
+        -->
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/common.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/selectAjax.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/moment.js}"></script>
+
+
+        <!-- CKEditor 4.15.0 -->
+<!--        <script src="/admin/js/common/ckeditor/ckeditor.min.js"></script>-->
+
+        <!-- 추가 JS -->
+        <script src="/static/js/additional.js"></script>
+
+        <script type="text/javascript" th:inline="javascript" th:src="@{${jsName}}"></script>
+
+        <script th:inline="javascript">
+
+            var UPLOAD_PATH = [[ ${uploadPath} ]]; //기본 파일 경로
+            /*<![CDATA[*/
+            /*[# th:if="${result != null}"]*/
+            var result = [[${result.message}]];
+            console.log(result);
+            alert(result);
+            /*[/]*/
+            /*]]>*/
+
+        </script>
+
+
+    </div>
+
+    <div th:fragment="commonDefault">
+
+
+        <!--/* 각 페이지에서 추가되는 script */-->
+        <script layout:fragment="javascript"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/common.js}"></script>
+        <!--
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/control.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/validator.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/fileUtils.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/dateUtils.js}"></script>
+        -->
+
+        <!-- 추가 JS -->
+        <script src="/static/js/additional.js"></script>
+
+        <script type="text/javascript" th:inline="javascript" th:src="@{${jsName}}"></script>
+        <script th:inline="javascript">
+
+            var UPLOAD_PATH = [[ ${uploadPath} ]]; //기본 파일 경로
+
+        </script>
+        <!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
+        <script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>
+        <script type="text/javascript">
+            if (!wcs_add) var wcs_add={};
+            wcs_add["wa"] = "s_45464de99425";
+            if (!_nasa) var _nasa={};
+            if(window.wcs){
+                wcs.inflow();
+                wcs_do(_nasa);
+            }
+        </script>
+
+    </div>
+
+    <div th:fragment="login">
+
+
+        <!--/* 각 페이지에서 추가되는 script */-->
+        <script layout:fragment="javascript"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/common.js}"></script>
+       <!--
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/control.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/validator.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/fileUtils.js}"></script>
+        <script type="text/javascript" th:inline="javascript" th:src="@{/static/js/common/dateUtils.js}"></script>
+        -->
+
+        <!-- 추가 JS -->
+        <script src="/static/js/additional.js"></script>
+
+        <script type="text/javascript" th:inline="javascript" th:src="@{${jsName}}"></script>
+        <!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
+        <script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>
+        <script type="text/javascript">
+            if (!wcs_add) var wcs_add={};
+            wcs_add["wa"] = "s_45464de99425";
+            if (!_nasa) var _nasa={};
+            if(window.wcs){
+                wcs.inflow();
+                wcs_do(_nasa);
+            }
+        </script>
+
+    </div>
+</html>

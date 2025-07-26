@@ -1,0 +1,53 @@
+[class^="icon-"] {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  flex-shrink: 0 !important;
+}
+
+/* 16px 아이콘 */
+$icons-16px: plus, minus;
+@each $icon in $icons-16px {
+  .icon-#{$icon} {
+    background-image: url("../images/icon-#{$icon}.svg");
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* 24px 아이콘 */
+$icons-24px: check-circle;
+@each $icon in $icons-24px {
+  .icon-#{$icon} {
+    background-image: url("../images/icon-#{$icon}.svg");
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* 32px 아이콘 */
+$icons-32px: marker, take-off, randing;
+@each $icon in $icons-32px {
+  .icon-#{$icon} {
+    background-image: url("../images/icon-#{$icon}.svg");
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* 40px 아이콘 */
+$icons-40px: link-arrow;
+@each $icon in $icons-40px {
+  .icon-#{$icon} {
+    background-image: url("../images/icon-#{$icon}.svg");
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.icon-golf-hole{
+  background-image: url("../images/icon-golf-hole.svg");
+  width: 32px;height: 24px;
+}

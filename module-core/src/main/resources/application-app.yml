@@ -1,0 +1,48 @@
+---
+# local
+spring:
+  config:
+    activate:
+      on-profile: local
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+  rabbitmq:
+    host: 10.99.11.10
+    port: 5672
+    username: r79admin
+    password: re20201112!!
+
+
+---
+# dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+  rabbitmq:
+    host: 10.99.11.10
+    port: 5672
+    username: r9admin
+    password: re20201112!!
+
+---
+# prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+  rabbitmq:
+    host: 10.0.11.10
+    port: 5672
+    username: r9admin
+    password: re20201207!!

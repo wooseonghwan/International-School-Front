@@ -1,0 +1,112 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="common">
+    <header class="pc-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="header-logo">
+                    <a href="/fo/main1">
+                        <img src="/static/images/logo.svg" alt=""/>
+                    </a>
+                </div>
+                <ul class="gnb">
+                    <li>
+                        <a href="">급식결제</a>
+                    </li>
+                    <li>
+                        <a href="">급식내역</a>
+                    </li>
+                    <li>
+                        <a href="">사용내역</a>
+                    </li>
+                    <li>
+                        <a href="">메뉴</a>
+                    </li>
+                    <li>
+                        <a href="">고객게시판</a>
+                    </li>
+                    <li>
+                        <a href="">공지사항</a>
+                    </li>
+                    <li>
+                        <a href="">내정보</a>
+                    </li>
+                </ul>
+                <div class="header-info">
+                    <button type="button" class="btn-logout">
+                        <i class="icon-logout"></i>
+                    </button>
+                    <div class="toggle-wrapper" id="langToggle">
+                        <div class="label">
+                            <span class="ko">Ko</span>
+                            <span class="en">En</span>
+                        </div>
+                        <div class="toggle-ball">Ko</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header class="mo-header">
+        <div class="header-top">
+            <a href="" class="logo">
+                <img src="/static/images/logo.svg" alt=" 로고"/>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <div class="toggle-wrapper" id="langToggleMobile">
+                    <div class="label">
+                        <span class="ko">Ko</span>
+                        <span class="en">En</span>
+                    </div>
+                    <div class="toggle-ball">Ko</div>
+                </div>
+                <button type="button" class="menu-btn">
+                    <i class="icon-m-menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <div>
+            <div class="side-menu-header">
+                <div class="content">
+                    <p class="title">Menu</p>
+                    <button type="button" class="close-btn">
+                        <i class="icon-m-close"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="side-menu-body">
+                <ul class="gnb">
+                    <li>
+                        <a href="">급식결제</a>
+                    </li>
+                    <li>
+                        <a href="">급식내역</a>
+                    </li>
+                    <li>
+                        <a href="">사용내역</a>
+                    </li>
+                    <li>
+                        <a href="">메뉴</a>
+                    </li>
+                    <li>
+                        <a href="">고객게시판</a>
+                    </li>
+                    <li>
+                        <a href="">공지사항</a>
+                    </li>
+                    <li>
+                        <a href="">내정보</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="side-menu-footer">
+            <button type="button" class="btn-logout">
+                <i class="icon-logout"></i>
+            </button>
+        </div>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,28 @@
+<th:block th:fragment="cardPaging_Fragment()">
+    <th:block th:if="${not #strings.isEmpty(pagination)} ">
+        <div class="col-sm-12 col-md-5">
+            <th:block th:if="${pagination.totalListCnt} < ${pagination.pageSize * pagination.page}">
+                <div class="dataTables_info" role="status" aria-live="polite">전체 <span th:text="${#numbers.formatInteger(pagination.totalListCnt, 0, 'COMMA')}"></span> 중 <span th:text="${#numbers.formatInteger(pagination.pageSize * (pagination.page - 1) + 1, 0, 'COMMA')}">1</span> - <span th:text="${#numbers.formatInteger(pagination.totalListCnt, 0, 'COMMA')}"></span></div>
+            </th:block>
+            <th:block th:unless="${pagination.totalListCnt} < ${pagination.pageSize * pagination.page}">
+                <div class="dataTables_info" role="status" aria-live="polite">전체 <span th:text="${#numbers.formatInteger(pagination.totalListCnt, 0, 'COMMA')}"></span> 중 <span th:text="${#numbers.formatInteger(pagination.pageSize * (pagination.page - 1) + 1, 0, 'COMMA')}">1</span> - <span th:text="${#numbers.formatInteger(pagination.pageSize * pagination.page, 0, 'COMMA')}"></span></div>
+            </th:block>
+        </div>
+        <div class="col-sm-12 col-md-7">
+            <div class="pagination">
+                <a href="#none" th:class="${pagination.page} <= ${pagination.blockSize} ? 'disabled' : '' " th:href="|javascript:pagingPost('${pagination.prevBlock}')|" aria-hidden="true">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                
+                <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                    <a href="#none" th:class="${pageButton} == ${pagination.page} ? 'page-link active' : 'page-link'" th:href="|javascript:pagingPost('${pageButton}')|"
+                        th:text=${pageButton} th:with="start = ${pagination.startPage}, end = ${pagination.endPage}" th:each="pageButton : ${#numbers.sequence(start, end)}"></a>
+                </th:block>
+                
+                <a href="#none" th:class="${pagination.page} == ${pagination.totalPageCnt} ? 'disabled' : '' " th:href="|javascript:pagingPost('${pagination.nextBlock}')|" aria-hidden="true">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </th:block>
+</th:block>

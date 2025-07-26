@@ -1,0 +1,83 @@
+---
+# local
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource-db1:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:mariadb://112.172.85.94:4902/tkis_pangyo
+    username: pangyo
+    password: pangyo12!@
+    hikari:
+      connection-timeout: 800
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000
+      maximum-pool-size: 20
+    jpa:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB102Dialect
+        open-in-view: true
+        format-sql: true
+        implicit-naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        hbm2ddl:
+          auto: none
+---
+# dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource-db1:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:mariadb://112.172.85.94:4902/tkis_pangyo
+    username: pangyo
+    password: pangyo12!@
+    hikari:
+      connection-timeout: 3000
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000
+      maximum-pool-size: 20
+    jpa:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB102Dialect
+        open-in-view: true
+        format-sql: true
+        implicit-naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        hbm2ddl:
+          auto: none
+
+---
+# prod
+spring:
+  config:
+    activate:
+      on-profile: real
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+  datasource-db1:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:mariadb://49.247.29.161:3306/aesk
+    username: aesk
+    password: aesk1!
+    hikari:
+      connection-timeout: 3000
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000
+      maximum-pool-size: 20
+    jpa:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB102Dialect
+        open-in-view: true
+        format-sql: true
+        implicit-naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        hbm2ddl:
+          auto: none

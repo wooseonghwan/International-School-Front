@@ -1,0 +1,32 @@
+.tour-info{
+  color: $white;
+  background: #22272C;
+  padding: 2rem 0;
+  @include media-breakpoint-up(lg){
+    padding: 120px 0;
+  }
+  .accordion{
+    --bs-accordion-bg: transparent;
+    --bs-accordion-active-bg: transparent;
+    --bs-accordion-color: $gray3;
+    --bs-accordion-btn-color: $white;
+    --bs-accordion-active-color: $white;
+    --bs-accordion-border-width: 0;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.125rem rgba(255, 255, 255, 0.25);
+    --bs-accordion-btn-focus-border-color: transparent;
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.35374 6.14663L3.35355 6.14645C3.25979 6.05268 3.13261 6 3 6C2.86739 6 2.74021 6.05268 2.64645 6.14645L2.64616 6.14673L2.64218 6.15076L2.6419 6.15105C2.55092 6.24442 2.5 6.36963 2.5 6.5C2.5 6.63261 2.55268 6.75979 2.64645 6.85355L2.64663 6.85374L7.64645 11.8536C7.74021 11.9473 7.86739 12 8 12C8.13261 12 8.25979 11.9473 8.35355 11.8536L13.3536 6.85355C13.4473 6.75979 13.5 6.63261 13.5 6.5C13.5 6.36739 13.4473 6.24021 13.3536 6.14645C13.2598 6.05268 13.1326 6 13 6C12.8674 6 12.7402 6.05268 12.6464 6.14645L8 10.7929L3.35374 6.14663Z' fill='white'/%3E%3C/svg%3E%0A");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3Csvg width='16' height='17' viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.35374 6.14663L3.35355 6.14645C3.25979 6.05268 3.13261 6 3 6C2.86739 6 2.74021 6.05268 2.64645 6.14645L2.64616 6.14673L2.64218 6.15076L2.6419 6.15105C2.55092 6.24442 2.5 6.36963 2.5 6.5C2.5 6.63261 2.55268 6.75979 2.64645 6.85355L2.64663 6.85374L7.64645 11.8536C7.74021 11.9473 7.86739 12 8 12C8.13261 12 8.25979 11.9473 8.35355 11.8536L13.3536 6.85355C13.4473 6.75979 13.5 6.63261 13.5 6.5C13.5 6.36739 13.4473 6.24021 13.3536 6.14645C13.2598 6.05268 13.1326 6 13 6C12.8674 6 12.7402 6.05268 12.6464 6.14645L8 10.7929L3.35374 6.14663Z' fill='white'/%3E%3C/svg%3E%0A");
+    max-width: 1096px;
+    margin: 0 auto;
+    .accordion-button{
+      font-weight: 700;
+      &:focus{
+
+      }
+    }
+    .accordion-body{
+      color: $gray3;@include typography(13px);
+    }
+  }
+}
+

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/mainLayout"
+>
+<div th:fragment="common">
+</div>
+</html>
+<script>
+    $(document).ready(function () {
+        $('.select-design').select2({
+            minimumResultsForSearch: -1,
+        });
+    });
+</script>

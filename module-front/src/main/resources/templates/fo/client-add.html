@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/clientAdd}">
+<div layout:fragment="contents" th:remove="tag">
+        <div class="add-form-wrap">
+            <h5 class="title">고객사 등록</h5>
+            <div class="form-body">
+                <div class="form-header">
+                    <div class="form-title">담당자 정보 입력</div>
+                    <div class="form-help"><span class="text-danger">*</span> 필수 입력 항목입니다.</div>
+                </div>
+                <div class="form" style="--labelWidth: 120px">
+                    <div class="form-group">
+                        <label for="formUserId" class="form-label">아이디 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="form-control" id="formUserId" name="id" placeholder="아이디를 입력해주세요."/>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn btn-dark" data-role="checkId">중복확인</button>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback" id="idCheck" style="display: none">이미 사용중인 아이디 입니다.</div>
+                            <div class="form-text" id="form-text">※ 5~15자리 이내 영문 또는 영문+숫자 조합으로 입력 가능</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserPassword" class="form-label">비밀번호 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="password" class="form-control" id="formUserPassword" name="password"
+                                   placeholder="비밀번호를 입력해주세요."/>
+                            <div class="invalid-feedback" id="password-not-pattern" style="display: none">비밀번호는 8~16자리 이내 영문, 숫자, 특수문자를 포함해야 합니다.</div>
+                            <div class="form-text">※ 8~16자리 이내 영문+숫자+특수문자 조합으로 입력 가능</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserPasswordRe" class="form-label">비밀번호 확인 <span
+                                class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="password" class="form-control" id="formUserPasswordRe"
+                                   placeholder="비밀번호를 다시 입력해주세요."/>
+                            <div class="invalid-feedback" id="password-not-same" style="display: none">비밀번호가 일치하지 않습니다.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserName" class="form-label">회사명 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="text" class="form-control" id="formUserName" name="companyName" placeholder="회사명을 입력해주세요." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserType" class="form-label">유형 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <select id="formUserType" class="form-select" name="companyCategory" onchange="toggleInputBox(this.value)">
+                                <option value="">유형 선택</option>
+                                <option value="CTC">컨설팅사</option>
+                                <option value="IVC">투자회사</option>
+                                <option value="LF">로펌</option>
+                                <option value="AC">회계법인</option>
+                                <option value="BC">대기업</option>
+                                <option value="MC">중견기업</option>
+                                <option value="SC">중소기업/스타트업</option>
+                                <option value="ETC">기타</option>
+                            </select>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <div class="form-input-wrap" id="extraInputBox" name="companyCategoryEtc" style="display:none;">
+                                <input type="text" class="form-control" id="companyCategoryEtc" name="companyCategoryEtc" placeholder="직접 입력"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserCharge" class="form-label">담당자명 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="text" class="form-control" id="formUserCharge" name="managerName" placeholder="담당자명을 입력해주세요." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserChargeMobile" class="form-label">담당자 휴대폰 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="tel" class="form-control" id="formUserChargeMobile" name="managerPhone" placeholder="숫자만 입력해주세요." maxlength="11" data-role="onlyNumber"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserChargeEmail" class="form-label">담당자 이메일 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="email" class="form-control" id="formUserChargeEmail" name="managerEmail" placeholder="이메일 주소를 입력해주세요." />
+                            <div class="invalid-feedback" id="email-invalid-feedback" style="display: none;">
+                                올바른 이메일 형식이 아닙니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserCountry" class="form-label">국가</label>
+                        <div class="form-input-wrap">
+                            <select id="formUserCountry" class="form-select" name="nation">
+                                <option value="KR">South Korea</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserTime" class="form-label">선호하는 시간대</label>
+                        <div class="form-input-wrap">
+                            <select id="formUserTime" class="form-select" name="needTime">
+                                <option value="SEOUL">Asia/Seoul (GMT +09:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-header mt-6">
+                    <div class="form-title">컨설팅 요청 입력</div>
+                </div>
+                <div class="form" style="--labelWidth: 120px">
+                    <div class="form-group">
+                        <label for="formConsultingType" class="form-label">컨설팅 유형 <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType1" name="consultingCategory" value="ECC"/>
+                                        <label class="form-check-label" for="formConsultingType1">전문가 전화 컨설팅</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType2" name="consultingCategory" value="IPPC"/>
+                                        <label class="form-check-label" for="formConsultingType2">전문가 파견</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType3" name="consultingCategory" value="ES"/>
+                                        <label class="form-check-label" for="formConsultingType3">전문가 채용</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType4" name="consultingCategory" value="PC"/>
+                                        <label class="form-check-label" for="formConsultingType4">프로젝트 컨설팅</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType5" name="consultingCategory" value="SMR"/>
+                                        <label class="form-check-label" for="formConsultingType5">소셜&마켓 리서치</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <div class="row align-items-center gap-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formConsultingType6" name="consultingCategory" value="ETC"/>
+                                                <label class="form-check-label" for="formConsultingType6">기타</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-input-wrap">
+                                                <input type="text" class="form-control" name="consultingCateEtc" id="consultingCateEtc" placeholder="내용을 입력하세요." disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formExpert" class="form-label">전문가 선정 <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formExpert1" name="expertNeed" value="INCUM"/>
+                                        <label class="form-check-label" for="formExpert1">현직</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formExpert2" name="expertNeed" value="EXE"/>
+                                        <label class="form-check-label" for="formExpert2">임원급</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formExpert3" name="expertNeed" value="RETIRE3"/>
+                                        <label class="form-check-label" for="formExpert3">퇴직/전직후 3년 이내</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <div class="row align-items-center gap-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formExpert4" name="expertNeed" value="ETC"/>
+                                                <label class="form-check-label" for="formExpert4">연관 회사/기관 지정</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm">
+                                            <div class="form-input-wrap">
+                                                <input type="text" class="form-control" id="expertNeedEtc" name="expertNeedEtc" placeholder="내용을 입력하세요." disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formConsultingWay" class="form-label">컨설팅 방식 <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingWay1" name="consultingMethod" value="CALL"/>
+                                        <label class="form-check-label" for="formConsultingWay1">전화자문</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingWay2" name="consultingMethod" value="WRITE"/>
+                                        <label class="form-check-label" for="formConsultingWay2">서면 자문</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingWay3" name="consultingMethod" value="OFF"/>
+                                        <label class="form-check-label" for="formConsultingWay3">오프라인 미팅</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <div class="row align-items-center gap-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formConsultingWay4" name="consultingMethod" value="ETC"/>
+                                                <label class="form-check-label" for="formConsultingWay4">기타</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-input-wrap">
+                                                <input type="text" class="form-control" id="consultingMethodEtc" name="consultingMethodEtc" placeholder="내용을 입력하세요." disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formLangA" class="form-label">컨설팅 요청시간 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap max-width-none">
+                            <div class="row gy-2">
+                                <div class="col-auto">
+                                    <select id="formLangA" class="form-select" name="consultingRequestTime">
+                                        <option value="">요청시간 선택</option>
+                                        <option value="TODAY">금일중(ASAP)</option>
+                                        <option value="3DAY">3일 이내</option>
+                                        <option value="WEEK">1주일 이내</option>
+                                        <option value="ETC">기타(날짜/시간 지정)</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <select id="formLangB" class="form-select" name="consultingRequestTimeDetail" disabled>
+                                        <option value="">상세 요청시간 선택</option>
+                                        <option value="2H">2시간 이내</option>
+                                        <option value="90M">90분 이내</option>
+                                        <option value="1H">1시간 이내</option>
+                                        <option value="30M">30분 이내</option>
+                                        <option value="ETC">기타</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <input type="text" class="form-control" name="consultingRequestTimeEtc" placeholder="내용을 입력하세요." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formRequest" class="form-label">기타 요청사항</label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formRequest1" name="etcRequest" value="EXPERTS"/>
+                                        <label class="form-check-label" for="formRequest1">전문가 복수 추천</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formRequest2" name="etcRequest" value="INTER"/>
+                                        <label class="form-check-label" for="formRequest2">통역 지원</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formSubject" class="form-label">컨설팅 주제 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="text" class="form-control" id="formSubject" name="consultingSubject" placeholder="내용을 입력해주세요." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formPoint" class="form-label">핵심 질문 <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <textarea id="formPoint" class="form-control" name="coreQuestion" placeholder="내용을 입력해주세요."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formPrice" class="form-label">시간당 희망 자문료 <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <div class="row gy-2">
+                                <div class="col-12 col-sm-7">
+                                    <select class="form-select" name="timeNeedAdvisory">
+                                        <option value="">희망 자문료 선택</option>
+                                        <option value="EVERY">상관없음</option>
+                                        <option value="70-90">70~90만원</option>
+                                        <option value="50-70">50~70만원</option>
+                                        <option value="50DWON">50만원 미만</option>
+                                        <option value="ETC">기타</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-5">
+                                    <input type="text" class="form-control" id="formPrice" name="timeNeedAdvisoryEtc" inputmode="numeric" placeholder="내용 입력" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="formPrivacyAgree" name="infoAgreeYn"/>
+                        <label class="form-check-label" for="formPrivacyAgree">
+                            <a href="" class="text-primary text-decoration-underline">개인정보수집 및 이용</a>에 동의합니다.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="formTermsAgree" name="useAgreeYn"/>
+                        <label class="form-check-label" for="formTermsAgree">
+                            <a href="" class="text-primary text-decoration-underline">이용약관</a>에 동의합니다.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer gap-2">
+                <button type="button" class="btn btn-outline-secondary" data-role="main">메인으로 이동</button>
+                <button type="button" class="btn btn-secondary" data-role="tempSave">임시저장</button>
+                <button type="button" class="btn btn-primary" data-role="save">최종제출</button>
+            </div>
+        </div>
+    </div>
+</html>

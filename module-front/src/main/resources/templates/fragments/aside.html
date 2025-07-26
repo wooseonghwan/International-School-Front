@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="common">
+        <aside id="sidebar">
+            <div class="sidebar-top">
+                <a href="/bo" class="logo">
+                    <img src="" alt="Framework">
+                    <span>관리자</span>
+                </a>
+            </div>
+            <nav class="sidebar">
+                <div class="overflow-y-scroll">
+                    <ul class="dep1">
+                        <li class="has-treeview" th:id="${item.menuCd}" th:each="item : ${menuList}" th:if="${item.menuLevel eq '2'}">
+                            <a href="javascript:"><span th:text="${item.menuNm}"></span></a>
+                            <ul class="dep2">
+                                <th:block th:each="item2 : ${menuList}">
+                                    <th:block th:if="${item2.menuLevel eq '3' and item.menuCd eq item2.upperMenuCd}">
+                                        <li th:id="${item2.menuCd}"><a th:href="${item2.menuUrl}" th:data-gnb-code="${item.menuIconCd}"><span th:text="${item2.menuNm}"></span></a></li>
+                                    </th:block>
+                                </th:block>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+    </div>
+</html>

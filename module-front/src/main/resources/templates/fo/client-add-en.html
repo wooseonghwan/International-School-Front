@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/clientAddEn}">
+<div layout:fragment="contents" th:remove="tag">
+        <div class="add-form-wrap">
+            <h5 class="title">Client Registration</h5>
+            <div class="form-body">
+                <div class="form-header">
+                    <div class="form-title">Enter Contact Information</div>
+                    <div class="form-help"><span class="text-danger">*</span> Required Field.</div>
+                </div>
+                <div class="form" style="--labelWidth: 120px">
+                    <div class="form-group">
+                        <label for="formUserId" class="form-label">ID <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="form-control" id="formUserId" name="id" placeholder="Please Enter Your ID.">
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn btn-dark" data-role="checkId">Availability check</button>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback" id="idCheck" style="display: none"> This ID is already in use.</div>
+                            <div class="form-text" id="form-text">
+                                ※ Please enter 5-15 characters, using letters or letters and numbers.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="password" class="form-control" id="formUserPassword" name="password" placeholder="Please enter your password.">
+                            <div class="invalid-feedback" id="password-not-pattern" style="display: none">
+                                Password must be 8 to 16 characters long and contain letters, numbers, and special characters.
+                            </div>
+                            <div class="form-text">※ Enter 8-16 characters, combining letters, numbers, and special characters.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserPasswordRe" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="password" class="form-control" id="formUserPasswordRe"
+                                   placeholder="Please re-enter your password.">
+                            <div class="invalid-feedback" id="password-not-same" style="display: none">Password does not match.</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserName" class="form-label">Company Name <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="text" class="form-control" id="formUserName" name="companyName" placeholder="Please enter the Company Name." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserType" class="form-label">Company Type <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <select id="formUserType" class="form-select" name="companyCategory" onchange="toggleInputBox(this.value)">
+                                <option value="">Please select a type.</option>
+                                <option value="CTC">Consulting Firm</option>
+                                <option value="IVC">Investment Company</option>
+                                <option value="LF">Law Firm</option>
+                                <option value="AC">Accounting Firm</option>
+                                <option value="BC">Major Company</option>
+                                <option value="MC">Mid-sized Company</option>
+                                <option value="SC">Small and medium-sized enterprises / Startup</option>
+                                <option value="ETC">Others</option>
+                            </select>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <div class="form-input-wrap" id="extraInputBox" name="companyCategoryEtc" style="display:none;">
+                                <input type="text" class="form-control" id="companyCategoryEtc" name="companyCategoryEtc" placeholder="Please enter the content."/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserCharge" class="form-label">Contact Person Name <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="text" class="form-control" id="formUserCharge" name="managerName" placeholder="Please enter the contact person’s name." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserChargeMobile" class="form-label">Contact person’s Mobile Number <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="tel" class="form-control" id="formUserChargeMobile" name="managerPhone" placeholder="Enter numbers only." maxlength="11" data-role="onlyNumber"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserChargeEmail" class="form-label">Contact Person’s
+                            Email Address <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="email" class="form-control" id="formUserChargeEmail" name="managerEmail" placeholder="Please enter the email address." />
+                            <div class="invalid-feedback" id="email-invalid-feedback" style="display: none;">
+                                This is not a valid email format.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserCountry" class="form-label">Country</label>
+                        <div class="form-input-wrap">
+                            <select id="formUserCountry" class="form-select" name="nation">
+                                <option value="KR">South Korea</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formUserTime" class="form-label">Preferred Time</label>
+                        <div class="form-input-wrap">
+                            <select id="formUserTime" class="form-select" name="needTime">
+                                <option value="SEOUL">Asia/Seoul (GMT +09:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-header mt-6">
+                    <div class="form-title">Enter Consulting Request</div>
+                </div>
+                <div class="form" style="--labelWidth: 120px">
+                    <div class="form-group">
+                        <label for="formConsultingType" class="form-label">Consulting Type <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType1" name="consultingCategory" value="ECC"/>
+                                        <label class="form-check-label" for="formConsultingType1">Expert Phone Consulting</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType2" name="consultingCategory" value="IPPC"/>
+                                        <label class="form-check-label" for="formConsultingType2">Expert Dispatch</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType3" name="consultingCategory" value="ES"/>
+                                        <label class="form-check-label" for="formConsultingType3">Expert Recruitment</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType4" name="consultingCategory" value="PC"/>
+                                        <label class="form-check-label" for="formConsultingType4">Project Consulting</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingType5" name="consultingCategory" value="SMR"/>
+                                        <label class="form-check-label" for="formConsultingType5">Social & Market Research</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <div class="row align-items-center gap-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formConsultingType6" name="consultingCategory" value="ETC"/>
+                                                <label class="form-check-label" for="formConsultingType6">Other</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-input-wrap">
+                                                <input type="text" class="form-control" name="consultingCateEtc" id="consultingCateEtc" placeholder="Please enter." disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formExpert" class="form-label">Expert Selection <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formExpert1" name="expertNeed" value="INCUM"/>
+                                        <label class="form-check-label" for="formExpert1">Current Position</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formExpert2" name="expertNeed" value="EXE"/>
+                                        <label class="form-check-label" for="formExpert2">Executive Level</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formExpert3" name="expertNeed" value="RETIRE3"/>
+                                        <label class="form-check-label" for="formExpert3">Within 3 years of Retirement/Transition</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <div class="row align-items-center gap-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formExpert4" name="expertNeed" value="ETC"/>
+                                                <label class="form-check-label" for="formExpert4">Specify Related Company/Organization</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm">
+                                            <div class="form-input-wrap">
+                                                <input type="text" class="form-control" id="expertNeedEtc" name="expertNeedEtc" placeholder="Please enter." disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formConsultingWay" class="form-label">Consulting Type <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingWay1" name="consultingMethod" value="CALL"/>
+                                        <label class="form-check-label" for="formConsultingWay1">Phone Consultation</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingWay2" name="consultingMethod" value="WRITE"/>
+                                        <label class="form-check-label" for="formConsultingWay2">Written Consultation</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formConsultingWay3" name="consultingMethod" value="OFF"/>
+                                        <label class="form-check-label" for="formConsultingWay3">Offline Meeting</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <div class="row align-items-center gap-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formConsultingWay4" name="consultingMethod" value="ETC"/>
+                                                <label class="form-check-label" for="formConsultingWay4">Other</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-input-wrap">
+                                                <input type="text" class="form-control" id="consultingMethodEtc" name="consultingMethodEtc" placeholder="Please enter." disabled/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formLangA" class="form-label">Consulting Request Time <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap max-width-none">
+                            <div class="row gy-2">
+                                <div class="col-auto">
+                                    <select id="formLangA" class="form-select" name="consultingRequestTime">
+                                        <option value="">Request Time Selection</option>
+                                        <option value="TODAY">Today (ASAP)</option>
+                                        <option value="3DAY">Within 3 days</option>
+                                        <option value="WEEK">Within 1 week</option>
+                                        <option value="ETC">Others (Specify date/time)</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <select id="formLangB" class="form-select" name="consultingRequestTimeDetail" disabled>
+                                        <option value="">Detailed Request Time Selection</option>
+                                        <option value="2H">Within 2 hours</option>
+                                        <option value="90M">Within 90 minutes</option>
+                                        <option value="1H">Within 1 hour</option>
+                                        <option value="30M">Within 30 minutes</option>
+                                        <option value="ETC">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto flex-grow-1">
+                                    <input type="text" class="form-control" name="consultingRequestTimeEtc" placeholder="Please enter." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formRequest" class="form-label">Other Requests</label>
+                        <div class="flex-grow-1">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formRequest1" name="etcRequest" value="EXPERTS"/>
+                                        <label class="form-check-label" for="formRequest1">Multiple Expert Recommendations</label>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="formRequest2" name="etcRequest" value="INTER"/>
+                                        <label class="form-check-label" for="formRequest2">Interpretation Support</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formSubject" class="form-label">Consulting Topic <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap">
+                            <input type="text" class="form-control" id="formSubject" name="consultingSubject" placeholder="Please enter." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formPoint" class="form-label">Key Questions <span class="text-danger">*</span></label>
+                        <div class="flex-grow-1">
+                            <textarea id="formPoint" class="form-control" name="coreQuestion" placeholder="Please enter."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="formPrice" class="form-label">Budget Range/Hour <span class="text-danger">*</span></label>
+                        <div class="form-input-wrap max-width-none">
+                            <div class="row gy-2">
+                                <div class="col-12 col-sm-7">
+                                    <select class="form-select" name="timeNeedAdvisory">
+                                        <option value="">Desired Consulting Fee Selection</option>
+                                        <option value="EVERY">No Preference</option>
+                                        <option value="70-90">505.96 to 650.52 USD</option>
+                                        <option value="50-70">361.40 to 505.96 USD</option>
+                                        <option value="50DWON">Less than 361.40 USD</option>
+                                        <option value="ETC">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-5">
+                                    <input type="text" class="form-control" id="formPrice" name="timeNeedAdvisoryEtc" inputmode="numeric" placeholder="Please enter." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="formPrivacyAgree" name="infoAgreeYn"/>
+                        <label class="form-check-label" for="formPrivacyAgree">
+                            <a href="" class="text-primary text-decoration-underline">I agree to the</a>collection and use of personal information.
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="formTermsAgree" name="useAgreeYn"/>
+                        <label class="form-check-label" for="formTermsAgree">
+                            <a href="" class="text-primary text-decoration-underline">I agree to the</a>terms and conditions.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer gap-2">
+                <button type="button" class="btn btn-outline-secondary" data-role="main">Go to Main Page</button>
+                <button type="button" class="btn btn-secondary" data-role="tempSave">Save as draft</button>
+                <button type="button" class="btn btn-primary" data-role="save">Final Submission</button>
+            </div>
+        </div>
+    </div>4
+</div>
+</html>

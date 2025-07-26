@@ -1,0 +1,38 @@
+#header{
+  position: absolute;
+  top: 0;left: 0; right: 0;z-index: $header-z-index;
+  height: $header-height;
+  width:100%;
+  @include media-breakpoint-up(lg){
+    height: $header-height-lg;
+  }
+}
+
+.tour-name{
+  color: $white;
+  text-decoration: none;
+  font-weight: 700;
+  i{transform: translateY(-2px);}
+  @include media-breakpoint-down(lg){
+    i{width: 20px;height: 20px;}
+  }
+  @include media-breakpoint-up(lg){
+    @include typography(20px)
+  }
+  @include media-breakpoint-up(xl){
+    @include typography(22px)
+  }
+  .dropdown-menu{
+    border-radius: 1.5rem;
+    border: 0;
+    overflow: hidden;
+    padding: 1rem 0;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
+  }
+  .dropdown-item{
+    text-decoration: none;
+    text-align: center;
+    padding: .5rem 1.5rem;
+  }
+}
+

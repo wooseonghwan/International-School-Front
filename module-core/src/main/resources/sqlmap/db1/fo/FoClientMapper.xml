@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.core.mapper.db1.fo.FoClientMapper">
+
+    <select id="selectIdCheck" parameterType="FoClientDTO" resultType="int">
+        /* com.fw.core.mapper.db1.fo.FoClientMapper.selectIdCheck, 24.10.08, wsh, FoExpertMapper.xml */
+        SELECT COUNT(1)
+        FROM tb_client
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertClient" parameterType="FoClientDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.insertClient, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_client (
+               form_status
+             , id
+             , password
+             , company_name
+             , company_category
+             , company_category_etc
+             , manager_name
+             , manager_phone
+             , manager_email
+             , nation
+             , need_time
+             , consulting_request_time
+             , consulting_request_time_detail
+             , consulting_request_time_etc
+             , consulting_subject
+             , core_question
+             , time_need_advisory
+             , time_need_advisory_etc
+             , info_agree_yn
+             , use_agree_yn
+        ) VALUES (
+               'SUCCESS'
+             , #{id}
+             , #{password}
+             , #{companyName}
+             , #{companyCategory}
+             , #{companyCategoryEtc}
+             , #{managerName}
+             , #{managerPhone}
+             , #{managerEmail}
+             , #{nation}
+             , #{needTime}
+             , #{consultingRequestTime}
+             , #{consultingRequestTimeDetail}
+             , #{consultingRequestTimeEtc}
+             , #{consultingSubject}
+             , #{coreQuestion}
+             , #{timeNeedAdvisory}
+             , #{timeNeedAdvisoryEtc}
+             , #{infoAgreeYn}
+             , #{useAgreeYn}
+        )
+        <selectKey resultType="String" keyProperty="clientSeq" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="inserConsultingCategory" parameterType="FoClientDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserConsultingCategory, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_consulting_category (
+               client_seq
+             , consulting_category
+             , consulting_cate_etc
+             ) VALUES (
+               #{clientSeq}
+             , #{consultingCategoryDb}
+             , #{consultingCateEtc}
+             )
+    </insert>
+
+    <insert id="inserExpertNeed" parameterType="FoClientDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserExpertNeed, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_expert_need (
+               client_seq
+             , expert_need
+             , expert_need_etc
+        ) VALUES (
+               #{clientSeq}
+             , #{expertNeedDb}
+             , #{expertNeedEtc}
+                 )
+    </insert>
+
+    <insert id="inserConsultingMethod" parameterType="FoClientDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserConsultingMethod, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_consulting_method (
+               client_seq
+             , consulting_method
+             , consulting_method_etc
+        ) VALUES (
+               #{clientSeq}
+             , #{consultingMethodDb}
+             , #{consultingMethodEtc}
+                 )
+    </insert>
+
+    <insert id="inserEtcRequest" parameterType="FoClientDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.inserEtcRequest, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_etc_request (
+               client_seq
+             , etc_request
+        ) VALUES (
+               #{clientSeq}
+             , #{etcRequestDb}
+                 )
+    </insert>
+
+    <insert id="insertClientTemp" parameterType="FoClientDTO">
+        /* com.fw.core.mapper.db1.fo.FoExpertMapper.insertClientTemp, 24.10.08, wsh, FoExpertMapper.xml */
+        INSERT INTO tb_client (
+               form_status
+             , id
+             , password
+             , company_name
+             , company_category
+             , company_category_etc
+             , manager_name
+             , manager_phone
+             , manager_email
+             , nation
+             , need_time
+             , consulting_request_time
+             , consulting_request_time_detail
+             , consulting_request_time_etc
+             , consulting_subject
+             , core_question
+             , time_need_advisory
+             , time_need_advisory_etc
+             , info_agree_yn
+             , use_agree_yn
+        ) VALUES (
+               'TEMP'
+             , #{id}
+             , #{password}
+             , #{companyName}
+             , #{companyCategory}
+             , #{companyCategoryEtc}
+             , #{managerName}
+             , #{managerPhone}
+             , #{managerEmail}
+             , #{nation}
+             , #{needTime}
+             , #{consultingRequestTime}
+             , #{consultingRequestTimeDetail}
+             , #{consultingRequestTimeEtc}
+             , #{consultingSubject}
+             , #{coreQuestion}
+             , #{timeNeedAdvisory}
+             , #{timeNeedAdvisoryEtc}
+             , #{infoAgreeYn}
+             , #{useAgreeYn}
+        )
+        <selectKey resultType="String" keyProperty="clientSeq" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+</mapper>

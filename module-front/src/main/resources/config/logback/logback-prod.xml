@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+    <property name="FILE_PATH" value="/www/logs/aesk/fo-"/><!-- 로그 파일 경로 -->
+    <property name="STD_FILE" value="info.log"/>
+    <property name="ERROR_FILE" value="error.log"/>
+
+    <appender name="FILE_STD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${FILE_PATH}${STD_FILE}</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_PATH}${STD_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-30}</maxHistory>
+        </rollingPolicy>
+
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${FILE_PATH}${ERROR_FILE}</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_PATH}${ERROR_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-30}</maxHistory>
+        </rollingPolicy>
+
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="FILE_STD"/>
+    </root>
+    <root level="ERROR">
+        <appender-ref ref="FILE_ERROR"/>
+    </root>
+
+    <logger name="com.fw" level="INFO" />
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="logging.level.org.springframework.web" level="WARN" />
+    <logger name="logging.level.org.apache" level="WARN" />
+    <logger name="jdbc.connection" level="WARN"/>
+    <logger name="jdbc.audit" level="WARN"/>
+    <logger name="jdbc.sqlonly" level="WARN"/>
+    <logger name="jdbc.sqltiming" level="INFO"/>
+    <logger name="jdbc.resultset" level="WARN"/>
+    <logger name="jdbc.resultsettable" level="INFO"/>
+
+</included>

@@ -1,0 +1,59 @@
+@mixin typography($font-size, $font-weight:null) {
+  font-size: $font-size;
+  @if $font-size == 12px{
+    line-height: 1.7;
+  }
+  @else if $font-size == 14px{
+    line-height: 1.7;
+  }
+  @else if $font-size == 16px{
+    line-height: 1.6;
+  }
+  @else if $font-size == 18px{
+    line-height: 1.5;
+  }
+  @else if $font-size == 24px{
+    line-height: 1.5;
+  }
+  @else if $font-size == 26px{
+    line-height: 1.5;
+  }
+  @else if $font-size == 32px{
+    line-height: 1.5;
+  }
+  @else if $font-size == 40px{
+    line-height: 1.5;
+  }
+  font-weight: $font-weight;
+}
+
+@mixin ellipsis($width:null) {
+  @if not $width{
+    display:block;
+  }@else{
+    display: inline-block;
+    max-width: $width;
+  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+@mixin ellipsis-multiline($font-size, $line-height, $lines-to-show) {
+  $height-calc: $font-size*$line-height*$lines-to-show;
+  display: block;
+  display: -webkit-box;
+  font-size: $font-size*1px;
+  line-height: $line-height;
+  max-height: ($line-height * $lines-to-show) * 1em;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+
+  p:not(:first-of-type) {
+    display: none;
+  }
+}

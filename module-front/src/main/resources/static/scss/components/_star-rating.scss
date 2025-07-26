@@ -1,0 +1,106 @@
+.star-rating{
+  display: inline-flex;
+  padding-left: 1px;padding-right: 1px;
+  gap: 2px;
+  position: relative;
+  white-space: nowrap;
+  svg {
+    fill: $primary;
+    width: 20px;
+    height: 20px;
+  }
+  .cover {
+    background: white;
+    height: 100%;
+    overflow: hidden;
+    mix-blend-mode: color;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &[data-rating="3.0"]{
+    .cover{
+      width: calc(100% - 60%);
+    }
+  }
+  &[data-rating="3.5"]{
+    .cover{
+      width: calc(100% - 70%);
+    }
+  }
+  &[data-rating="3.6"]{
+    .cover{
+      width: calc(100% - 72%);
+    }
+  }
+  &[data-rating="3.7"]{
+    .cover{
+      width: calc(100% - 74%);
+    }
+  }
+  &[data-rating="3.8"]{
+    .cover{
+      width: calc(100% - 76%);
+    }
+  }
+  &[data-rating="3.9"]{
+    .cover{
+      width: calc(100% - 78%);
+    }
+  }
+  &[data-rating="4.0"]{
+    .cover{
+      width: calc(100% - 80%);
+    }
+  }
+  &[data-rating="4.1"]{
+    .cover{
+      width: calc(100% - 82%);
+    }
+  }
+  &[data-rating="4.2"]{
+    .cover{
+      width: calc(100% - 84%);
+    }
+  }
+  &[data-rating="4.3"]{
+    .cover{
+      width: calc(100% - 86%);
+    }
+  }
+  &[data-rating="4.4"]{
+    .cover{
+      width: calc(100% - 88%);
+    }
+  }
+  &[data-rating="4.5"]{
+    .cover{
+      width: calc(100% - 90%);
+    }
+  }
+  &[data-rating="4.6"]{
+    .cover{
+      width: calc(100% - 92%);
+    }
+  }
+  &[data-rating="4.7"]{
+    .cover{
+      width: calc(100% - 94%);
+    }
+  }
+  &[data-rating="4.8"]{
+    .cover{
+      width: calc(100% - 96%);
+    }
+  }
+  &[data-rating="4.9"]{
+    .cover{
+      width: calc(100% - 98%);
+    }
+  }
+  &[data-rating="5.0"]{
+    .cover{
+      width: calc(100% - 100%);
+    }
+  }
+}

@@ -1,0 +1,4 @@
+rootProject.name = 'International-School-Front'
+include 'module-core'
+include 'module-front'
+

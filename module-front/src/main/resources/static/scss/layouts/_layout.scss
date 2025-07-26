@@ -1,0 +1,22 @@
+.container,
+.container-fluid{
+  padding-left: $container-padding-x !important;
+  padding-right: $container-padding-x !important;
+  @include media-breakpoint-up(lg){
+    padding-left: $container-padding-x-lg !important;
+    padding-right: $container-padding-x-lg !important;
+  }
+}
+
+.container{
+  max-width: 1540px !important;
+}
+
+.row > *{
+  min-width: 0;
+}
+
+#main{
+  width: 100%;
+  overflow-x: hidden;
+}

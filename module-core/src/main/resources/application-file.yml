@@ -1,0 +1,20 @@
+---
+# local
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+# dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+# prod
+spring:
+  config:
+    activate:
+      on-profile: prod

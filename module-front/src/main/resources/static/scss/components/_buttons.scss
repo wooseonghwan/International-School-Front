@@ -1,0 +1,67 @@
+.btn{
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: inline-flex;align-items: center;justify-content: center;gap: 8px;
+  &:hover{
+    text-decoration: none;
+  }
+  &:disabled{
+    opacity: 0.3;
+  }
+  .input-group > &{
+    min-width: 0;
+  }
+}
+
+.btn-sm{
+  --bs-btn-line-height: 1.7;
+}
+
+[class*=btn-outline-]{
+  --bs-btn-hover-color: var(--bs-btn-color);
+  --bs-btn-hover-bg: var(--bs-btn-bg);
+  --bs-btn-hover-border-color: var(--bs-btn-border-color);
+  &:hover{
+    opacity: .8;
+  }
+}
+
+.close-btn{
+  border: 1px solid var(--gray3);
+  border-radius: 8px;
+  padding: 4px;
+
+}
+
+.btn-light{
+  color: $gray3;
+}
+
+.radio-button-type{
+  .btn-light{
+    background: transparent;
+    border-color: transparent !important;
+    color: $dark;
+  }
+  .btn-check:checked{
+    & + .btn-light{
+      color: $primary;
+      background: $light;
+      &::before{
+        content: '';
+        display: inline-block;vertical-align: middle;
+        background: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M17.5435 5.37758C18.1217 5.90861 18.1551 6.80268 17.6183 7.37455L10.1013 15.3818C9.83722 15.6631 9.46885 15.826 9.08086 15.8331C8.69287 15.8402 8.31866 15.6909 8.04427 15.4195L3.41842 10.8439C2.86053 10.2921 2.86053 9.39738 3.41842 8.84555C3.97631 8.29372 4.88083 8.29372 5.43872 8.84555L9.01631 12.3843L15.5246 5.45154C16.0614 4.87967 16.9653 4.84655 17.5435 5.37758Z' fill='%2300B477'/%3E%3C/svg%3E%0A") no-repeat 0 0;
+        width: 21px;height: 20px;
+      }
+    }
+  }
+}
+
+.btn-link {
+  padding: 6px 10px 6px 16px; border: 1px solid $primary; background-color: rgba(255, 255, 255, 0.10); border-radius: 40px; color: $primary; @include typography(14px, 700); text-decoration: none;
+  .icon-link-arrow {width: 36px; height: 36px;}
+  @include media-breakpoint-up(lg){
+    padding: 10px 12px 10px 24px; @include typography(16px);
+    .icon-link-arrow {width: 40px; height: 40px;}
+  }
+}

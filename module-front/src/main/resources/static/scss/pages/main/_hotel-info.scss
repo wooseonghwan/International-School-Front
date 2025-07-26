@@ -1,0 +1,102 @@
+.hotel-info {
+  .title-wrap {
+    color: $white;
+    .sub-title {
+      @include typography(14px);
+      @include media-breakpoint-up(lg){
+        @include typography(18px); margin-bottom: 16px;
+      }
+    }
+    .title {
+      @include typography(28px, 700); margin-bottom: 18px;
+      @include media-breakpoint-up(lg){
+        @include typography(40px); margin-bottom: 40px;
+      }
+    }
+    .desc {
+      @include typography(14px);
+      @include media-breakpoint-up(lg){
+        @include typography(16px);
+      }
+    }
+  }
+
+  .hotel-info-summary {
+    position: relative; padding: 60px 0 60px;
+    .bg {
+      width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: -1; background-size: cover; opacity: 0; transition: opacity 0.2s;
+      &#kaga-bg {
+        background-image: url('../images/hotel-info-bg01.png'); opacity: 1;
+      }
+      &#rurikoh-bg {
+        background-image: url('../images/hotel-info-bg02.png'); 
+      }
+      &#hatori-bg {
+        background-image: url('../images/hotel-info-bg03.png'); 
+      }
+      &#arrowle-bg {
+        background-image: url('../images/hotel-info-bg04.png'); 
+      }
+      &.active {opacity: 1;}
+    }
+    .nav {
+      margin-bottom: 40px;
+      @include media-breakpoint-up(lg){
+        margin-bottom: 80px;
+      }
+    }
+
+    .animation-circle {
+      margin-top: 60px;
+    }
+    
+    @include media-breakpoint-up(lg){
+      padding: 260px 0;
+      .left-content {max-width: 560px;}
+      .animation-circle {
+        margin-top: 0;
+      }
+    }
+  }
+  
+  .hotel-info-details {
+    padding: 50px 0;
+    .title-wrap {
+      color: #000;
+      .sub-title {color: $primary;}
+      @include media-breakpoint-down(xxl){
+        text-align: center;
+      }
+    }
+    .btn-wrap {
+      margin-top: 80px;
+      @include media-breakpoint-down(xxl){
+        margin-top: 30px; display: flex; justify-content: center;
+      }
+    }
+    .service-wrap {
+      margin-top: 20px;
+      .check-list {
+        display: flex; column-gap: 24px; row-gap: 12px; flex-wrap: wrap; margin-top: 16px;
+        .list {
+          width: calc((100% / 4) - 18px); display: flex;  gap: 4px; @include typography(16px);
+        }
+        @include media-breakpoint-down(sm){
+          column-gap: 12px;
+          .list {width: calc((100% / 2) - 6px); @include typography(14px);}
+        }
+      }
+      @include media-breakpoint-up(lg){
+        margin-top: 40px;
+      }
+    }
+    @include media-breakpoint-up(xxl){
+      .tab-content {
+        img {width: 100%; object-fit: cover;}
+      }
+    }
+    @include media-breakpoint-up(lg){
+      padding: 120px 0;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="common">
+  <header id="header">
+    <div class="container-fluid h-100">
+      <div class="h-100 d-flex justify-content-between align-items-center flex-wrap">
+        <div class="logo d-flex gap-3 flex-column flex-md-row align-items-start align-items-md-end">
+          <a href="/fo/main1-en">
+            <div class="img"><img src="/static/images/logo.svg" alt="" /></div>
+          </a>
+          <span class="d-none d-lg-block">Experts & Talents Fit to All Angles</span>
+        </div>
+        <div class="hstack gap-2 gap-lg-10 d-none d-lg-flex">
+          <!-- <ul class="nav nav-underline">
+            <li class="nav-item">
+              <a href="#" class="nav-link active" aria-current="page">가나다라</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">가나다라</a>
+            </li>
+          </ul> -->
+          <div class="hstack gap-2">
+            <a href="/fo/client-add-en">
+              <button type="button" class="btn btn-primary">
+                <div class="hstack gap-2">
+                  <i class="icon-send-18"></i>
+                  Client Registration
+                </div>
+              </button>
+            </a>
+            <a href="/fo/expert-add-en">
+              <button type="button" class="btn btn-dark">
+                <div class="hstack gap-2">
+                  <i class="icon-mail-20"></i>
+                  Expert Registration
+                </div>
+              </button>
+            </a>
+          </div>
+          <select class="form-select select-language">
+            <option value="KOR">KOR</option>
+            <option value="ENG" selected>ENG</option>
+          </select>
+        </div>
+        <div class="mobile-menu d-block d-lg-none">
+          <button type="button" class="mobile-menu-btn">
+            <i class="icon-menu"></i>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-menu-dropdown">
+        <div class="btn-wrap">
+          <!-- <button type="button" class="btn btn-light">
+            Platform & Network
+          </button>
+          <button type="button" class="btn btn-white">
+            About aESK
+          </button> -->
+          <a href="/fo/client-add-en">
+            <button type="button" class="btn btn-primary w-100">
+              <div class="hstack gap-2">
+                <i class="icon-send-18"></i>
+                Client Registration
+              </div>
+            </button>
+          </a>
+          <a href="/fo/expert-add-en">
+            <button type="button" class="btn btn-dark w-100">
+              <div class="hstack gap-2">
+                <i class="icon-mail-20"></i>
+                Expert Registration
+              </div>
+            </button>
+          </a>
+        </div>
+        <div class="d-flex justify-content-center">
+          <select class="form-select select-language mt-6">
+            <option value="KOR">KOR</option>
+            <option value="ENG" selected>ENG</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <script>
+      // 모든 select.language 요소에 대해 이벤트 리스너 등록
+      const languageSelectors = document.querySelectorAll('.select-language');
+
+      languageSelectors.forEach(selector => {
+        selector.addEventListener('change', function () {
+          const selectedLanguage = this.value;
+
+          // 현재 페이지 파일명 가져오기
+          const currentPath = window.location.pathname;
+          const fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+          const fileWithoutExtension = fileName.replace('.html', '');
+
+          let targetFile = '';
+
+          // ENG가 선택되면 -en 파일을, KOR가 선택되면 -en 제거한 파일로 이동
+          if (selectedLanguage === 'ENG') {
+            targetFile = fileWithoutExtension + '-en';
+          } else {
+            // 파일명이 -en으로 끝나는 경우 -en 제거
+            targetFile = fileWithoutExtension.endsWith('-en')
+                    ? fileWithoutExtension.replace('-en', '') + ''
+                    : fileWithoutExtension + '';
+          }
+
+          // 페이지 리다이렉트
+          window.location.href = targetFile;
+        });
+      });
+    </script>
+  </header>
+
+</th:block>
+</html>

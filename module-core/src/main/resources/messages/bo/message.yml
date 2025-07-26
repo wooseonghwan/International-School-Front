@@ -1,0 +1,25 @@
+# System Message
+bad-request:
+  message: ''
+page-not-found:
+  message: '잘못된 페이지 접근입니다.'
+method-not-allowed:
+  message: ''
+internal-server-error:
+  message: ''
+not-authorized:
+  message: ''
+invalid-parameter:
+  message: ''
+success:
+  message: '성공'
+login-fail:
+  message: ''
+token-expired:
+  message: ''
+token-non-exists:
+  message: ''
+user-non-exists:
+  message: ''
+no-content:
+  message: ''

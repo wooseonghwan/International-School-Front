@@ -1,0 +1,24 @@
+:root{
+  --sat: env(safe-area-inset-top);
+  --sar: env(safe-area-inset-right);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+
+  --gray1: #262D34;
+  --gray2: #5D6772;
+  --gray3: #A1A7AE;
+  --gray4: #CDD1D6;
+  --gray5: #dfe1e4;
+  --gray6: #eff1f3;
+  --gray7: #f5f8fb;
+}
+
+$header-height: 64px;
+$header-height-lg: 110px;
+$header-z-index: 99;
+
+$container-padding-x: 1.25rem;
+$container-padding-x-lg: 2.5rem;
+
+$footer-height: 160px;
+$footer-height-lg: 240px;

@@ -1,0 +1,26 @@
+.club-intro {
+  background: url('../images/club-intro01.png') no-repeat center; background-size: cover;
+  background-attachment: fixed;
+  .contents-wrap {
+    display: flex; align-items: center; flex-direction: column; color: #fff; padding: 200px 20px 80px;text-align: center;
+    .sub-title {
+      width: 180px; height: 32px; margin-bottom: 24px;
+      img {width: 100%; height: 100%;}
+    }
+    .title {
+      @include typography(28px, 700);
+      margin-bottom: 40px;
+    }
+    .desc {margin-bottom: 65px; @include typography(14px); }
+
+    @include media-breakpoint-up(lg){
+      padding: 480px 0 126px;
+      .sub-title {margin-bottom: 16px;}
+      .title {
+        @include typography(40px, 700);
+        margin-bottom: 40px;
+      }
+      .desc {margin-bottom: 100px;}
+    }
+  }
+}

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="common">
+  <!-- Alert: sample -->
+    <div class="modal alert" tabindex="-1" id="alert-sample1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="alert-message">Text body Text body Text body Text body Text body Text body Text body Text body Text body</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-role="ok">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal alert" tabindex="-1" id="alert-sample2">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="alert-message2">Text body Text body Text body Text body Text body Text body Text body Text body Text body</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-role="ok">confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- //Alert: sample -->
+  <!-- Alert: sample -->
+    <div class="modal alert" tabindex="-1" id="confirmModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="alert-message">전문가 등록을 완료하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" id="confirmModalBtn">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal alert" tabindex="-1" id="confirmModal2">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p class="alert-message2">전문가 등록을 완료하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmModalBtn2">confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- //Alert: sample -->
+    <div class="modal" tabindex="-1" id="modal-expert-participation" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-lg-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">전문가 자문 참여 동의서</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="scroll-wrap">
+                        <div class="sub-title">주식회사 애스크(AESK, 이하 “회사”로 표기)</div>
+                        <div class="desc">
+                            회사의 체계는 귀하, 회사 및 회사 고객 사이의 안전하고 법적 규정을 준수하며 전문적인 자문(예: 유선 자문, 설문조사 또는 가상/대면 회의, 장단기 파견, 고정 자문 계약 등)를 보장합니다. 회사와 협업하려면 우선 귀하는 회사의 참여 조건, 지불 조건, 회사 전문가 행동 강령 및 개인 정보 보호 및
+                            쿠키 정책을 반드시 읽고 이에 동의해야 합니다. 아래 해당 내용을 검토한 뒤 동의를 진행해 주십시오.
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">자격</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 귀하가 자문에 참여할 자격이 있다는 데 동의합니다. 특히 귀하는 귀하의 고용주 또는 제3자(해당하는 경우)에게 참여를 위한 동의 또는 면책권을 획득했습니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 이해 충돌이 발생하거나, 법률, 규제 또는 제3자에 대한 의무를 위반하거나, 해당 자문 내용이 귀하의 현재 고용주에 관한 내용인 경우 그러한 자문에 참여해서는 안 된다는 점을 이해합니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 불특정 다수에게 공개된 정보외에, 자문주제와 직접 관련된 대상(Entity)의 투자, 재무, 회계, 법률, 의료 또는 기타 전문적인 자문을 제공하지 않는다는 데 동의합니다.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">기밀 및 미공개 중요 정보</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 자문 중 기밀 및 독점 정보를 공개하지 않습니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 자문 중 비공개 중요 정보를 공개하지 않습니다. 이는 특정 상장 증권과 관련하여 합리적인 투자자가 투자 결정을 내릴 때 중요하게 고려하는 정보이자 해당 증권의 가격에 영향을 미칠 가능성이 있는 모든 비공개 정보를 의미합니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 참여 사실이나 자문의 주제 또는 회사 고객의 신원을 제3자에게 공개해서는 안 됩니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 자문 중 취득한 정보를 사용하거나, 이를 바탕으로 사익을 취하거나, 자문하지 않습니다.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">귀하의 개인정보</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        회사는 귀하의 자문 참여 주선을 위해 이름, 연락처 세부 정보, 경력, 관점, 전문 분야 등을 포함하는 귀하의 개인정보를 고객과 공유할 수 있습니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        별도로 동의하지 않는 한, 당사의 고객은 귀하의 개인정보를 특정 프로젝트의 맥락에서만 평가할 것이며 다른 목적으로 평가하지 않습니다. 귀하와 자문을 완료한 모든 고객은 규정 준수 목적으로 제한적인 특정 개인정보를 보유할 수 있습니다.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">지불</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        지불을 받을 자격이 있는 경우 귀하는 합의된 시간당 요율로 보상을 받게 되며, 지불은 당사의 고객에게 자문하는 데 소요된 시간을 바탕으로 분단위 계산됩니다.
+                                    </div>
+                                    <ul class="desc">
+                                        <li>
+                                            <div class="d-flex gap-2">
+                                                <span>·</span>
+                                                해당하는 경우, 귀하는 설문조사 또는 보고서에 대하여 자문 당 결정되는 고정 요율로 보상을 받을 수 있습니다.
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex gap-2">
+                                                <span>·</span>
+                                                KRW, USD, EUR, GBP 계정의 경우, 당사는 영업일 기준 5~6일 내에 은행 계좌 이체를 실행하는 것을 목표로 합니다. 다른 통화 및 수표는 영업일 기준 최대 10~14일 소요될 수 있습니다.
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex gap-2">
+                                                <span>·</span>
+                                                당사의 지불 조건에 따라 모든 지불은 달리 규정되지 않는 한 30일 이내에 처리됩니다.
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">정확한 표현 및 전문가 의식</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 귀하의 경력, 전문성 및 관련 경력에 관하여 회사의 직원, 고객 또는 제3자를 고의로 잘못 대변하거나, 오도하거나, 기만해서는 안 됩니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 회사의 직원, 고객, 제3자에게 항상 전문가에게 기대되는 적절한 행동을 보여야 한다는 데 동의합니다.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        귀하는 정해진 회사 자문에 정시에 참여 가능해야 한다는 데 동의합니다.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 영문 -->
+    <div class="modal" tabindex="-1" id="modal-expert-participation-en" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg modal-fullscreen-lg-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Expert Consultation Consent Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="scroll-wrap">
+                        <div class="sub-title">AESK Co., Ltd. (hereinafter referred to as the "Company")</div>
+                        <div class="desc">
+                            The Company’s system ensures a safe, legally compliant, and professional consultation among you, the Company, and the Company’s clients (e.g., telephone consultation, surveys or virtual/in-person meetings, short- or long-term dispatch, fixed advisory contracts, etc.).<br />
+                            To collaborate with the Company, you must first read and agree to the Company’s participation terms, payment conditions, Expert Code of Conduct, and Privacy and Cookie Policy. Please review the relevant details below and proceed with your agreement.
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">Eligibility</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You agree that you are eligible to participate in the consultation. Specifically, you confirm that you have obtained the necessary consent or waiver from your employer or any relevant third parties (if applicable) to participate.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You understand that you must not participate in any consultation where a conflict of interest may arise, where there is a violation of any legal, regulatory, or third-party obligations, or if the consultation involves matters concerning your current employer.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You also agree that you will not provide any investment, financial, accounting, legal, medical, or other professional advice on topics directly related to the consultation subject beyond publicly available information.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">Confidentiality and Non-Public Material Information</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You agree not to disclose any confidential or proprietary information during the consultation.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You agree not to disclose any non-public material information during the consultation. This includes any non-public information related to specific publicly traded securities that a reasonable investor would consider important in making an investment decision or that could
+                                        affect the price of such securities.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You must not disclose to any third party your participation in the consultation, the subject of the consultation, or the identity of the Company’s clients.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You agree not to use, profit from, or provide any advice based on information obtained during the consultation.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">Your Personal Information</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        The Company may share your personal information, including your name, contact details, career background, insights, and areas of expertise, with clients to facilitate your participation in consultations.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        Unless otherwise agreed, our clients will review your personal information solely within the context of specific projects and not for any other purposes. All clients with whom you have completed consultations may retain certain limited personal information for compliance
+                                        purposes.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">Payment</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        If eligible for payment, you will be compensated at the agreed hourly rate, calculated to the minute based on the time spent advising the Company’s clients.
+                                    </div>
+                                    <ul class="desc">
+                                        <li>
+                                            <div class="d-flex gap-2">
+                                                <span>·</span>
+                                                Where applicable, you may be compensated at a fixed rate per consultation for surveys or reports, as determined on a per-project basis.
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex gap-2">
+                                                <span>·</span>
+                                                For KRW, USD, EUR, and GBP accounts, we aim to execute bank transfers within 5–6 business days. Other currencies and checks may take up to 10–14 business days.
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex gap-2">
+                                                <span>·</span>
+                                                In accordance with our payment terms, all payments will be processed within 30 days unless otherwise specified.
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="vstack gap-2">
+                            <div class="name">Accuracy and Professional Conduct</div>
+                            <ul class="desc">
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You must not intentionally misrepresent, mislead, or deceive the Company’s employees, clients, or any third parties regarding your career, expertise, or relevant experience.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You agree to demonstrate conduct that meets the professional standards expected by the Company’s employees, clients, and third parties at all times.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex gap-2">
+                                        <span>·</span>
+                                        You also agree to be available punctually for scheduled consultations arranged by the Company.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- modal: 전문가 등록 -->
+  <!-- //modal: 예약 완료 -->
+</th:block>
+</html>

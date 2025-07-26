@@ -1,0 +1,101 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.6'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// 모듈 공통 적용
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+
+    group = 'com.fw'
+    version = '1.0'
+    sourceCompatibility = '1.8'
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    tasks.withType(JavaCompile){
+        options.encoding = 'UTF-8'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-mail'
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-websocket'
+        implementation 'org.springframework.boot:spring-boot-devtools'
+        implementation 'org.springframework.amqp:spring-rabbit'
+        implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+        implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+        implementation 'org.apache.commons:commons-lang3:3.12.0'
+        implementation 'com.google.guava:guava:31.1-jre'
+        implementation 'dev.akkinoc.util:yaml-resource-bundle:2.4.1'
+        implementation 'org.mariadb.jdbc:mariadb-java-client:2.2.0'
+        implementation 'com.amazonaws:aws-java-sdk-ses:1.12.339'
+        implementation 'com.amazonaws:aws-java-sdk-s3:1.12.232'
+        implementation 'com.google.code.gson:gson:2.7'
+        implementation 'org.json:json:20220924'
+        implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+        implementation 'org.apache.poi:poi:3.14'
+        implementation 'org.apache.poi:poi-ooxml:3.14'
+        implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly 'org.projectlombok:lombok:1.18.24'
+        annotationProcessor 'org.projectlombok:lombok:1.18.24'
+        testCompileOnly 'org.projectlombok:lombok:1.18.24'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+project(':module-front') {
+    apply plugin: 'war'
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'com.fw.front.FoApplication'
+        }
+        enabled = false
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+        implementation 'com.nimbusds:nimbus-jose-jwt:3.10'
+        implementation project(':module-core')
+    }
+}
+
+project(':module-core') {
+    apply plugin: 'java-library'
+
+    tasks.named("bootJar") {
+        enabled = false
+    }
+
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+    }
+}

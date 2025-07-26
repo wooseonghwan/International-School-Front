@@ -1,0 +1,24 @@
+#footer{
+  background: #1A1E22;
+  color: $white;
+  height: $footer-height;
+  @include typography(12px);
+  .company{
+    display: inline;text-align: center;
+    strong{
+      @include typography(14px);
+      @include media-breakpoint-up(lg){
+        @include typography(16px)
+      }
+    }
+    > * + *{
+      &::before{
+        content: '';width: 1px;height: 12px;background: $white;display: inline-block;margin: 0 8px;transform: translateY(1px);
+      }
+    }
+  }
+  @include media-breakpoint-up(lg){
+    height: $footer-height-lg;
+    @include typography(14px)
+  }
+}

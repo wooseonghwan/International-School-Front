@@ -1,0 +1,15 @@
+$font-size: 12px, 14px, 15px, 16px, 18px, 20px;
+@each $i in $font-size {
+  .fs-#{$i} {
+    @include typography($i);
+  }
+}
+
+.playfair-display{
+  font-family: 'Playfair Display';
+}
+
+.subtitle{
+  @include typography(1.125rem, 700);
+  &::before{content: '';width: 4px;height: 24px;background: $primary;vertical-align: middle;display: inline-block;margin-right: 10px;}
+}

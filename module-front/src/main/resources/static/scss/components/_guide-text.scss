@@ -1,0 +1,14 @@
+.guide-text{
+  display: flex;flex-direction: column;gap: .25rem;
+  color: $gray;
+  @include typography(14px, 500);
+  > li{
+    word-break: keep-all;
+    padding-left: .75rem;
+    position: relative;
+    &::before{
+      content: '';width: 4px;height: 4px;border-radius: 50%;background-color: $gray3;display: inline-block;
+      position: absolute;left: 0;top: 10px;
+    }
+  }
+}

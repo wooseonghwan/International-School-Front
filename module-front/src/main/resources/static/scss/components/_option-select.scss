@@ -1,0 +1,87 @@
+.option-select{
+  padding: 24px 24px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.40);
+  color: $white;
+  box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.16);
+  button{
+    color: $white;
+    &:not(.btn){
+      &::after{
+        content: '';
+        display: inline-block;vertical-align: middle;margin-left: 4px;
+        background: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.33083 5.06701C9.47443 5.06718 10.4827 5.06709 10.7826 5.06702L11.7998 5.06738C11.9477 5.06725 12.1423 5.06722 12.3263 5.0672C12.4504 5.06718 12.5697 5.06716 12.6667 5.06712L8.31039 11.4173C8.22712 11.5346 8.11583 11.6002 8 11.6002C7.88418 11.6002 7.77288 11.5346 7.68962 11.4173L3.33334 5.06712L3.62913 5.06707H4.20473L4.70181 5.06712C4.7405 5.0671 4.79371 5.06707 4.8532 5.06703C5.03441 5.06692 5.27386 5.06677 5.33861 5.06707H8.79842C8.84187 5.06687 8.95185 5.06695 9.06291 5.06703C9.17167 5.06711 9.28146 5.06719 9.33083 5.06701Z' fill='white'/%3E%3C/svg%3E%0A") no-repeat 0 0;
+        width: 16px;height: 16px;
+      }
+      @include media-breakpoint-down(lg){
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: .5rem 0;
+      }
+      @include media-breakpoint-up(lg){
+        margin: 0 1rem .75rem;
+      }
+      @include media-breakpoint-up(xxl){
+        margin: 0 3rem 0 0;
+      }
+    }
+  }
+  .total{
+    display: block;
+    @include media-breakpoint-down(lg){
+      padding: .5rem 0 1rem;text-align: right;
+      @include typography(15px);
+    }
+    @include media-breakpoint-up(lg){
+      margin-right: .75rem;
+    }
+  }
+  @include media-breakpoint-down(lg){
+    margin-top: 2rem;
+    .btn{width: 100%;}
+  }
+  @include media-breakpoint-up(lg){
+    max-width: 480px;
+    padding: 11px $container-padding-x;
+    position: fixed;
+    right: $container-padding-x-lg;
+    top: 24px;
+    z-index: 99;
+    transition: top .25s .05s;
+    /* .scrolled & {
+      top: -70px;
+    } */
+  }
+  @include media-breakpoint-up(xxl){
+    padding: 11px $container-padding-x-lg;
+    max-width: none;
+  }
+}
+
+.option-details{
+  dl{
+    overflow: hidden;
+    dt,
+    dd{
+      padding: 6px 0;
+    }
+    dt{
+      clear: both;
+      float: left;
+      color: $gray3;
+      @include typography(14px,400);
+    }
+    dd{
+      text-align: right;
+      padding: 6px 0;
+      font-weight: 500;
+    }
+    strong{
+      color: $primary;
+      @include typography(24px, 700);
+    }
+  }
+}

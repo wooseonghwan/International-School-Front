@@ -1,0 +1,5 @@
+.progress-bar{
+  border-radius: 10rem;
+  @include typography(14px, 700);
+  color: var(--white);
+}

@@ -1,0 +1,93 @@
+spring:
+  profiles:
+    active: local
+    include:
+      - app
+      - db
+      - file
+  mvc:
+    throw-exception-if-no-handler-found: true
+    dispatch-options-request: false
+  config:
+    messages:
+      basename: messages/bo/message
+      encoding: UTF-8
+  web:
+    resources:
+      add-mappings: false
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+---
+# local
+spring:
+  config:
+    activate:
+      on-profile: local
+server:
+  port: 8079
+  servlet:
+    session:
+      cookie:
+        name: BO-JSESSIONID
+bo:
+  session:
+    key-name: BO_SESSION_INFO
+file:
+  upload:
+    path: C:/upload
+    editor_path: C:/upload/editor
+service:
+  upload:
+    path: /upload
+api:
+  url: http://localhost:21411
+---
+# dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+server:
+  port: 8079
+  servlet:
+    session:
+      cookie:
+        name: BO-JSESSIONID
+bo:
+  session:
+    key-name: BO_SESSION_INFO
+file:
+  upload:
+    path: /www/uploadFiles/aesk
+    editor_path: /www/uploadFiles/aesk
+service:
+  upload:
+    path: /upload
+api:
+  url: https://core-smanager.devsp.kr
+
+---
+# prod
+spring:
+  config:
+    activate:
+      on-profile: real
+server:
+  port: 79
+  servlet:
+    session:
+      cookie:
+        name: BO-JSESSIONID
+bo:
+  session:
+    key-name: BO_SESSION_INFO
+file:
+  upload:
+    path: /www/sites/aesk/upload
+    editor_path: /www/sites/aesk/upload
+service:
+  upload:
+    path: /upload

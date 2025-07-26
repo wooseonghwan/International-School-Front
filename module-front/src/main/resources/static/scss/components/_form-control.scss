@@ -1,0 +1,43 @@
+.form-control {
+  min-width: var(--min-width);
+  background-color: #fff;
+  &.price-form-control{
+    background-color: var(--gray7);
+    text-align: right;
+    padding-right: 12px !important;
+  }
+}
+
+[data-picker="date"],
+[data-picker="datetime"] {
+  background-image: url("../images/icon-calendar.svg");
+  background-repeat: no-repeat;
+  background-position: right 11px top 50%;
+  display: inline-block;
+  background-color: #fff;
+  color: var(--gray1);
+}
+[data-picker="date"] {
+  width: 150px;
+}
+[data-picker="datetime"] {
+  width: 200px;
+}
+
+@include media-breakpoint-down(lg) {
+  [data-picker="date"] {
+    width: 135px;
+  }
+  [data-picker="datetime"] {
+    width: 180px;
+  }
+}
+
+textarea.form-textarea{
+  background-color: #fff;
+  min-height: 145px;
+  @include media-breakpoint-down(lg){
+    font-size: 14px;
+    min-height: 100px;
+  }
+}

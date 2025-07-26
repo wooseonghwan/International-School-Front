@@ -1,0 +1,115 @@
+.swiper-button-next,
+.swiper-button-prev{
+  flex-shrink: 0;
+  width: 40px;height: 40px;
+  &::after{content: '';width: 100%;height: 100%;}
+  &.swiper-button-disabled {
+    opacity: .25;
+  }
+}
+.swiper-button-next{
+  right: 0;
+  &::after{
+    background: url(../images/btn-next.svg) no-repeat 0 0;background-size: contain;
+  }
+}
+.swiper-button-prev{
+  left: 0;
+  &::after{
+    background: url(../images/btn-prev.svg) no-repeat 0 0;background-size: contain;
+  }
+}
+
+.club-info{
+  padding: 60px 0;
+  background: url(../images/bg-club-info.png) no-repeat center top;
+  background-size: cover;
+  @include media-breakpoint-up(lg){
+    padding: 120px 0;
+  }
+  .title{
+    display: inline-flex;align-items: center;gap: 12px;
+    @include typography(18px, 700);
+    @include media-breakpoint-up(lg){
+      @include typography(1.5rem);
+    }
+  }
+  .desc{
+    @include media-breakpoint-down(lg){
+      br{display: none;}
+    }
+  }
+  .course{
+    margin-top: 80px;
+    @include media-breakpoint-up(lg){
+      margin-top: 160px;
+    }
+  }
+  .course-map{
+    background: $gray7;border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;align-items: center;justify-content: center;
+  }
+  .price-warning{
+    background: $dark;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: $white;
+    strong{display: block;margin-bottom: 1.5rem;}
+    p{
+      @include typography(.875rem);
+    }
+  }
+  .hole,
+  .clubhouse{
+    padding: 0 60px;
+    position: relative;
+    .swiper{
+      position: static;
+    }
+    @include media-breakpoint-down(lg){
+      padding: 0;
+      .swiper{
+        overflow: visible;
+        .swiper-wrapper{
+          .swiper-slide{
+            width: 168px !important;
+          }
+        }
+        .swiper-button-prev,
+        .swiper-button-next{
+          display: none;
+        }
+      }
+    }
+  }
+
+  .amenity{
+    .amenity-title{
+      @include typography(1.5rem, 700);
+      margin-bottom: 24px;
+    }
+    .swiper-button-next,
+    .swiper-button-prev{
+      position: static;
+      margin: 0;
+    }
+    @include media-breakpoint-up(md){
+      .swiper{
+        margin-top: 2rem;
+      }
+    }
+    @include media-breakpoint-down(md){
+      .swiper{
+        overflow-x: visible;
+      }
+      .swiper-button-next,
+      .swiper-button-prev{
+        display: none;
+      }
+      .swiper-slide{
+        width: 185px !important;
+      }
+    }
+  }
+}

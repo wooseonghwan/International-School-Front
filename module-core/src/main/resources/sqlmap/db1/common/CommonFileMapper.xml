@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.core.mapper.db1.common.CommonFileMapper">
+
+    <!-- tb_file insert -->
+    <insert id="insertFile" parameterType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.insertFile, tb_file insert, 22.11.21, j.s.ko, CommonFileMapper.xml */
+        INSERT INTO tb_file (
+               create_dt
+             , create_seq
+        ) VALUES (
+               NOW()
+             , #{createSeq}
+        )
+        <selectKey order="AFTER" keyProperty="fileSeq" resultType="String">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!-- tb_file insert -->
+    <insert id="insertFileSeq" parameterType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.insertFile, tb_file insert, 22.11.21, j.s.ko, CommonFileMapper.xml */
+        INSERT INTO tb_file (
+               create_dt
+             , create_seq
+             , file_seq
+        ) VALUES (
+               NOW()
+             , #{createSeq}
+             , #{fileSeq}
+        )
+    </insert>
+
+    <!-- tb_detail_file insert -->
+    <insert id="insertFileDetail" parameterType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.insertFileDetail, tb_detail_file insert , 22.11.21, j.s.ko, CommonFileMapper.xml */
+        INSERT INTO file_mgr (
+               ext
+             , height
+             , isImage
+             , name
+             , originName
+             , path
+             , size
+             , url
+             , width
+             , delFlag
+             , file_seq
+        )   VALUES (
+              #{ext}
+            , #{height}
+            , #{isImage}
+            , #{name}
+            , #{originName}
+            , #{path}
+            , #{size}
+            , #{url}
+            , #{width}
+            , 'N'
+            , #{fileSeq}
+        )
+    </insert>
+
+    <!-- tb_detail_file delete -->
+    <update id="updateFileDetail" parameterType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.updateFileDetail, tb_detail_file delete, 22.11.21, j.s.ko, CommonFileMapper.xml */
+        UPDATE file_mgr
+           SET delFlag = 'Y'
+         WHERE file_seq = #{fileSeq}
+    </update>
+
+    <!-- tb_detail_file delete / use - id -->
+    <update id="updateFile" parameterType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.updateFile, tb_detail_file delete, 22.11.21, j.s.ko, CommonFileMapper.xml */
+        UPDATE file_mgr
+           SET delFlag = 'Y'
+         WHERE id = #{id}
+    </update>
+
+    <!-- tb_detail_file list -->
+    <select id="selectFileDetailList" parameterType="String" resultType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.selectFileDetailList, tb_detail_file list, 22.11.22, j.s.ko, CommonFileMapper.xml */
+        SELECT id
+             , ext
+             , height
+             , isImage
+             , name
+             , originName
+             , path
+             , size
+             , url
+             , width
+             , delFlag
+             , file_seq
+          FROM file_mgr
+         WHERE delFlag = 'N'
+           AND file_seq = #{fileSeq}
+    </select>
+
+    <!-- file seq 구하기 -->
+    <select id="selectFileSeq" parameterType="String" resultType="FileDTO">
+        /* com.fw.core.mapper.db1.common.CommonFileMapper.selectFileSeq, selectFileSeq , 22.11.22, j.s.ko, CommonFileMapper.xml */
+        SELECT file_seq
+          FROM file_mgr
+         WHERE delFlag = 'N'
+           AND id = #{profilePictureFileId}
+    </select>
+
+</mapper>
