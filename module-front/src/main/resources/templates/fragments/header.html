@@ -48,7 +48,7 @@
     </header>
     <header class="mo-header">
         <div class="header-top">
-            <a href="" class="logo">
+            <a href="/fo/main1" class="logo">
                 <img src="/static/images/logo.svg" alt=" 로고"/>
             </a>
             <div class="d-flex align-items-center gap-4">
@@ -108,5 +108,37 @@
             </button>
         </div>
     </div>
+    <div class="dimmed"></div>
+    <script>
+        function toggleLanguage() {
+            const pathname = window.location.pathname;
+            let targetPath;
+
+            const isEnglish = pathname.includes('-en');
+            const hasFilename = pathname.split('/').filter(Boolean).length > 1; // /fo/main1 = true, /fo = false
+
+            if (isEnglish) {
+                // 영어 → 한글
+                targetPath = pathname.replace('-en', '');
+                if (!hasFilename) targetPath = '/fo/main1'; // 예: /fo-en → /fo/main1
+            } else {
+                // 한글 → 영어
+                if (!hasFilename) {
+                    targetPath = '/fo/main1-en'; // 예: /fo → /fo/main1-en
+                } else {
+                    const parts = pathname.split('/');
+                    const filename = parts.pop();
+                    const newFilename = filename + '-en';
+                    targetPath = [...parts, newFilename].join('/');
+                }
+            }
+
+            window.location.href = targetPath;
+        }
+
+        document.getElementById('langToggle')?.addEventListener('click', toggleLanguage);
+        document.getElementById('langToggleMobile')?.addEventListener('click', toggleLanguage);
+    </script>
+
 </th:block>
 </html>

@@ -6,15 +6,15 @@
         <th:block layout:fragment="head" th:remove="tag"/>
     </head>
     <body>
-        <div>
-            <div class="dimmed"></div>
-            <th:block layout:fragment="contents"/>
-            <th:block th:replace="fragments/header :: common" />
-            <footer>
-                <th:block th:replace="_include/_footer :: common" />
-            </footer>
-            <th:block th:replace="fragments/_modal :: common" />
-        </div>
+    <div class="wrap">
+        <th:block th:replace="fragments/header :: common" />
+        <div class="dimmed"></div>
+        <th:block layout:fragment="contents"/>
+        <footer>
+            <th:block th:replace="_include/_footer :: common" />
+        </footer>
+        <th:block th:replace="fragments/_modal :: common" />
         <th:block th:replace="fragments/javascript :: common" />
+    </div>
     </body>
 </html>

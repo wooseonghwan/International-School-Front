@@ -1,116 +1,144 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="common">
-    <header id="header">
-        <div class="wrap">
-            <header class="pc-header">
-                <div class="">
-                    <div class="header-top">
-                        <div class="header-logo">
-                            <a href="/fo/main1-en">
-                                <img src="/static/images/logo.svg" alt=""/>
-                            </a>
-                        </div>
-                        <ul class="gnb">
-                            <li>
-                                <a href="/fo/lunch-payment-en">Charge/Pay</a>
-                            </li>
-                            <li>
-                                <a href="/fo/lunch-payment-history-en">Charge Breakdown</a>
-                            </li>
-                            <li>
-                                <a href="/fo/use-history-en">Details Of Usage</a>
-                            </li>
-                            <li>
-                                <a href="/fo/menu-en">Menu</a>
-                            </li>
-                            <li>
-                                <a href="/fo/notice-board-en">Bulletin Board</a>
-                            </li>
-                            <li>
-                                <a href="/fo/notice-announcement-en">Notice</a>
-                            </li>
-                            <li>
-                                <a href="/fo/myinfo-en">My Profile</a>
-                            </li>
-                        </ul>
-                        <div class="header-info">
-                            <button type="button" class="btn-logout">
-                                <i class="icon-logout"></i>
-                            </button>
-                            <div class="toggle-wrapper active" id="langToggle">
-                                <div class="label">
-                                    <span class="ko">Ko</span>
-                                    <span class="en">En</span>
-                                </div>
-                                <div class="toggle-ball">en</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <header class="mo-header">
-                <div class="header-top">
-                    <a href="/fo/main1-en" class="logo">
-                        <img src="/static/images/logo.svg" alt=" 로고"/>
+    <header class="pc-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="header-logo">
+                    <a href="/fo/main1-en">
+                        <img src="/static/images/logo.svg" alt=""/>
                     </a>
-                    <div class="d-flex align-items-center gap-4">
-                        <div class="toggle-wrapper active" id="langToggleMobile">
-                            <div class="label">
-                                <span class="ko">Ko</span>
-                                <span class="en">En</span>
-                            </div>
-                            <div class="toggle-ball">en</div>
-                        </div>
-                        <button type="button" class="menu-btn">
-                            <i class="icon-m-menu"></i>
-                        </button>
-                    </div>
                 </div>
-            </header>
-            <!-- Side Menu -->
-            <div class="side-menu">
-                <div>
-                    <div class="side-menu-header">
-                        <div class="content">
-                            <p class="title">Menu</p>
-                            <button type="button" class="close-btn">
-                                <i class="icon-m-close"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="side-menu-body">
-                        <ul class="gnb">
-                            <li>
-                                <a href="/fo/lunch-payment-en">Charge/Pay</a>
-                            </li>
-                            <li>
-                                <a href="/fo/lunch-payment-history-en">Charge Breakdown</a>
-                            </li>
-                            <li>
-                                <a href="/fo/use-history-en">Details Of Usage</a>
-                            </li>
-                            <li>
-                                <a href="/fo/menu-en">Menu</a>
-                            </li>
-                            <li>
-                                <a href="/fo/notice-board-en">Bulletin Board</a>
-                            </li>
-                            <li>
-                                <a href="/fo/notice-announcement-en">Notice</a>
-                            </li>
-                            <li>
-                                <a href="/fo/myinfo-en">My Profile</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="side-menu-footer">
+                <ul class="gnb">
+                    <li>
+                        <a href="/fo/lunch-payment-en">Charge/Pay</a>
+                    </li>
+                    <li>
+                        <a href="/fo/lunch-payment-history-en">Charge Breakdown</a>
+                    </li>
+                    <li>
+                        <a href="/fo/use-history-en">Details Of Usage</a>
+                    </li>
+                    <li>
+                        <a href="/fo/menu-en">Menu</a>
+                    </li>
+                    <li>
+                        <a href="/fo/notice-board-en">Bulletin Board</a>
+                    </li>
+                    <li>
+                        <a href="/fo/notice-announcement-en">Notice</a>
+                    </li>
+                    <li>
+                        <a href="/fo/myinfo-en">My Profile</a>
+                    </li>
+                </ul>
+                <div class="header-info">
                     <button type="button" class="btn-logout">
                         <i class="icon-logout"></i>
                     </button>
+                    <div class="toggle-wrapper active" id="langToggle">
+                        <div class="label">
+                            <span class="ko">Ko</span>
+                            <span class="en">En</span>
+                        </div>
+                        <div class="toggle-ball">en</div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
+    <header class="mo-header">
+        <div class="header-top">
+            <a href="/fo/main1-en" class="logo">
+                <img src="/static/images/logo.svg" alt=" 로고"/>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <div class="toggle-wrapper active" id="langToggleMobile">
+                    <div class="label">
+                        <span class="ko">Ko</span>
+                        <span class="en">En</span>
+                    </div>
+                    <div class="toggle-ball">en</div>
+                </div>
+                <button type="button" class="menu-btn">
+                    <i class="icon-m-menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <div>
+            <div class="side-menu-header">
+                <div class="content">
+                    <p class="title">Menu</p>
+                    <button type="button" class="close-btn">
+                        <i class="icon-m-close"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="side-menu-body">
+                <ul class="gnb">
+                    <li>
+                        <a href="/fo/lunch-payment-en">Charge/Pay</a>
+                    </li>
+                    <li>
+                        <a href="/fo/lunch-payment-history-en">Charge Breakdown</a>
+                    </li>
+                    <li>
+                        <a href="/fo/use-history-en">Details Of Usage</a>
+                    </li>
+                    <li>
+                        <a href="/fo/menu-en">Menu</a>
+                    </li>
+                    <li>
+                        <a href="/fo/notice-board-en">Bulletin Board</a>
+                    </li>
+                    <li>
+                        <a href="/fo/notice-announcement-en">Notice</a>
+                    </li>
+                    <li>
+                        <a href="/fo/myinfo-en">My Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="side-menu-footer">
+            <button type="button" class="btn-logout">
+                <i class="icon-logout"></i>
+            </button>
+        </div>
+    </div>
+    <div class="dimmed"></div>
+    <script>
+        function toggleLanguage() {
+            const pathname = window.location.pathname;
+            let targetPath;
+
+            const isEnglish = pathname.includes('-en');
+            const hasFilename = pathname.split('/').filter(Boolean).length > 1; // /fo/main1 = true, /fo = false
+
+            if (isEnglish) {
+                // 영어 → 한글
+                targetPath = pathname.replace('-en', '');
+                if (!hasFilename) targetPath = '/fo/main1'; // 예: /fo-en → /fo/main1
+            } else {
+                // 한글 → 영어
+                if (!hasFilename) {
+                    targetPath = '/fo/main1-en'; // 예: /fo → /fo/main1-en
+                } else {
+                    const parts = pathname.split('/');
+                    const filename = parts.pop();
+                    const newFilename = filename + '-en';
+                    targetPath = [...parts, newFilename].join('/');
+                }
+            }
+
+            window.location.href = targetPath;
+        }
+
+        document.getElementById('langToggle')?.addEventListener('click', toggleLanguage);
+        document.getElementById('langToggleMobile')?.addEventListener('click', toggleLanguage);
+    </script>
+
 </th:block>
 </html>
