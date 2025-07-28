@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +20,11 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class FoPaymentController {
-    @GetMapping({ "/fo/lunch-payment" })
+    @RequestMapping({ "/fo/lunch-payment" })
     public String lunchPayment(ModelMap modelMap) {
         return "fo/lunch-payment";
     }
-    @GetMapping({ "/fo/lunch-payment-en" })
+    @RequestMapping({ "/fo/lunch-payment-en" })
     public String lunchPaymentEn(ModelMap modelMap) {
         return "fo/lunch-payment-en";
     }
@@ -54,7 +55,7 @@ public class FoPaymentController {
         payload.put("amount", 500);
         payload.put("payMethodTypeCode", "11");
         payload.put("currency", "00");
-        payload.put("returnUrl", "https://yourdomain.com/payment/return");
+        payload.put("returnUrl", "https://cezars.devsp.kr/fo/lunch-payment");
         payload.put("deviceTypeCode", "pc");
         payload.put("clientTypeCode", "00");
         payload.put("langFlag", "KOR");
