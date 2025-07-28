@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout-en}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="container">
+            <div class="notice-wrap">
+                <div class="borad-head">
+                    <p class="title">Bulletin Board</p>
+                    <p class="desc">You can talk about everything related to school meals here.</p>
+                    <div class="search-content">
+                        <div class="form-wrap">
+                            <select name="" id="" class="form-select form-md round">
+                                <option value="">All</option>
+                            </select>
+                        </div>
+                        <div class="form-field search">
+                            <div class="input-form">
+                                <i class="icon-search"></i>
+                                <input type="text" class="form-control search-form form-md round"
+                                       placeholder="Enter a keyword to search."/>
+                                <button type="button" class="clear-button">
+                                    <i class="icon-input-close"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <div class="table-top">
+                        <div class="d-flex align-items-center gap-3">
+                            <p class="table-top-title">All Posts</p>
+                            <p class="table-top-desc">Total Posts <span>312</span></p>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" onclick="location.href='/fo/notice-board-form-en'" style="outline-color: #ff974d;">
+                            <i class="icon-write"></i> Write Post
+                        </button>
+                    </div>
+                    <div class="scroll-layout">
+                        <table class="table border-table">
+                            <colgroup>
+                                <col width="5%"/>
+                                <col width="59%"/>
+                                <col width="15%"/>
+                                <col width="13%"/>
+                                <col width="8%"/>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">No.</th>
+                                <th class="text-start">Title</th>
+                                <th class="text-center">Author</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Views</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="active">
+                                <td class="text-center">
+                                    <p class="">125</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <button type="button" class="btn btn-primary round btn-xs" style="background-color: #ff974d;">Notice</button>
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Next Week’s Menu
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+                            <tr class="active">
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="icon-lock"></i>
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Next Week’s Menu
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i>User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <p class="">124</p>
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="" class="board-desc text-truncate">
+                                            Inquiry About Allergen Information of a Specific Ingredient
+                                            <span class="comment">[123]</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <p class="author"><i class="icon-author"></i> User 1</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="date">2025.07.04</p>
+                                </td>
+                                <td class="text-center">
+                                    <p class="">184</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="First">
+                                    <i class="icon-pagination-first"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <i class="icon-pagination-prev"></i>
+                                </a>
+                            </li>
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <i class="icon-pagination-next"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Last">
+                                    <i class="icon-pagination-last"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

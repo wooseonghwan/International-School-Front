@@ -26,6 +26,14 @@ public class FoOtherController {
     public String noticeBoardEn(ModelMap modelMap) {
         return "fo/notice-board-en";
     }
+    @GetMapping({ "/fo/notice-board-form" })
+    public String noticeBoardForm(ModelMap modelMap) {
+        return "fo/notice-board-form";
+    }
+    @GetMapping({ "/fo/notice-board-form-en" })
+    public String noticeBoardFormEn(ModelMap modelMap) {
+        return "fo/notice-board-form-en";
+    }
     @GetMapping({ "/fo/notice-announcement" })
     public String notice(ModelMap modelMap) {
         return "fo/notice-announcement";

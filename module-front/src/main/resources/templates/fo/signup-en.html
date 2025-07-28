@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout-en}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="sign-head">
+            <p class="title">Sign up</p>
+        </div>
+        <div class="sign-form">
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">Card ID number</p>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> Card ID does not match. Please try again.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">Name</p>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> Name does not match. Please try again.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">Code</p>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> Code does not match. Please try again.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">ID</p>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> ID does not match. Please try again.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">Password</p>
+                    <input type="password" class="form-control form-lg" placeholder="Please enter your password."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> Passwords do not match. Please try again.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">Confirm password</p>
+                    <input type="password" class="form-control form-lg"
+                           placeholder="Please enter your password again."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> Password confirmation does not match. Please try again.
+                </div> -->
+                <div class="btn-columns">
+                    <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

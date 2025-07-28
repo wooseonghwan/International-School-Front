@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout-en}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="container">
+            <div class="notice-wrap">
+                <div class="borad-head">
+                    <p class="title">Bulletin Board</p>
+                    <p class="desc">You can talk about everything related to school meals here.</p>
+                </div>
+                <div class="write-title">
+                    <i class="icon-edit"></i>
+                    Write Post
+                </div>
+                <div class="inquiry-wrap">
+                    <div class="form-wrap">
+                        <p class="form-title">Title</p>
+                        <input type="text" class="form-control form-lg" placeholder="Please enter a title."/>
+                    </div>
+                    <div class="form-wrap">
+                        <p class="form-title">Post Password</p>
+                        <div class="d-flex align-items-center gap-5 mt-3 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault1" checked/>
+                                <label class="form-check-label" for="flexRadioDefault1">Set Password</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                       id="flexRadioDefault2"/>
+                                <label class="form-check-label" for="flexRadioDefault2">Do Not Set</label>
+                            </div>
+                        </div>
+                        <input type="password" class="form-control form-lg" placeholder="Enter a 4 digit password."/>
+                    </div>
+                    <div class="form-wrap">
+                        <label class="title">Content</label>
+                        <div class="editor-wrap">editor</div>
+                    </div>
+                    <div class="commnet-wrap">
+                        <ul>
+                            <li>※ If you use an easy password, the risk of your post being edited or deleted
+                                increases.
+                            </li>
+                            <li>※ Posts containing slander, discrimination, defamation, or infringement of copyrights,
+                                portrait rights, etc., may be subject to civil and criminal liability.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btns d-flex align-items-center justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-gray btn-md" onclick="location.href='/fo/notice-board-en'">Cancel</button>
+                    <button type="button" class="btn btn-dark btn-md">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -46,4 +46,20 @@ public class FoMainController {
 	public String main1En(ModelMap modelMap) {
 		return "fo/main1-en";
 	}
+	@GetMapping({ "/fo/login" })
+	public String login() {
+		return "fo/login";
+	}
+	@GetMapping({ "/fo/login-en" })
+	public String loginEn() {
+		return "fo/login-en";
+	}
+	@GetMapping({ "/fo/signup" })
+	public String signup() {
+		return "fo/signup";
+	}
+	@GetMapping({ "/fo/signup-en" })
+	public String signupEn() {
+		return "fo/signup-en";
+	}
 }

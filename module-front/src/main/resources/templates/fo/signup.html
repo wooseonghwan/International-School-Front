@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="sign-head">
+            <p class="title">회원가입</p>
+        </div>
+        <div class="sign-form">
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">카드 아이디 번호</p>
+                    <input type="text" class="form-control form-lg" placeholder="카드 아이디 번호를 입력해주세요."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> 카드 아이디가 일치하지 않습니다. 다시
+                  시도해주세요.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">이름</p>
+                    <input type="text" class="form-control form-lg" placeholder="카드 아이디 번호를 입력해주세요."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> 이름이 일치하지 않습니다. 다시
+                  시도해주세요.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">코드</p>
+                    <input type="text" class="form-control form-lg" placeholder="카드 아이디 번호를 입력해주세요."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> 코드가 일치하지 않습니다. 다시
+                  시도해주세요.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">아이디</p>
+                    <input type="text" class="form-control form-lg" placeholder="카드 아이디 번호를 입력해주세요."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> 아이디가 일치하지 않습니다. 다시
+                  시도해주세요.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">비밀번호</p>
+                    <input type="password" class="form-control form-lg" placeholder="비밀번호를 입력해주세요."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> 비밀번호가 일치하지 않습니다. 다시
+                  시도해주세요.
+                </div> -->
+            </div>
+            <div class="form-field">
+                <div class="form-wrap">
+                    <p class="form-title">비밀번호 확인</p>
+                    <input type="password" class="form-control form-lg" placeholder="비밀번호를 한번 더 입력해주세요."/>
+                </div>
+                <!-- <div class="invalid-feedback">
+                  <i class="icon-error"></i> 비밀번호 확인이 일치하지 않습니다. 다시
+                  시도해주세요.
+                </div> -->
+            </div>
+            <div class="btn-columns">
+                <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">회원가입하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
