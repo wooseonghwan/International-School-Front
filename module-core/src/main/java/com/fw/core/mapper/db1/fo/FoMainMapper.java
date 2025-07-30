@@ -12,7 +12,7 @@ import java.util.List;
 public interface FoMainMapper {
     int countByCardId(@Param("cardId") String cardId);
     int countByWebId(@Param("webId") String webId);
-    int getTodayUserSeq(@Param("today") String today); // 오늘날짜에 해당하는 일련번호
-    int insertUser(FoUserDTO dto);
+    int updateUserByCustNo(FoUserDTO foUserDTO);
     FoUserDTO selectUserByCredentials(FoUserDTO foUserDTO);
+    FoUserDTO selectCardInfo(String cardId);
 }

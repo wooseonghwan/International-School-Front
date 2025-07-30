@@ -10,62 +10,190 @@
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">Card ID number</p>
-                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number." name="cardId"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> Card ID does not match. Please try again.
-                </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">Name</p>
-                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your Name." name="custName"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> Name does not match. Please try again.
-                </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">Code</p>
-                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                    <input type="text" class="form-control form-lg" name="custNo" readonly/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> Code does not match. Please try again.
-                </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">ID</p>
-                    <input type="text" class="form-control form-lg" placeholder="Please enter your card ID number."/>
+                    <input type="text" class="form-control form-lg" placeholder="Please enter your ID." name="webId"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> ID does not match. Please try again.
-                </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">Password</p>
-                    <input type="password" class="form-control form-lg" placeholder="Please enter your password."/>
+                    <input type="password" class="form-control form-lg" placeholder="Please enter your password." name="webPw"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> Passwords do not match. Please try again.
-                </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">Confirm password</p>
-                    <input type="password" class="form-control form-lg"
-                           placeholder="Please enter your password again."/>
+                    <input type="password" class="form-control form-lg" placeholder="Please enter your password again." name="passwordConfirm"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> Password confirmation does not match. Please try again.
-                </div> -->
                 <div class="btn-columns">
-                    <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">Sign up</button>
+                    <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="signUp">Sign up</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            let isCardIdValid = false;
+            let isWebIdValid = false;
+
+            // 카드번호 중복 및 고객정보 조회
+            $('input[name="cardId"]').on('blur', function () {
+                const cardId = $(this).val().trim();
+                if (!cardId) return;
+
+                $.ajax({
+                    url: '/fo/check-card-id',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({cardId}),
+                    success: function (res) {
+                        if (res.duplicate === true) {
+                            // webId 값이 있으면 이미 회원가입된 카드
+                            if (res.webId) {
+                                alert('This card number has already been used for sign-up.');
+                            } else {
+                                alert('This card number is already registered.');
+                            }
+
+                            isCardIdValid = false;
+                            $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
+                            $('input[name="custName"], input[name="custNo"]').val('');
+                            return;
+                        }
+
+                        // 중복 아님 → 고객 정보 조회
+                        isCardIdValid = true;
+                        $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', false);
+
+                        $.ajax({
+                            url: '/fo/card-info',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({cardId}),
+                            success: function (info) {
+                                if (info && info.custName && info.custNo) {
+                                    $('input[name="custName"]').val(info.custName);
+                                    $('input[name="custNo"]').val(info.custNo);
+                                } else {
+                                    alert('No customer information found for this card number.');
+                                    $('input[name="custName"], input[name="custNo"]').val('');
+                                }
+                            },
+                            error: function () {
+                                alert('An error occurred while retrieving customer information.');
+                                $('input[name="custName"], input[name="custNo"]').val('');
+                            }
+                        });
+                    },
+                    error: function () {
+                        alert('An error occurred while checking the card number.');
+                        isCardIdValid = false;
+                    }
+                });
+            });
+
+            // 아이디 중복 체크
+            $('input[name="webId"]').on('blur', function () {
+                const webId = $(this).val().trim();
+                if (!webId) return;
+
+                $.ajax({
+                    url: '/fo/check-user-id',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({webId}),
+                    success: function (res) {
+                        if (res === true || res.result === true) {
+                            alert('This ID is already in use.');
+                            isWebIdValid = false;
+
+                            // 비밀번호 입력 비활성화
+                            $('input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
+                        } else {
+                            isWebIdValid = true;
+
+                            // 비밀번호 입력 가능
+                            $('input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', false);
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred while checking the ID.');
+                        isWebIdValid = false;
+                    }
+                });
+            });
+
+            // 회원가입 처리
+            $('[data-role="signUp"]').on('click', function () {
+                const cardId = $.trim($('input[name="cardId"]').val());
+                const custName = $.trim($('input[name="custName"]').val());
+                const webId = $.trim($('input[name="webId"]').val());
+                const webPw = $.trim($('input[name="webPw"]').val());
+                const passwordConfirm = $.trim($('input[name="passwordConfirm"]').val());
+                const custNo = $.trim($('input[name="custNo"]').val());
+
+                // 유효성 검사
+                if (!cardId || !custName || !webId || !webPw || !passwordConfirm) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                if (!isCardIdValid) {
+                    alert('The card number is either duplicated or not verified.');
+                    return;
+                }
+
+                if (!isWebIdValid) {
+                    alert('The ID is either duplicated or not verified.');
+                    return;
+                }
+
+                if (webPw !== passwordConfirm) {
+                    alert('Password and confirmation do not match.');
+                    return;
+                }
+
+                // 회원가입 실행
+                const data = {
+                    cardId: cardId,
+                    custName: custName,
+                    webId: webId,
+                    webPw: webPw,
+                    custNo: custNo
+                };
+
+                $.ajax({
+                    url: '/fo/insert-user',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function () {
+                        alert('Sign-up completed successfully.');
+                        location.href = '/fo/login-en';
+                    },
+                    error: function (xhr) {
+                        alert(xhr.responseText || 'An error occurred during sign-up.');
+                    }
+                });
+            });
+        })
+    </script>
 </div>
 </html>

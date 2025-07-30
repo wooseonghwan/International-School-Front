@@ -128,34 +128,41 @@
     </div>
     <div class="dimmed"></div>
     <script>
-        function toggleLanguage() {
-            const pathname = window.location.pathname;
-            let targetPath;
+        document.addEventListener('DOMContentLoaded', function () {
+            function toggleLanguage() {
+                const pathname = window.location.pathname;
+                let targetPath;
 
-            const isEnglish = pathname.includes('-en');
-            const hasFilename = pathname.split('/').filter(Boolean).length > 1; // /fo/main1 = true, /fo = false
+                const isEnglish = pathname.includes('-en');
+                const hasFilename = pathname.split('/').filter(Boolean).length > 1;
 
-            if (isEnglish) {
-                // 영어 → 한글
-                targetPath = pathname.replace('-en', '');
-                if (!hasFilename) targetPath = '/fo/main1'; // 예: /fo-en → /fo/main1
-            } else {
-                // 한글 → 영어
-                if (!hasFilename) {
-                    targetPath = '/fo/main1-en'; // 예: /fo → /fo/main1-en
+                if (isEnglish) {
+                    targetPath = pathname.replace('-en', '');
+                    if (!hasFilename) targetPath = '/fo/main1';
                 } else {
-                    const parts = pathname.split('/');
-                    const filename = parts.pop();
-                    const newFilename = filename + '-en';
-                    targetPath = [...parts, newFilename].join('/');
+                    if (!hasFilename) {
+                        targetPath = '/fo/main1-en';
+                    } else {
+                        const parts = pathname.split('/');
+                        const filename = parts.pop();
+                        const newFilename = filename + '-en';
+                        targetPath = [...parts, newFilename].join('/');
+                    }
                 }
+
+                window.location.href = targetPath;
             }
 
-            window.location.href = targetPath;
-        }
+            // 현재 URL 기반으로 언어 상태 표시 텍스트 업데이트
+            const isEnglish = window.location.pathname.includes('-en');
+            const toggleBall = document.querySelector('.toggle-ball');
+            if (toggleBall) {
+                toggleBall.textContent = isEnglish ? 'En' : 'Ko';
+            }
 
-        document.getElementById('langToggle')?.addEventListener('click', toggleLanguage);
-        document.getElementById('langToggleMobile')?.addEventListener('click', toggleLanguage);
+            document.getElementById('langToggle')?.addEventListener('click', toggleLanguage);
+            document.getElementById('langToggleMobile')?.addEventListener('click', toggleLanguage);
+        });
     </script>
 
 </th:block>

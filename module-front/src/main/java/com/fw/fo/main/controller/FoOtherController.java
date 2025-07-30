@@ -8,6 +8,7 @@ import com.fw.core.vo.ResponseVO;
 import com.fw.fo.main.service.FoOtherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,10 @@ public class FoOtherController {
         return "fo/menu-en";
     }
     @GetMapping({ "/fo/notice-board" })
-    public String noticeBoard(ModelMap model, FoNoticeBoardDTO foNoticeBoardDTO) {
+    public String noticeBoard(ModelMap model, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
+        if (httpSession.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         int total = foOtherService.selectNoticeBoardListCnt(foNoticeBoardDTO);
         foNoticeBoardDTO.setTotalCount(total);
         foNoticeBoardDTO.calculatePaging();
@@ -48,7 +52,10 @@ public class FoOtherController {
         return foOtherService.checkPassword(foNoticeBoardDTO);
     }
     @GetMapping({ "/fo/notice-board-en" })
-    public String noticeBoardEn(ModelMap model, FoNoticeBoardDTO foNoticeBoardDTO) {
+    public String noticeBoardEn(ModelMap model, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
+        if (httpSession.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         int total = foOtherService.selectNoticeBoardListEnCnt(foNoticeBoardDTO);
         foNoticeBoardDTO.setTotalCount(total);
         foNoticeBoardDTO.calculatePaging();
@@ -65,8 +72,15 @@ public class FoOtherController {
     @ResponseBody
     ResponseEntity<ResponseVO> insertNoticeBoard(HttpServletRequest request, @RequestBody FoNoticeBoardDTO foNoticeBoardDTO){
         ResponseCode code = ResponseCode.SUCCESS;
-        //BoAdminSessionDTO sessionDTO = (BoAdminSessionDTO) request.getSession().getAttribute(BO_SESSION_KEY);
-        //boNoticeDTO.setCreateId(sessionDTO.getAdminNm());
+        // 세션에서 로그인 유저 정보 꺼내기
+        FoUserDTO sessionUser = (FoUserDTO) request.getSession().getAttribute("loginUser");
+        if (sessionUser != null && sessionUser.getWebId() != null) {
+            foNoticeBoardDTO.setCreateId(sessionUser.getWebId());
+        } else {
+            code = ResponseCode.PAGE_NOT_FOUND;
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(ResponseVO.builder(code).message("로그인 세션이 만료되었거나 잘못되었습니다.").build());
+        }
         foOtherService.insertNoticeBoard(foNoticeBoardDTO);
         return ResponseEntity.status(code.getHttpStatus()).body(ResponseVO.builder(code).build());
     }
@@ -116,13 +130,18 @@ public class FoOtherController {
     }
     @GetMapping({ "/fo/myinfo" })
     public String myinfo(HttpSession session, Model model, FoUserDTO foUserDTO) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
-        System.out.println("custName = " + loginUser.getCustName());
         model.addAttribute("user", loginUser);
         return "fo/myinfo";
     }
     @GetMapping({ "/fo/myinfo-en" })
-    public String myinfoEn(ModelMap modelMap) {
+    public String myinfoEn(HttpSession session, Model model, FoUserDTO foUserDTO) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         return "fo/myinfo-en";
     }
 }

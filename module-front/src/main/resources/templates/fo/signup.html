@@ -11,161 +11,192 @@
                 <div class="form-wrap">
                     <p class="form-title">카드 ID 번호</p>
                     <input type="text" class="form-control form-lg" placeholder="카드 ID 번호를 입력해주세요." name="cardId"/>
-                    <div class="invalid-feedback d-none" id="cardId-duplicate-msg" style="color: red;">이미 등록된 카드번호입니다.</div>
                 </div>
-            </div>
-            <div class="form-field">
-                <div class="form-wrap">
-                    <p class="form-title">이름</p>
-                    <input type="text" class="form-control form-lg" placeholder="이름을 입력해주세요." name="custName"/>
+                <div class="form-field">
+                    <div class="form-wrap">
+                        <p class="form-title">이름</p>
+                        <input type="text" class="form-control form-lg" placeholder="이름을 입력해주세요." name="custName" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-field">
-                <div class="form-wrap">
-                    <p class="form-title">고객번호</p>
-                    <input type="text" class="form-control form-lg" name="custNo" readonly/>
+                <div class="form-field">
+                    <div class="form-wrap">
+                        <p class="form-title">고객번호</p>
+                        <input type="text" class="form-control form-lg" name="custNo" readonly/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-field">
-                <div class="form-wrap">
-                    <p class="form-title">아이디</p>
-                    <input type="text" class="form-control form-lg" placeholder="아이디를 입력해주세요." name="webId"/>
+                <div class="form-field">
+                    <div class="form-wrap">
+                        <p class="form-title">아이디</p>
+                        <input type="text" class="form-control form-lg" placeholder="아이디를 입력해주세요." name="webId"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-field">
-                <div class="form-wrap">
-                    <p class="form-title">비밀번호</p>
-                    <input type="password" class="form-control form-lg" placeholder="비밀번호를 입력해주세요." name="password"/>
+                <div class="form-field">
+                    <div class="form-wrap">
+                        <p class="form-title">비밀번호</p>
+                        <input type="password" class="form-control form-lg" placeholder="비밀번호를 입력해주세요." name="webPw"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-field">
-                <div class="form-wrap">
-                    <p class="form-title">비밀번호 확인</p>
-                    <input type="password" class="form-control form-lg" placeholder="비밀번호를 한번 더 입력해주세요." name="passwordConfirm"/>
+                <div class="form-field">
+                    <div class="form-wrap">
+                        <p class="form-title">비밀번호 확인</p>
+                        <input type="password" class="form-control form-lg" placeholder="비밀번호를 한번 더 입력해주세요."
+                               name="passwordConfirm"/>
+                    </div>
                 </div>
-            </div>
-            <div class="btn-columns">
-                <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="signUp">회원가입하기</button>
+                <div class="btn-columns">
+                    <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;"
+                            data-role="signUp">회원가입하기
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            let isCardIdValid = false;
-            let isWebIdValid = false;
+        <script>
+            $(document).ready(function () {
+                let isCardIdValid = false;
+                let isWebIdValid = false;
 
-            // 카드번호 중복 체크
-            $('input[name="cardId"]').on('blur', function () {
-                const cardId = $(this).val().trim();
-                if (!cardId) return;
+                // 카드번호 중복 및 고객정보 조회
+                $('input[name="cardId"]').on('blur', function () {
+                    const cardId = $(this).val().trim();
+                    if (!cardId) return;
 
-                $.ajax({
-                    url: '/fo/check-card-id',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({cardId}),
-                    success: function (res) {
-                        if (res === true || res.result === true) {
-                            alert('이미 등록된 카드번호입니다.');
-                            isCardIdValid = false;
-                            // 아래 항목 입력 비활성화
-                            $('input[name="custName"], input[name="webId"], input[name="password"], input[name="passwordConfirm"]').prop('disabled', true);
-                        } else {
+                    $.ajax({
+                        url: '/fo/check-card-id',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({cardId}),
+                        success: function (res) {
+                            if (res.duplicate === true) {
+                                // webId 값이 있으면 이미 회원가입된 카드
+                                if (res.webId) {
+                                    alert('이미 회원가입된 카드번호입니다.');
+                                } else {
+                                    alert('이미 등록된 카드번호입니다.');
+                                }
+
+                                isCardIdValid = false;
+                                $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
+                                $('input[name="custName"], input[name="custNo"]').val('');
+                                return;
+                            }
+
+                            // 중복 아님 → 고객 정보 조회
                             isCardIdValid = true;
-                            // 아래 항목 입력 가능
-                            $('input[name="custName"], input[name="webId"], input[name="password"], input[name="passwordConfirm"]').prop('disabled', false);
+                            $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', false);
+
+                            $.ajax({
+                                url: '/fo/card-info',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({cardId}),
+                                success: function (info) {
+                                    if (info && info.custName && info.custNo) {
+                                        $('input[name="custName"]').val(info.custName);
+                                        $('input[name="custNo"]').val(info.custNo);
+                                    } else {
+                                        alert('해당 카드번호에 대한 고객정보를 찾을 수 없습니다.');
+                                        $('input[name="custName"], input[name="custNo"]').val('');
+                                    }
+                                },
+                                error: function () {
+                                    alert('고객정보 조회 중 오류가 발생했습니다.');
+                                    $('input[name="custName"], input[name="custNo"]').val('');
+                                }
+                            });
+                        },
+                        error: function () {
+                            alert('카드번호 확인 중 오류가 발생했습니다.');
+                            isCardIdValid = false;
                         }
-                    },
-                    error: function () {
-                        alert('카드번호 확인 중 오류가 발생했습니다.');
-                        isCardIdValid = false;
-                    }
+                    });
                 });
-            });
 
-            // 아이디 중복 체크
-            $('input[name="webId"]').on('blur', function () {
-                const webId = $(this).val().trim();
-                if (!webId) return;
+                // 아이디 중복 체크
+                $('input[name="webId"]').on('blur', function () {
+                    const webId = $(this).val().trim();
+                    if (!webId) return;
 
-                $.ajax({
-                    url: '/fo/check-user-id',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({webId}),
-                    success: function (res) {
-                        if (res === true || res.result === true) {
-                            alert('이미 사용 중인 아이디입니다.');
+                    $.ajax({
+                        url: '/fo/check-user-id',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({webId}),
+                        success: function (res) {
+                            if (res === true || res.result === true) {
+                                alert('이미 사용 중인 아이디입니다.');
+                                isWebIdValid = false;
+
+                                // 비밀번호 입력 비활성화
+                                $('input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
+                            } else {
+                                isWebIdValid = true;
+
+                                // 비밀번호 입력 가능
+                                $('input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', false);
+                            }
+                        },
+                        error: function () {
+                            alert('아이디 확인 중 오류가 발생했습니다.');
                             isWebIdValid = false;
-
-                            // 비밀번호 입력 비활성화
-                            $('input[name="password"], input[name="passwordConfirm"]').prop('disabled', true);
-                        } else {
-                            isWebIdValid = true;
-
-                            // 비밀번호 입력 가능
-                            $('input[name="password"], input[name="passwordConfirm"]').prop('disabled', false);
                         }
-                    },
-                    error: function () {
-                        alert('아이디 확인 중 오류가 발생했습니다.');
-                        isWebIdValid = false;
-                    }
+                    });
                 });
-            });
 
-            // 회원가입 처리
-            $('[data-role="signUp"]').on('click', function () {
-                const cardId = $.trim($('input[name="cardId"]').val());
-                const custName = $.trim($('input[name="custName"]').val());
-                const webId = $.trim($('input[name="webId"]').val());
-                const password = $.trim($('input[name="password"]').val());
-                const passwordConfirm = $.trim($('input[name="passwordConfirm"]').val());
+                // 회원가입 처리
+                $('[data-role="signUp"]').on('click', function () {
+                    const cardId = $.trim($('input[name="cardId"]').val());
+                    const custName = $.trim($('input[name="custName"]').val());
+                    const webId = $.trim($('input[name="webId"]').val());
+                    const webPw = $.trim($('input[name="webPw"]').val());
+                    const passwordConfirm = $.trim($('input[name="passwordConfirm"]').val());
+                    const custNo = $.trim($('input[name="custNo"]').val());
 
-                // 유효성 검사
-                if (!cardId || !custName || !webId || !password || !passwordConfirm) {
-                    alert('모든 항목을 입력해주세요.');
-                    return;
-                }
-
-                if (!isCardIdValid) {
-                    alert('카드번호가 중복되었거나 확인되지 않았습니다.');
-                    return;
-                }
-
-                if (!isWebIdValid) {
-                    alert('아이디가 중복되었거나 확인되지 않았습니다.');
-                    return;
-                }
-
-                if (password !== passwordConfirm) {
-                    alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-                    return;
-                }
-
-                // 회원가입 실행
-                const data = {
-                    cardId: cardId,
-                    custName: custName,
-                    webId: webId,
-                    password: password
-                };
-
-                $.ajax({
-                    url: '/fo/insert-user',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(data),
-                    success: function () {
-                        alert('회원가입이 완료되었습니다.');
-                        location.href = '/fo/login';
-                    },
-                    error: function (xhr) {
-                        alert(xhr.responseText || '회원가입 중 오류가 발생했습니다.');
+                    // 유효성 검사
+                    if (!cardId || !custName || !webId || !webPw || !passwordConfirm) {
+                        alert('모든 항목을 입력해주세요.');
+                        return;
                     }
+
+                    if (!isCardIdValid) {
+                        alert('카드번호가 중복되었거나 확인되지 않았습니다.');
+                        return;
+                    }
+
+                    if (!isWebIdValid) {
+                        alert('아이디가 중복되었거나 확인되지 않았습니다.');
+                        return;
+                    }
+
+                    if (webPw !== passwordConfirm) {
+                        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+                        return;
+                    }
+
+                    // 회원가입 실행
+                    const data = {
+                        cardId: cardId,
+                        custName: custName,
+                        webId: webId,
+                        webPw: webPw,
+                        custNo: custNo
+                    };
+
+                    $.ajax({
+                        url: '/fo/insert-user',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        success: function () {
+                            alert('회원가입이 완료되었습니다.');
+                            location.href = '/fo/login';
+                        },
+                        error: function (xhr) {
+                            alert(xhr.responseText || '회원가입 중 오류가 발생했습니다.');
+                        }
+                    });
                 });
-            });
-        })
-    </script>
+            })
+        </script>
+    </div>
 </div>
 </html>

@@ -1,8 +1,10 @@
 package com.fw.fo.main.controller;
 
+import com.fw.core.code.ResponseCode;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
 import com.fw.core.dto.fo.FoUserDTO;
+import com.fw.core.vo.ResponseVO;
 import com.fw.fo.main.service.FoMainService;
 import com.fw.fo.main.service.FoOtherService;
 import lombok.RequiredArgsConstructor;
@@ -71,6 +73,18 @@ public class FoMainController {
 		boolean exists = foMainService.checkDuplicateCardId(cardId);
 		return ResponseEntity.ok(exists);
 	}
+	@PostMapping("/fo/card-info")
+	@ResponseBody
+	public Map<String, Object> getCardInfo(@RequestBody FoUserDTO dto) {
+		FoUserDTO info = foMainService.getCardInfo(dto.getCardId());
+		Map<String, Object> result = new HashMap<>();
+		if (info != null) {
+			result.put("custName", info.getCustName());
+			result.put("custNo", info.getCustNo());
+			result.put("webId", info.getWebId());
+		}
+		return result;
+	}
 	@PostMapping("/fo/check-user-id")
 	public ResponseEntity<Boolean> checkUserId(@RequestBody Map<String, String> body) {
 		String webId = body.get("webId");
@@ -78,9 +92,10 @@ public class FoMainController {
 		return ResponseEntity.ok(exists);
 	}
 	@PostMapping("/fo/insert-user")
-	public ResponseEntity<String> insertUser(@RequestBody FoUserDTO userDTO) {
-		boolean result = foMainService.registerUser(userDTO);
-		return result ? ResponseEntity.ok("success") : ResponseEntity.status(500).body("등록 실패");
+	@ResponseBody
+	public ResponseEntity<ResponseVO> updateUser(@RequestBody FoUserDTO foUserDTO) {
+		boolean result = foMainService.updateUserByCustNo(foUserDTO); // ← update 방식
+		return ResponseEntity.ok(ResponseVO.builder(result ? ResponseCode.SUCCESS : ResponseCode.LOGIN_FAIL).build());
 	}
 	@PostMapping("/fo/login-check")
 	@ResponseBody

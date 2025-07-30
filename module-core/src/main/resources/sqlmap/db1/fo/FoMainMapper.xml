@@ -10,32 +10,23 @@
         SELECT COUNT(*) FROM user_tb WHERE webId = #{webId}
     </select>
 
-    <select id="getTodayUserSeq" resultType="int">
-        SELECT IFNULL(MAX(SUBSTRING(custNo, 7, 4)), 0) + 1
-        FROM user_tb
-        WHERE SUBSTRING(custNo, 1, 6) = #{today}
-    </select>
+    <update id="updateUserByCustNo" parameterType="FoUserDTO">
+        UPDATE user_tb
+        SET webId = #{webId}
+          , webPw = #{webPw}
+        WHERE custNo = #{custNo}
+    </update>
 
-    <insert id="insertUser" parameterType="FoUserDTO">
-        INSERT INTO user_tb (
-            custNo
-            , cardId
-            , custName
-            , webId
-            , password
-            , cDate
-        ) VALUES (
-                     #{custNo}
-                     , #{cardId}
-                     , #{custName}
-                     , #{webId}
-                     , #{password}
-                     , NOW()
-                 )
-    </insert>
     <select id="selectUserByCredentials" parameterType="FoUserDTO" resultType="FoUserDTO">
         SELECT *
         FROM user_tb
         WHERE webId = #{webId} AND webPw = #{webPw}
+    </select>
+
+    <select id="selectCardInfo" parameterType="String" resultType="FoUserDTO">
+        SELECT custName
+             ,custNo
+        FROM user_tb
+        WHERE cardId = #{cardId}
     </select>
 </mapper>
