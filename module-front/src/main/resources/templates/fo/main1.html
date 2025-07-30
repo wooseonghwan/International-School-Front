@@ -92,28 +92,12 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <tr>
+                                    <tr th:each="noticeList : ${noticeList}">
                                         <td class="text-start">
-                                            <p class="text-truncate">8월 급식 운영 일정 안내</p>
+                                            <p class="text-truncate" th:text="${noticeList.title}">8월 급식 운영 일정 안내</p>
                                         </td>
                                         <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">급식 식단표 업데이트 안내</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">시스템 점검 안내 (8/10 새벽 2시~4시)</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
+                                            <p class="date" th:text="${noticeList.createDt}">2025.07.04</p>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -133,27 +117,11 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-start">
+                                    <tr th:each="noticeBoardList : ${noticeBoardList}">
+                                        <td class="text-start" th:text="${noticeBoardList.title}">
                                             <p class="text-truncate">요즘 우리 아이는 이 반찬에 푹 빠졌어요 :)</p>
                                         </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">오늘 급식 보고 너무 반가웠어요! 예전 학교 다닐 때 생각났네요.</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">혹시 급식에 나오는 레시피 집에서 따라 해보신 분 계세요?</p>
-                                        </td>
-                                        <td class="text-center">
+                                        <td class="text-center" th:text="${noticeBoardList.createDt}">
                                             <p class="date">2025.07.04</p>
                                         </td>
                                     </tr>

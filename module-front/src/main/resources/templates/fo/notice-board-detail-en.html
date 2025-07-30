@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout-en}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="container">
+            <div class="notice-wrap">
+                <div class="borad-head">
+                    <p class="title">Bulletin Board</p>
+                    <p class="desc">You can communicate everything related to school meals here.</p>
+                </div>
+                <div class="detail-desc">
+                    <div class="desc-title" th:text="${detail.title}">I have a question about a school meal payment error.</div>
+                    <div class="sub">
+                        <div class="name">
+                            <span class="key">Author</span>
+                            <span class="value" th:text="${detail.custName}">Park*Eun</span>
+                        </div>
+                        <div class="date">
+                            <span class="key">Date</span>
+                            <span class="value" th:text="${detail.createDt}">2025-10-25</span>
+                        </div>
+                    </div>
+                    <div class="desc-txt">
+                        <p th:text="${detail.content}">
+                            The system is blah blah blah<br />
+                            … omitted …<br />
+                            Please check.
+                        </p>
+                    </div>
+                    <h2 class="comment-title">Answer</h2>
+                    <div class="comment-wrap">
+                        <th:block th:if="${detail.reply != null}">
+                            <div class="sub">
+                                <div class="name">
+                                    <span class="key">Respondent</span>
+                                    <span class="value" th:text="${detail.adminNm}">Hong Gil Dong</span>
+                                </div>
+                                <div class="date">
+                                    <span class="key">Date</span>
+                                    <span class="value" th:text="${detail.replyDt}">2025-10-25</span>
+                                </div>
+                            </div>
+                            <div class="comment-desc">
+                                <p th:text="${detail.reply}">
+                                    We will answer.<br />.... omitted ....<br /><br />
+                                    Thank you.
+                                </p>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${detail.reply == null}">
+                            <div class="comment-desc">
+                                <p>Response pending.</p>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+                <div class="btns d-flex align-items-center justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-dark btn-md" onclick="location.href='/fo/notice-board-en'">List</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

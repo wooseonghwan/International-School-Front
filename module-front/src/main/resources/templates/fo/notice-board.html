@@ -8,29 +8,33 @@
                 <div class="borad-head">
                     <p class="title">고객게시판</p>
                     <p class="desc">급식과 관련된 모든 내용을 이곳에서 소통할 수 있습니다.</p>
-                    <div class="search-content">
-                        <div class="form-wrap">
-                            <select name="" id="" class="form-select form-md round">
-                                <option value="">전체</option>
-                            </select>
-                        </div>
-                        <div class="form-field search">
-                            <div class="input-form">
-                                <i class="icon-search"></i>
-                                <input type="text" class="form-control search-form form-md round"
-                                       placeholder="원하는 검색어를 입력해주세요."/>
-                                <button type="button" class="clear-button">
-                                    <i class="icon-input-close"></i>
-                                </button>
+                    <form name="searchForm">
+                        <div class="search-content">
+                            <div class="form-wrap">
+                                <select name="searchType" id="" class="form-select form-md round">
+                                    <option value="ALL" th:selected="${searchInfo.searchType == 'ALL'}">전체</option>
+                                    <option value="USER" th:selected="${searchInfo.searchType == 'USER'}">작성자</option>
+                                    <option value="TITLE" th:selected="${searchInfo.searchType == 'TITLE'}">제목</option>
+                                </select>
+                            </div>
+                            <div class="form-field search">
+                                <div class="input-form">
+                                    <i class="icon-search"></i>
+                                    <input type="text" class="form-control search-form form-md round" name="searchValue" th:value="${searchInfo.searchValue}"
+                                           placeholder="원하는 검색어를 입력해주세요."/>
+                                    <button type="button" class="clear-button" data-role="btn-search-form">
+                                        <i class="icon-input-close"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="table-container">
                     <div class="table-top">
                         <div class="d-flex align-items-center gap-3">
                             <p class="table-top-title">전체 게시글</p>
-                            <p class="table-top-desc">총 게시글 <span>312</span></p>
+                            <p class="table-top-desc">총 게시글 <span th:text="${searchInfo.totalCount}">312</span></p>
                         </div>
                         <button type="button" class="btn btn-outline-primary" onclick="location.href='/fo/notice-board-form'" style="outline-color: #ff974d;">
                             <i class="icon-write"></i> 게시글 작성
@@ -55,314 +59,116 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="active">
-                                <td class="text-center">
-                                    <p class="">125</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button type="button" class="btn btn-primary round btn-xs" style="background-color: #ff974d;">공지</button>
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-                            <tr class="active">
-                                <td class="text-center">
+                            <th:block th:if="${#lists.isEmpty(noticeBoardList)}">
+                                <tr>
+                                    <td colspan="6" class="text-center">내역이 없습니다.</td>
+                                </tr>
+                            </th:block>
+                            <tr th:each="list : ${noticeBoardList}">
+                                <td class="text-center" th:text="${list.rowNum}">
                                     <p class="">124</p>
                                 </td>
                                 <td class="text-start">
                                     <div class="d-flex align-items-center gap-2">
-                                        <i class="icon-lock"></i>
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
+                                        <th:block th:if="${list.passwordYn == 'Y'}">
+                                            <i class="icon-lock"></i>
+                                            <a href="javascript:void(0);" class="board-desc text-truncate secret-link"
+                                               th:data-qna-id="${list.qnaId}">
+                                                <span th:text="${list.title}">제목</span>
+                                                <span class="comment" th:text="${'[' + list.replyCnt + ']'}">[0]</span>
+                                            </a>
+                                        </th:block>
+                                        <th:block th:unless="${list.passwordYn == 'Y'}">
+                                            <a th:href="@{/fo/notice-board-detail(qnaId=${list.qnaId})}" class="board-desc text-truncate">
+                                                <span th:text="${list.title}">제목</span>
+                                                <span class="comment" th:text="${'[' + list.replyCnt + ']'}">[0]</span>
+                                            </a>
+                                        </th:block>
                                     </div>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center" th:text="${list.custName}">
                                     <p class="author"><i class="icon-author"></i> 사용자 1</p>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center" th:text="${list.createDt}">
                                     <p class="date">2025.07.04</p>
                                 </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="">184</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate">
-                                            급식 결제 오류 관련 문의 드립니다.
-                                            <span class="comment">[123]</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> 사용자 1</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                                <td class="text-center">
+                                <td class="text-center" th:text="${list.viewCnt}">
                                     <p class="">184</p>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <nav>
+                    <nav th:if="${searchInfo.totalPage != null and searchInfo.totalPage >= 1}">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="First">
+                            <!-- 첫 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=1, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="First">
                                     <i class="icon-pagination-first"></i>
                                 </a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
+                            <!-- 이전 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${searchInfo.page - 1}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Previous">
                                     <i class="icon-pagination-prev"></i>
                                 </a>
                             </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+                            <!-- 페이지 번호 -->
+                            <li class="page-item"
+                                th:each="i : ${#numbers.sequence(searchInfo.startPage, searchInfo.endPage)}"
+                                th:classappend="${i == searchInfo.page} ? 'active' : ''"
+                                th:attr="aria-current=${i == searchInfo.page ? 'page' : null}">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${i}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   th:text="${i}">1</a>
+                            </li>
+                            <!-- 다음 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == searchInfo.totalPage} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${searchInfo.page + 1}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Next">
                                     <i class="icon-pagination-next"></i>
                                 </a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Last">
+                            <!-- 마지막 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == searchInfo.totalPage} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${searchInfo.totalPage}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Last">
                                     <i class="icon-pagination-last"></i>
                                 </a>
                             </li>
                         </ul>
                     </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="modal-pw-write">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">비밀번호 입력</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-field">
+                        <div class="input-form">
+                            <input type="text" class="form-control remove-form" placeholder="비밀글의 비밀번호를 입력해주세요." />
+                            <button type="button" class="clear-button">
+                                <i class="icon-input-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-lg btn-dark" disabled>확인</button>
+                    </div>
                 </div>
             </div>
         </div>

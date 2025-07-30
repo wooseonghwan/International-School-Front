@@ -16,27 +16,28 @@
                 <div class="inquiry-wrap">
                     <div class="form-wrap">
                         <p class="form-title">Title</p>
-                        <input type="text" class="form-control form-lg" placeholder="Please enter a title."/>
+                        <input type="text" class="form-control form-lg" placeholder="Please enter a title." name="title"/>
                     </div>
                     <div class="form-wrap">
                         <p class="form-title">Post Password</p>
                         <div class="d-flex align-items-center gap-5 mt-3 mb-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="flexRadioDefault1" checked/>
+                                <input class="form-check-input" type="radio" name="passwordYn"
+                                       id="flexRadioDefault1" value="Y" checked/>
                                 <label class="form-check-label" for="flexRadioDefault1">Set Password</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="flexRadioDefault2"/>
+                                <input class="form-check-input" type="radio" name="passwordYn"
+                                       id="flexRadioDefault2" value="N"/>
                                 <label class="form-check-label" for="flexRadioDefault2">Do Not Set</label>
                             </div>
                         </div>
-                        <input type="password" class="form-control form-lg" placeholder="Enter a 4 digit password."/>
+                        <input type="password" class="form-control form-lg" placeholder="Enter a 4 digit password." name="password"/>
                     </div>
                     <div class="form-wrap">
                         <label class="title">Content</label>
-                        <div class="editor-wrap">editor</div>
+                        <textarea class="form-control form-lg" name="content" placeholder="Please enter content."
+                                  style="height: 400px;"></textarea>
                     </div>
                     <div class="commnet-wrap">
                         <ul>
@@ -51,7 +52,7 @@
                 </div>
                 <div class="btns d-flex align-items-center justify-content-end gap-2 mt-4">
                     <button type="button" class="btn btn-gray btn-md" onclick="location.href='/fo/notice-board-en'">Cancel</button>
-                    <button type="button" class="btn btn-dark btn-md">Post</button>
+                    <button type="button" class="btn btn-dark btn-md" data-role="insert">Post</button>
                 </div>
             </div>
         </div>

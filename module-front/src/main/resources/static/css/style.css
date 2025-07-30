@@ -835,9 +835,6 @@ img {
     padding: 6px 12px;
   }
 }
-.form-control::-moz-placeholder {
-  color: #A29F9C;
-}
 .form-control::placeholder {
   color: #A29F9C;
 }
@@ -848,10 +845,6 @@ img {
   background-color: var(--gray7);
   text-align: right;
   padding-right: 12px !important;
-}
-.form-control:-moz-read-only {
-  background-color: #f5f5f5;
-  border: 1px solid #f5f5f5;
 }
 .form-control:read-only {
   background-color: #f5f5f5;
@@ -2244,7 +2237,6 @@ input[type=number] {
   border-radius: 50%;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
   object-fit: cover;
 }
 
@@ -2353,8 +2345,6 @@ input[type=number] {
   cursor: pointer;
   position: relative;
   transition: background-color 0.3s ease;
-  -webkit-user-select: none;
-  -moz-user-select: none;
   user-select: none;
 }
 @media (max-width: 1199.98px) {
@@ -3340,6 +3330,85 @@ input[type=number] {
   width: 100%;
 }
 
+.detail-desc {
+  margin-top: 64px;
+}
+@media (max-width: 1199.98px) {
+  .detail-desc {
+    margin-top: 32px;
+  }
+}
+.detail-desc .desc-title {
+  font-size: 20px;
+  color: #000;
+  font-weight: 700;
+  line-height: 140%;
+  padding: 22px 0;
+  border-top: 2px solid #222;
+  border-bottom: 1px solid #E2E2E2;
+  margin-bottom: 16px;
+}
+@media (max-width: 1199.98px) {
+  .detail-desc .desc-title {
+    font-size: 16px;
+    padding: 12px 0;
+    margin-bottom: 8px;
+  }
+}
+.detail-desc .sub {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+@media (max-width: 1199.98px) {
+  .detail-desc .sub {
+    font-size: 12px;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+}
+.detail-desc .sub .key {
+  color: #999;
+}
+.detail-desc .sub .value {
+  font-weight: 500;
+  margin-left: 8px;
+}
+.detail-desc .desc-txt {
+  min-height: 300px;
+}
+@media (max-width: 1199.98px) {
+  .detail-desc .desc-txt {
+    min-height: 200px;
+  }
+}
+.detail-desc .comment-title {
+  font-size: 18px;
+  color: #000;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-top: 45px;
+}
+@media (max-width: 1199.98px) {
+  .detail-desc .comment-title {
+    font-size: 16px;
+  }
+}
+.detail-desc .comment-wrap {
+  border-top: 2px solid #231815;
+  margin-bottom: 84px;
+  padding-top: 16px;
+}
+@media (max-width: 1199.98px) {
+  .detail-desc .comment-wrap {
+    margin-bottom: 40px;
+    padding-top: 8px;
+  }
+}
+
 .payment-wrap .payment-head {
   text-align: center;
 }
@@ -3624,4 +3693,3 @@ input[type=number] {
     font-size: 16px;
   }
 }
-/*# sourceMappingURL=style.css.map */

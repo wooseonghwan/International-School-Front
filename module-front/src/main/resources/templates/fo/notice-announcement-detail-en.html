@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout-en}">
+<div layout:fragment="contents" th:remove="tag">
+    <div class="main-container">
+        <div class="container">
+            <div class="notice-wrap">
+                <div class="borad-head">
+                    <p class="title">Announcement</p>
+                    <p class="desc">You can check important announcements regarding school meals here.</p>
+                </div>
+                <div class="detail-desc">
+                    <div class="desc-title" th:text="${detailEn.title}">[Must Read] Guide to paying for school meals for the second semester of 2025
+                    </div>
+                    <div class="sub">
+                        <div class="name">
+                            <span class="key">Author</span>
+                            <span class="value" th:text="${detailEn.adminNm}">Park*Eun</span>
+                        </div>
+                        <div class="date">
+                            <span class="key">Date</span>
+                            <span class="value" th:text="${detailEn.createDt}">2025-10-25</span>
+                        </div>
+                    </div>
+                    <div class="desc-txt">
+                        <p th:utext="${detailEn.content}">
+                            The system is blah blah blah<br/>
+                            … omitted …<br/>
+                            Please check.
+                        </p>
+                    </div>
+                </div>
+                <div class="btns d-flex align-items-center justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-dark btn-md" onclick="location.href='/fo/notice-announcement-en'">List</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

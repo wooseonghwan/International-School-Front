@@ -103,27 +103,11 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-start">
+                                    <tr th:each="noticeListEn : ${noticeListEn}">
+                                        <td class="text-start" th:text="${noticeListEn.title}">
                                             <p class="text-truncate">August Meal Service Schedule</p>
                                         </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">Information on updating the school lunch menu</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">System Maintenance Notice (2:00-4:00 AM, 8/10)</p>
-                                        </td>
-                                        <td class="text-center">
+                                        <td class="text-center" th:text="${noticeListEn.createDt}">
                                             <p class="date">2025.07.04</p>
                                         </td>
                                     </tr>
@@ -144,30 +128,12 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-start">
+                                    <tr th:each="noticeBoard : ${noticeBoardListEn}">
+                                        <td class="text-start"  th:text="${noticeBoard.title}">
                                             <p class="text-truncate">These days, my child is completely obsessed with
                                                 this side dish :)</p>
                                         </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">I was so happy to see the lunch today! It reminded
-                                                me of my old school days.</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start">
-                                            <p class="text-truncate">Has anyone tried following the recipes from school
-                                                lunches at home?</p>
-                                        </td>
-                                        <td class="text-center">
+                                        <td class="text-center" th:text="${noticeBoard.createDt}">
                                             <p class="date">2025.07.04</p>
                                         </td>
                                     </tr>

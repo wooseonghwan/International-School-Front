@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.core.mapper.db1.fo.FoOtherMapper">
+    <!-- 한글 공지사항-->
+    <select id="selectNoticeListMain" parameterType="FoNoticeDTO" resultType="FoNoticeDTO">
+        SELECT tn.NOTICE_ID
+             , tn.LANG
+             , tn.TITLE
+             , date_format(tn.CREATE_DT, '%Y-%m-%d') as createDt
+            FROM t_notice tn
+            WHERE tn.DEL_YN = 'N' AND tn.LANG = 'KR'
+            ORDER BY tn.CREATE_DT DESC
+            LIMIT 3
+    </select>
+    <!-- 영문 공지사항 -->
+    <select id="selectNoticeListEnMain" parameterType="FoNoticeDTO" resultType="FoNoticeDTO">
+        SELECT tn.NOTICE_ID
+             , tn.LANG
+             , tn.TITLE
+             , date_format(tn.CREATE_DT, '%Y-%m-%d') as createDt
+            FROM t_notice tn
+        WHERE tn.DEL_YN = 'N' AND LANG = 'EN'
+        ORDER BY tn.CREATE_DT DESC
+        LIMIT 3
+    </select>
+    <!-- 한글 고객 게시판 -->
+    <select id="selectNoticeBoardListMain" parameterType="FoNoticeBoardDTO" resultType="FoNoticeBoardDTO">
+        SELECT QNA_ID
+             , TITLE
+             , date_format(CREATE_DT, '%Y-%m-%d') as createDt
+        FROM t_qna
+        ORDER BY CREATE_DT DESC
+            LIMIT 3
+    </select>
+    <!-- 영문 고객 게시판 -->
+    <select id="selectNoticeBoardListEnMain" parameterType="FoNoticeBoardDTO" resultType="FoNoticeBoardDTO">
+        SELECT QNA_ID
+             , TITLE
+             , date_format(CREATE_DT, '%Y-%m-%d') as createDt
+        FROM t_qna
+        ORDER BY CREATE_DT DESC
+            LIMIT 3
+    </select>
+    <!-- 한글 공지사항-->
+    <select id="selectNoticeList" parameterType="FoNoticeDTO" resultType="FoNoticeDTO">
+        SELECT ROW_NUMBER() OVER (ORDER BY tn.CREATE_DT DESC) AS rowNum
+             , tn.NOTICE_ID
+             , tn.LANG
+             , tn.TITLE
+             , date_format(tn.CREATE_DT, '%Y-%m-%d') as createDt
+             , ta.admin_nm
+        FROM t_notice tn
+    INNER JOIN t_admin ta ON ta.admin_seq = tn.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'TITLE'">
+                        tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'CONTENT'">
+                        tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+            AND tn.DEL_YN = 'N' AND tn.LANG = 'KR'
+        </where>
+        ORDER BY tn.CREATE_DT DESC
+        LIMIT #{endRow} OFFSET #{startRow}
+    </select>
+    <select id="selectNoticeListCnt" resultType="int" parameterType="FoNoticeDTO">
+        SELECT COUNT(*)
+        FROM t_notice tn
+        INNER JOIN t_admin ta ON ta.admin_seq = tn.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'TITLE'">
+                        tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'CONTENT'">
+                        tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+            AND tn.DEL_YN = 'N' AND tn.LANG = 'KR'
+        </where>
+    </select>
+    <!-- 영문 공지사항 -->
+    <select id="selectNoticeListEn" parameterType="FoNoticeDTO" resultType="FoNoticeDTO">
+        SELECT ROW_NUMBER() OVER (ORDER BY tn.CREATE_DT DESC) AS rowNum
+             , tn.NOTICE_ID
+             , tn.LANG
+             , tn.TITLE
+             , date_format(tn.CREATE_DT, '%Y-%m-%d') as createDt
+             , ta.admin_nm
+        FROM t_notice tn
+    INNER JOIN t_admin ta ON ta.admin_seq = tn.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'TITLE'">
+                        tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'CONTENT'">
+                        tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+            AND tn.DEL_YN = 'N' AND tn.LANG = 'EN'
+        </where>
+        ORDER BY tn.CREATE_DT DESC
+        LIMIT #{endRow} OFFSET #{startRow}
+    </select>
+    <select id="selectNoticeListEnCnt" resultType="int" parameterType="FoNoticeDTO">
+        SELECT COUNT(*)
+        FROM t_notice tn
+        INNER JOIN t_admin ta ON ta.admin_seq = tn.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'TITLE'">
+                        tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'CONTENT'">
+                        tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tn.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+            AND tn.DEL_YN = 'N' AND tn.LANG = 'EN'
+        </where>
+    </select>
+    <!-- 한글 고객 게시판 -->
+    <select id="selectNoticeBoardList" parameterType="FoNoticeBoardDTO" resultType="FoNoticeBoardDTO">
+        SELECT ROW_NUMBER() OVER (ORDER BY tq.CREATE_DT DESC) AS rowNum
+             , tq.QNA_ID
+             , tq.TITLE
+             , date_format(tq.CREATE_DT, '%Y-%m-%d') as createDt
+             , tq.VIEW_CNT
+             , tq.PASSWORD_YN
+             , tq.CREATE_ID
+             , CASE WHEN tq.REPLY IS NOT NULL THEN 1 ELSE 0 END AS replyCnt
+             , tu.custName
+        FROM t_qna tq
+    LEFT JOIN user_tb tu ON tu.webId = tq.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'NAME'">
+                        tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'TITLE'">
+                        tq.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        ORDER BY tq.CREATE_DT DESC
+    </select>
+    <select id="selectNoticeBoardListCnt" resultType="int" parameterType="FoNoticeBoardDTO">
+        SELECT COUNT(*)
+        FROM t_qna tq
+    LEFT JOIN user_tb tu ON tu.webId = tq.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'NAME'">
+                        tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'TITLE'">
+                        tq.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
+    <!-- 영문 고객 게시판 -->
+    <select id="selectNoticeBoardListEn" parameterType="FoNoticeBoardDTO" resultType="FoNoticeBoardDTO">
+        SELECT ROW_NUMBER() OVER (ORDER BY tq.CREATE_DT DESC) AS rowNum
+             , tq.QNA_ID
+             , tq.TITLE
+             , date_format(tq.CREATE_DT, '%Y-%m-%d') as createDt
+             , tq.VIEW_CNT
+             , tq.PASSWORD_YN
+             , tq.CREATE_ID
+             , CASE WHEN tq.REPLY IS NOT NULL THEN 1 ELSE 0 END AS replyCnt
+             , tu.custName
+        FROM t_qna tq
+    LEFT JOIN user_tb tu ON tu.webId = tq.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'NAME'">
+                        tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'TITLE'">
+                        tq.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        ORDER BY tq.CREATE_DT DESC
+    </select>
+    <select id="selectNoticeBoardListEnCnt" resultType="int" parameterType="FoNoticeBoardDTO">
+        SELECT COUNT(*)
+        FROM t_qna tq
+    LEFT JOIN user_tb tu ON tu.webId = tq.create_id
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                <choose>
+                    <when test="searchType == 'NAME'">
+                        tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <when test="searchType == 'TITLE'">
+                        tq.TITLE LIKE CONCAT('%', #{searchValue}, '%')
+                    </when>
+                    <otherwise>
+                        (tu.custName LIKE CONCAT('%', #{searchValue}, '%')
+                        OR tn.CONTENT LIKE CONCAT('%', #{searchValue}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
+    <select id="selectNoticeBoardDetail" parameterType="String" resultType="FoNoticeBoardDTO">
+        SELECT tq.QNA_ID
+             , tq.TITLE
+             , tq.CONTENT
+             , tq.REPLY
+             , tq.VIEW_CNT
+             , ta.admin_nm
+             , tq.REPLY_DT
+             , date_format(tq.CREATE_DT, '%Y-%m-%d') as createDt
+             , tu.custName
+        FROM t_qna tq
+    LEFT JOIN t_admin ta ON ta.admin_seq = tq.REPLY_ID
+    LEFT JOIN user_tb tu ON tu.webId = tq.create_id
+        WHERE tq.QNA_ID = #{qnaId}
+    </select>
+    <select id="selectNoticeBoardDetailEn" parameterType="String" resultType="FoNoticeBoardDTO">
+        SELECT tq.QNA_ID
+             , tq.TITLE
+             , tq.CONTENT
+             , tq.REPLY
+             , tq.VIEW_CNT
+             , ta.admin_nm
+             , tq.REPLY_DT
+             , date_format(tq.CREATE_DT, '%Y-%m-%d') as createDt
+             , tu.custName
+        FROM t_qna tq
+    LEFT JOIN t_admin ta ON ta.admin_seq = tq.REPLY_ID
+    LEFT JOIN user_tb tu ON tu.webId = tq.create_id
+        WHERE tq.QNA_ID = #{qnaId}
+    </select>
+    <!-- 고객게시판 등록 -->
+    <insert id="insertNoticeBoard" parameterType="FoNoticeBoardDTO">
+        INSERT INTO t_qna
+        (
+            TITLE
+            , CONTENT
+            , PASSWORD_YN
+            , PASSWORD
+            , CREATE_ID
+            , CREATE_DT
+            , VIEW_CNT
+        ) VALUES (
+                 #{title}
+                , #{content}
+                , #{passwordYn}
+                , #{password}
+                , #{createId}
+                , NOW()
+                , 0
+            )
+    </insert>
+    <!-- 비밃글 비밀번호 -->
+    <select id="selectPasswordById" resultType="String">
+        SELECT password
+        FROM t_qna
+        WHERE qna_id = #{qnaId}
+    </select>
+    <!-- 게시글 조회수 -->
+    <update id="updateViewCount">
+        UPDATE t_qna
+        SET view_cnt = view_cnt + 1
+        WHERE qna_id = #{qnaId}
+    </update>
+    <select id="selectNoticeDetail" parameterType="String" resultType="FoNoticeDTO">
+        SELECT tn.NOTICE_ID
+             , tn.TITLE
+             , tn.CONTENT
+             , ta.admin_nm
+             , date_format(tn.CREATE_DT, '%Y-%m-%d') as createDt
+        FROM t_notice tn
+    LEFT JOIN t_admin ta ON ta.admin_seq = tn.CREATE_ID
+        WHERE tn.NOTICE_ID = #{noticeId}
+    </select>
+    <select id="selectNoticeDetailEn" parameterType="String" resultType="FoNoticeDTO">
+        SELECT tn.NOTICE_ID
+             , tn.TITLE
+             , tn.CONTENT
+             , ta.admin_nm
+             , date_format(tn.CREATE_DT, '%Y-%m-%d') as createDt
+        FROM t_notice tn
+    LEFT JOIN t_admin ta ON ta.admin_seq = tn.CREATE_ID
+        WHERE tn.NOTICE_ID = #{noticeId}
+    </select>
+</mapper>

@@ -8,23 +8,27 @@
                 <div class="borad-head">
                     <p class="title">Notice</p>
                     <p class="desc">You can find important announcements related to school meals here.</p>
-                    <div class="search-content">
-                        <div class="form-wrap">
-                            <select name="" id="" class="form-select form-md round">
-                                <option value="">All</option>
-                            </select>
-                        </div>
-                        <div class="form-field search">
-                            <div class="input-form">
-                                <i class="icon-search"></i>
-                                <input type="text" class="form-control search-form form-md round"
-                                       placeholder="Enter a keyword to search."/>
-                                <button type="button" class="clear-button">
-                                    <i class="icon-input-close"></i>
-                                </button>
+                    <form name="searchForm">
+                        <div class="search-content">
+                            <div class="form-wrap">
+                                <select name="searchType" id="" class="form-select form-md round">
+                                    <option value="ALL" th:selected="${searchInfo.searchType == 'ALL'}">ALL</option>
+                                    <option value="TITLE" th:selected="${searchInfo.searchType == 'TITLE'}">TITLE</option>
+                                    <option value="CONTENT" th:selected="${searchInfo.searchType == 'CONTENT'}">CONTENT</option>
+                                </select>
+                            </div>
+                            <div class="form-field search">
+                                <div class="input-form">
+                                    <i class="icon-search"></i>
+                                    <input type="text" class="form-control search-form form-md round" name="searchValue" th:value="${searchInfo.searchValue}"
+                                           placeholder="Enter a keyword to search."/>
+                                    <button type="button" class="clear-button" data-role="btn-search-form">
+                                        <i class="icon-input-close"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="table-container">
                     <div class="table-top">
@@ -49,212 +53,76 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="text-center">
+                            <th:block th:if="${#lists.isEmpty(noticeListEn)}">
+                                <tr>
+                                    <td colspan="5" class="text-center">There is no history.</td>
+                                </tr>
+                            </th:block>
+                            <tr th:each="list : ${noticeListEn}">
+                                <td class="text-center" th:text="${list.rowNum}">
                                     <p class="">124</p>
                                 </td>
                                 <td class="text-start">
                                     <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
+                                        <a th:href="@{/fo/notice-announcement-detail-en(noticeId=${list.noticeId})}" class="board-desc text-truncate"
+                                           th:text="${list.title}">
+                                            [Important] 2nd Semester 2025 Meal Fee Payment Notice
+                                        </a>
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
+                                    <p class="author">
+                                        <i class="icon-author"></i>
+                                        <span th:text="${list.adminNm == '관리자'} ? 'Admin' : ${list.adminNm}">Admin</span>
+                                    </p>
                                 </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
-                                    <p class="date">2025.07.04</p>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center">
-                                    <p class="">124</p>
-                                </td>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="" class="board-desc text-truncate"> [Important] 2nd Semester 2025 Meal
-                                            Fee Payment Notice </a>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <p class="author"><i class="icon-author"></i> Admin</p>
-                                </td>
-                                <td class="text-center">
+                                <td class="text-center" th:text="${list.createDt}">
                                     <p class="date">2025.07.04</p>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <nav>
+                    <nav th:if="${searchInfo.totalPage != null and searchInfo.totalPage >= 1}">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="First">
+                            <!-- 첫 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=1, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="First">
                                     <i class="icon-pagination-first"></i>
                                 </a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
+                            <!-- 이전 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${searchInfo.page - 1}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Previous">
                                     <i class="icon-pagination-prev"></i>
                                 </a>
                             </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+                            <!-- 페이지 번호 -->
+                            <li class="page-item"
+                                th:each="i : ${#numbers.sequence(searchInfo.startPage, searchInfo.endPage)}"
+                                th:classappend="${i == searchInfo.page} ? 'active' : ''"
+                                th:attr="aria-current=${i == searchInfo.page ? 'page' : null}">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${i}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   th:text="${i}">1</a>
+                            </li>
+                            <!-- 다음 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == searchInfo.totalPage} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${searchInfo.page + 1}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Next">
                                     <i class="icon-pagination-next"></i>
                                 </a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Last">
+                            <!-- 마지막 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == searchInfo.totalPage} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/notice-announcement-en(page=${searchInfo.totalPage}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Last">
                                     <i class="icon-pagination-last"></i>
                                 </a>
                             </li>

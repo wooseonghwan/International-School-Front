@@ -19,28 +19,31 @@
                 <div class="inquiry-wrap">
                     <div class="form-wrap">
                         <p class="form-title">제목</p>
-                        <input type="text" class="form-control form-lg" placeholder="제목을 입력해주세요."/>
+                        <input type="text" class="form-control form-lg" placeholder="제목을 입력해주세요." name="title"/>
                     </div>
                     <div class="form-wrap">
                         <p class="form-title">게시글 비밀번호</p>
                         <div class="d-flex align-items-center gap-5 mt-3 mb-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="flexRadioDefault1" checked/>
+                                <input class="form-check-input" type="radio" name="passwordYn"
+                                       id="flexRadioDefault1" value="Y" checked />
                                 <label class="form-check-label" for="flexRadioDefault1">설정</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="flexRadioDefault2"/>
+                                <input class="form-check-input" type="radio" name="passwordYn"
+                                       id="flexRadioDefault2" value="N" />
                                 <label class="form-check-label" for="flexRadioDefault2">설정 안함</label>
                             </div>
                         </div>
-                        <input type="password" class="form-control form-lg" placeholder="4자리 숫자의 비밀번호를 입력해주세요."/>
+                        <input type="password" class="form-control form-lg"
+                               placeholder="4자리 숫자의 비밀번호를 입력해주세요." name="password"/>
                     </div>
                     <div class="form-wrap">
                         <label class="title">내용</label>
-                        <div class="editor-wrap">에디터 영역</div>
+                        <textarea class="form-control form-lg" name="content" placeholder="내용을 입력해주세요."
+                                  style="height: 400px;"></textarea>
                     </div>
+
                     <div class="commnet-wrap">
                         <ul>
                             <li>※ 쉬운 비밀번호를 입력하면 타인이 수정, 삭제할 가능성이 높아집니다.</li>
@@ -48,9 +51,11 @@
                         </ul>
                     </div>
                 </div>
+                <!-- 버튼 영역 -->
                 <div class="btns d-flex align-items-center justify-content-end gap-2 mt-4">
-                    <button type="button" class="btn btn-gray btn-md" onclick="location.href='/fo/notice-board'">취소</button>
-                    <button type="button" class="btn btn-dark btn-md">글 게시하기</button>
+                    <button type="button" class="btn btn-gray btn-md" onclick="location.href='/fo/notice-board'">취소
+                    </button>
+                    <button type="button" class="btn btn-dark btn-md" data-role="insert">글 게시하기</button>
                 </div>
             </div>
         </div>
