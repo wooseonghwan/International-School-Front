@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface FoMainMapper {
-    int countByCardId(@Param("cardId") String cardId);
+    FoUserDTO selectUserByCardId(String cardId);
     int countByWebId(@Param("webId") String webId);
     int updateUserByCustNo(FoUserDTO foUserDTO);
     FoUserDTO selectUserByCredentials(FoUserDTO foUserDTO);

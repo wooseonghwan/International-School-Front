@@ -8,20 +8,15 @@ import com.fw.core.dto.kicc.KiccTransactionResDTO;
 import com.fw.core.util.KiccUtil;
 import com.fw.core.vo.ResponseVO;
 import com.fw.fo.main.service.FoPaymentService;
-import jdk.internal.org.jline.terminal.impl.ExecPty;
-import jdk.tools.jlink.internal.plugins.ExcludePlugin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
 
 @Slf4j
 @Controller
@@ -32,6 +27,9 @@ public class FoPaymentController {
 
     @RequestMapping({ "/fo/lunch-payment" })
     public String lunchPayment(ModelMap modelMap, @RequestParam(value = "result", required = false) String result, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
         modelMap.addAttribute("loginUser", loginUser);
         modelMap.addAttribute("result", result);
@@ -40,6 +38,9 @@ public class FoPaymentController {
 
     @RequestMapping({ "/fo/lunch-payment-en" })
     public String lunchPaymentEn(ModelMap modelMap, @RequestParam(value = "result", required = false) String result, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login-en";
+        }
         FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
         modelMap.addAttribute("loginUser", loginUser);
         modelMap.addAttribute("result", result);
@@ -47,22 +48,34 @@ public class FoPaymentController {
     }
 
     @GetMapping({ "/fo/lunch-payment-history" })
-    public String lunchPaymentHist(ModelMap modelMap) {
+    public String lunchPaymentHist(ModelMap modelMap, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         return "fo/lunch-payment-history";
     }
 
     @GetMapping({ "/fo/lunch-payment-history-en" })
-    public String lunchPaymentHistEn(ModelMap modelMap) {
+    public String lunchPaymentHistEn(ModelMap modelMap, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login-en";
+        }
         return "fo/lunch-payment-history-en";
     }
 
     @GetMapping({ "/fo/use-history" })
-    public String useHist(ModelMap modelMap) {
+    public String useHist(ModelMap modelMap, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         return "fo/use-history";
     }
 
     @GetMapping({ "/fo/use-history-en" })
-    public String useHistEn(ModelMap modelMap) {
+    public String useHistEn(ModelMap modelMap, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login-en";
+        }
         return "fo/use-history-en";
     }
 

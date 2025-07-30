@@ -332,4 +332,9 @@
     LEFT JOIN t_admin ta ON ta.admin_seq = tn.CREATE_ID
         WHERE tn.NOTICE_ID = #{noticeId}
     </select>
+    <update id="updatePasswordByWebId">
+        UPDATE user_tb
+        SET webPw = #{webPw}
+        WHERE custNo = #{custNo}
+    </update>
 </mapper>

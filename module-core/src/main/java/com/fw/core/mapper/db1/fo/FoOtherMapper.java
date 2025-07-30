@@ -28,4 +28,5 @@ public interface FoOtherMapper {
     void updateViewCount(@Param("qnaId") String qnaId);
     FoNoticeDTO selectNoticeDetail(String noticeId);
     FoNoticeDTO selectNoticeDetailEn(String noticeId);
+    void updatePasswordByWebId(@Param("custNo") String custNo, @Param("webPw") String webPw);
 }

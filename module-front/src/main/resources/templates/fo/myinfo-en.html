@@ -15,36 +15,31 @@
                         <div>
                             <div class="form-wrap disabled">
                                 <p class="form-title">Name</p>
-                                <input type="text" class="form-control form-lg" placeholder="" value="Byoung Gul Cho"
-                                       disabled/>
+                                <input type="text" class="form-control form-lg" placeholder="" th:value="${session.loginUser.custName}" disabled/>
                             </div>
                             <div class="form-wrap disabled">
                                 <p class="form-title">Card ID Number</p>
-                                <input type="text" class="form-control form-lg" placeholder="" value="110323" disabled/>
+                                <input type="text" class="form-control form-lg" placeholder="" th:value="${session.loginUser.cardId}" disabled/>
                             </div>
                             <div class="form-wrap disabled">
                                 <p class="form-title">Code</p>
-                                <input type="text" class="form-control form-lg" placeholder="" value="00001247"
-                                       disabled/>
+                                <input type="text" class="form-control form-lg" placeholder="" th:value="${session.loginUser.custNo}" disabled/>
                             </div>
                             <div class="form-wrap disabled">
                                 <p class="form-title">ID</p>
-                                <input type="text" class="form-control form-lg" placeholder="" value="sougetsu"
-                                       disabled/>
+                                <input type="text" class="form-control form-lg" placeholder="" th:value="${session.loginUser.webId}" disabled/>
                             </div>
                             <div class="form-wrap">
                                 <p class="form-title">Password</p>
-                                <input type="password" class="form-control form-lg" placeholder="Enter your password."
-                                       value=""/>
+                                <input type="password" class="form-control form-lg" placeholder="Enter your password." value="" name="webPw"/>
                             </div>
                             <div class="form-wrap">
                                 <p class="form-title">Password Check</p>
-                                <input type="password" class="form-control form-lg" placeholder="Enter your password."
-                                       value=""/>
+                                <input type="password" class="form-control form-lg" placeholder="Enter your password." value="" name="webPwConfirm"/>
                             </div>
                         </div>
                         <div class="btns">
-                            <button type="button" class="btn btn-dark btn-lg w-100">Submit</button>
+                            <button type="button" class="btn btn-dark btn-lg w-100" data-role="update">Submit</button>
                         </div>
                     </div>
                 </div>

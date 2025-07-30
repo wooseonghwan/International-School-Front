@@ -60,27 +60,24 @@
                     const cardId = $(this).val().trim();
                     if (!cardId) return;
 
+                    // 프론트: 카드번호 중복 + webId 확인
                     $.ajax({
                         url: '/fo/check-card-id',
                         type: 'POST',
                         contentType: 'application/json',
-                        data: JSON.stringify({cardId}),
+                        data: JSON.stringify({ cardId }),
                         success: function (res) {
                             if (res.duplicate === true) {
-                                // webId 값이 있으면 이미 회원가입된 카드
-                                if (res.webId) {
+                                if (res.webId && res.webId.trim() !== '') {
                                     alert('이미 회원가입된 카드번호입니다.');
-                                } else {
-                                    alert('이미 등록된 카드번호입니다.');
+                                    isCardIdValid = false;
+                                    $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
+                                    $('input[name="custName"], input[name="custNo"]').val('');
+                                    return;
                                 }
-
-                                isCardIdValid = false;
-                                $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
-                                $('input[name="custName"], input[name="custNo"]').val('');
-                                return;
+                                // 등록된 카드지만 webId가 없으면 → 고객정보 조회 가능
                             }
-
-                            // 중복 아님 → 고객 정보 조회
+                            // 중복이 아닌 경우 → 고객 정보 조회
                             isCardIdValid = true;
                             $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', false);
 
@@ -88,7 +85,7 @@
                                 url: '/fo/card-info',
                                 type: 'POST',
                                 contentType: 'application/json',
-                                data: JSON.stringify({cardId}),
+                                data: JSON.stringify({ cardId }),
                                 success: function (info) {
                                     if (info && info.custName && info.custNo) {
                                         $('input[name="custName"]').val(info.custName);

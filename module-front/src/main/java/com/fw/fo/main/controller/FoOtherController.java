@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -54,7 +55,7 @@ public class FoOtherController {
     @GetMapping({ "/fo/notice-board-en" })
     public String noticeBoardEn(ModelMap model, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
         if (httpSession.getAttribute("loginUser") == null) {
-            return "redirect:/fo/login";
+            return "redirect:/fo/login-en";
         }
         int total = foOtherService.selectNoticeBoardListEnCnt(foNoticeBoardDTO);
         foNoticeBoardDTO.setTotalCount(total);
@@ -137,11 +138,29 @@ public class FoOtherController {
         model.addAttribute("user", loginUser);
         return "fo/myinfo";
     }
+    @PostMapping("/fo/update-password")
+    @ResponseBody
+    public ResponseEntity<?> updatePassword(@RequestBody Map<String, String> body, HttpSession session) {
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+        String newPw = body.get("newPw");
+        if (newPw == null || newPw.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("새 비밀번호가 유효하지 않습니다.");
+        }
+        foOtherService.updatePassword(loginUser.getCustNo(), newPw);
+        // 세션 무효화
+        session.invalidate();
+        return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+    }
     @GetMapping({ "/fo/myinfo-en" })
     public String myinfoEn(HttpSession session, Model model, FoUserDTO foUserDTO) {
         if (session.getAttribute("loginUser") == null) {
-            return "redirect:/fo/login";
+            return "redirect:/fo/login-en";
         }
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        model.addAttribute("user", loginUser);
         return "fo/myinfo-en";
     }
 }

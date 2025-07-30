@@ -11,20 +11,14 @@
                 <div class="form-wrap">
                     <p class="form-title">ID</p>
                     <input type="text" class="form-control form-lg"
-                           placeholder="Please enter your email address or mobile phone number."/>
+                           placeholder="Please enter your ID" name="webId"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> ID does not match. Please try again.
-                </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">Password</p>
-                    <input type="password" class="form-control form-lg" placeholder="Please enter your password."/>
+                    <input type="password" class="form-control form-lg" placeholder="Please enter your password." name="webPw"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                  <i class="icon-error"></i> Passwords do not match. Please try again.
-                </div> -->
             </div>
             <div class="login-tool">
                 <div class="form-check">
@@ -41,7 +35,7 @@
                 </div>
             </div>
             <div class="btn-columns">
-                <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">Login</button>
+                <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="login">Login</button>
                 <button type="button" class="btn btn-lg btn-outline-primary" onclick="location.href='/fo/signup-en'">Sign up</button>
             </div>
         </div>
@@ -182,5 +176,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $('[data-role="login"]').on('click', function () {
+            const webId = $.trim($('input[name="webId"]').val());
+            const webPw = $.trim($('input[name="webPw"]').val());
+
+            if (!webId || !webPw) {
+                alert('Please enter both your ID and password.');
+                return;
+            }
+
+            $.ajax({
+                url: '/fo/login-check',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ webId, webPw }),
+                success: function (res) {
+                    if (res.result === true) {
+                        location.href = '/fo/main1-en'; // 로그인 후 이동할 경로
+                    } else {
+                        alert(res.message || 'The ID or password you entered is incorrect.');
+                    }
+                },
+                error: function () {
+                    alert('An error occurred during login. Please try again.');
+                }
+            });
+        });
+    </script>
 </div>
 </html>

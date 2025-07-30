@@ -16,8 +16,8 @@ import java.util.Date;
 @Service
 public class FoMainService {
     private final FoMainMapper foMainMapper;
-    public boolean checkDuplicateCardId(String cardId) {
-        return foMainMapper.countByCardId(cardId) > 0;
+    public FoUserDTO getUserByCardId(String cardId) {
+        return foMainMapper.selectUserByCardId(cardId);
     }
 
     public boolean checkDuplicateWebId(String webId) {

@@ -2,8 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fw.core.mapper.db1.fo.FoMainMapper">
 
-    <select id="countByCardId" resultType="int">
-        SELECT COUNT(*) FROM user_tb WHERE cardId = #{cardId}
+    <select id="selectUserByCardId" parameterType="String" resultType="FoUserDTO">
+        SELECT custNo
+             , custName
+             , cardId
+             , webId
+        FROM user_tb
+        WHERE cardId = #{cardId}
     </select>
 
     <select id="countByWebId" resultType="int">
@@ -25,7 +30,8 @@
 
     <select id="selectCardInfo" parameterType="String" resultType="FoUserDTO">
         SELECT custName
-             ,custNo
+             , custNo
+             , webId
         FROM user_tb
         WHERE cardId = #{cardId}
     </select>

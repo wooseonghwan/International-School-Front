@@ -58,27 +58,24 @@
                 const cardId = $(this).val().trim();
                 if (!cardId) return;
 
+                // 프론트: 카드번호 중복 + webId 확인
                 $.ajax({
                     url: '/fo/check-card-id',
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify({cardId}),
+                    data: JSON.stringify({ cardId }),
                     success: function (res) {
                         if (res.duplicate === true) {
-                            // webId 값이 있으면 이미 회원가입된 카드
-                            if (res.webId) {
-                                alert('This card number has already been used for sign-up.');
-                            } else {
-                                alert('This card number is already registered.');
+                            if (res.webId && res.webId.trim() !== '') {
+                                alert('This card number is already registered as a member.');
+                                isCardIdValid = false;
+                                $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
+                                $('input[name="custName"], input[name="custNo"]').val('');
+                                return;
                             }
-
-                            isCardIdValid = false;
-                            $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', true);
-                            $('input[name="custName"], input[name="custNo"]').val('');
-                            return;
+                            // 등록된 카드지만 webId가 없으면 → 고객정보 조회 가능
                         }
-
-                        // 중복 아님 → 고객 정보 조회
+                        // 중복이 아닌 경우 → 고객 정보 조회
                         isCardIdValid = true;
                         $('input[name="custName"], input[name="custNo"], input[name="webId"], input[name="webPw"], input[name="passwordConfirm"]').prop('disabled', false);
 
@@ -86,7 +83,7 @@
                             url: '/fo/card-info',
                             type: 'POST',
                             contentType: 'application/json',
-                            data: JSON.stringify({cardId}),
+                            data: JSON.stringify({ cardId }),
                             success: function (info) {
                                 if (info && info.custName && info.custNo) {
                                     $('input[name="custName"]').val(info.custName);
@@ -161,12 +158,12 @@
                 }
 
                 if (!isWebIdValid) {
-                    alert('The ID is either duplicated or not verified.');
+                    alert('The username is either duplicated or not verified.');
                     return;
                 }
 
                 if (webPw !== passwordConfirm) {
-                    alert('Password and confirmation do not match.');
+                    alert('Password and password confirmation do not match.');
                     return;
                 }
 
@@ -185,11 +182,11 @@
                     contentType: 'application/json',
                     data: JSON.stringify(data),
                     success: function () {
-                        alert('Sign-up completed successfully.');
-                        location.href = '/fo/login-en';
+                        alert('Registration completed successfully.');
+                        location.href = '/fo/login';
                     },
                     error: function (xhr) {
-                        alert(xhr.responseText || 'An error occurred during sign-up.');
+                        alert(xhr.responseText || 'An error occurred during registration.');
                     }
                 });
             });

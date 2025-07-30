@@ -73,4 +73,7 @@ public class FoOtherService {
     public FoNoticeDTO selectNoticeDetailEn(String noticeId){
         return foOtherMapper.selectNoticeDetailEn(noticeId);
     }
+    public void updatePassword(String custNo, String newPw) {
+        foOtherMapper.updatePasswordByWebId(custNo, newPw);
+    }
 }

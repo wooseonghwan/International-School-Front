@@ -68,10 +68,20 @@ public class FoMainController {
 		return "fo/signup";
 	}
 	@PostMapping("/fo/check-card-id")
-	public ResponseEntity<Boolean> checkCardId(@RequestBody Map<String, String> body) {
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> checkCardId(@RequestBody Map<String, String> body) {
 		String cardId = body.get("cardId");
-		boolean exists = foMainService.checkDuplicateCardId(cardId);
-		return ResponseEntity.ok(exists);
+		Map<String, Object> result = new HashMap<>();
+
+		FoUserDTO user = foMainService.getUserByCardId(cardId);
+		if (user != null) {
+			result.put("duplicate", true);
+			result.put("webId", user.getWebId()); // null일 수도 있음
+		} else {
+			result.put("duplicate", false);
+		}
+
+		return ResponseEntity.ok(result);
 	}
 	@PostMapping("/fo/card-info")
 	@ResponseBody
