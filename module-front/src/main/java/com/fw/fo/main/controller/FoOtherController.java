@@ -3,12 +3,14 @@ package com.fw.fo.main.controller;
 import com.fw.core.code.ResponseCode;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
+import com.fw.core.dto.fo.FoUserDTO;
 import com.fw.core.vo.ResponseVO;
 import com.fw.fo.main.service.FoOtherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -113,7 +115,10 @@ public class FoOtherController {
         return "fo/notice-announcement-detail-en";
     }
     @GetMapping({ "/fo/myinfo" })
-    public String myinfo(ModelMap modelMap) {
+    public String myinfo(HttpSession session, Model model, FoUserDTO foUserDTO) {
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        System.out.println("custName = " + loginUser.getCustName());
+        model.addAttribute("user", loginUser);
         return "fo/myinfo";
     }
     @GetMapping({ "/fo/myinfo-en" })

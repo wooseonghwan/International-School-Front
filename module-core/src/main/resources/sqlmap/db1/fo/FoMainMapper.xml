@@ -2,60 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fw.core.mapper.db1.fo.FoMainMapper">
 
-    <insert id="insertReservation" parameterType="FoReservationDTO">
-        INSERT INTO tb_reservation (
-               golf_name
-             , person
-             , days
-             , start_date
-             , end_date
-             , lodging
-             , total_price
-             , reserve_nm
-             , reserve_phone
-             , reserve_status
-             , marketing_yn
-             , recommend_nm
-             , recommend_phone
-             , reg_dt
-        ) VALUES (
-             #{golfName}
-             , #{person}
-             , #{days}
-             , #{startDate}
-             , #{endDate}
-             , #{lodging}
-             , #{totalPrice}
-             , #{reserveNm}
-             , #{reservePhone}
-             , 'RESERVE_WAIT'
-             , #{marketingYn}
-             , #{recommendNm}
-             , #{recommendPhone}
-             , NOW()
-        )
-    </insert>
-
-    <insert id="insertUser" parameterType="FoReservationDTO">
-        INSERT INTO tb_user (
-                                 user_name
-                               , user_phone
-                               ) VALUES (
-                               #{reserveNm}
-                               , #{reservePhone}
-                               )
-    </insert>
-
-    <select id="selectDateList" parameterType="FoGolfPriceDTO" resultType="FoGolfPriceDTO">
-        SELECT start_date
-             , end_date
-        FROM tb_golf_price
-        WHERE days = #{days} AND person = #{person} AND golf_name = #{golfName}
+    <select id="countByCardId" resultType="int">
+        SELECT COUNT(*) FROM user_tb WHERE cardId = #{cardId}
     </select>
 
-    <select id="selectTotalPrice" parameterType="FoGolfPriceDTO" resultType="String">
-        SELECT total_price
-        FROM tb_golf_price
-        WHERE days = #{days} AND person = #{person} AND golf_name = #{golfName} AND start_date = #{startDate} AND end_date = #{endDate} AND lodging = #{lodging}
+    <select id="countByWebId" resultType="int">
+        SELECT COUNT(*) FROM user_tb WHERE webId = #{webId}
+    </select>
+
+    <select id="getTodayUserSeq" resultType="int">
+        SELECT IFNULL(MAX(SUBSTRING(custNo, 7, 4)), 0) + 1
+        FROM user_tb
+        WHERE SUBSTRING(custNo, 1, 6) = #{today}
+    </select>
+
+    <insert id="insertUser" parameterType="FoUserDTO">
+        INSERT INTO user_tb (
+            custNo
+            , cardId
+            , custName
+            , webId
+            , password
+            , cDate
+        ) VALUES (
+                     #{custNo}
+                     , #{cardId}
+                     , #{custName}
+                     , #{webId}
+                     , #{password}
+                     , NOW()
+                 )
+    </insert>
+    <select id="selectUserByCredentials" parameterType="FoUserDTO" resultType="FoUserDTO">
+        SELECT *
+        FROM user_tb
+        WHERE webId = #{webId} AND webPw = #{webPw}
     </select>
 </mapper>

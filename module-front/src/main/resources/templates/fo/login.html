@@ -10,22 +10,14 @@
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">아이디</p>
-                    <input type="text" class="form-control form-lg" placeholder="이메일 주소 또는 휴대폰 번호를 입력해주세요."/>
+                    <input type="text" class="form-control form-lg" placeholder="아이디를 입력해주세요." name="webId"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                      <i class="icon-error"></i> 아이디가 일치하지 않습니다. 다시
-                      시도해주세요.
-                    </div> -->
             </div>
             <div class="form-field">
                 <div class="form-wrap">
                     <p class="form-title">비밀번호</p>
-                    <input type="password" class="form-control form-lg" placeholder="비밀번호를 입력해주세요."/>
+                    <input type="password" class="form-control form-lg" placeholder="비밀번호를 입력해주세요." name="webPw"/>
                 </div>
-                <!-- <div class="invalid-feedback">
-                      <i class="icon-error"></i> 비밀번호가 일치하지 않습니다. 다시
-                      시도해주세요.
-                    </div> -->
             </div>
             <div class="login-tool">
                 <div class="form-check">
@@ -41,7 +33,7 @@
                 </div>
             </div>
             <div class="btn-columns">
-                <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">로그인</button>
+                <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="login">로그인</button>
                 <button type="button" class="btn btn-lg btn-outline-primary" onclick="location.href='/fo/signup'" >회원가입</button>
             </div>
         </div>
@@ -187,6 +179,34 @@
             </div>
         </div>
     </div>
+    <script>
+        $('[data-role="login"]').on('click', function () {
+            const webId = $.trim($('input[name="webId"]').val());
+            const webPw = $.trim($('input[name="webPw"]').val());
 
+            if (!webId || !webPw) {
+                alert('아이디와 비밀번호를 모두 입력해주세요.');
+                return;
+            }
+
+            $.ajax({
+                url: '/fo/login-check',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ webId, webPw }),
+                success: function (res) {
+                    if (res.result === true) {
+                        location.href = '/fo/main1'; // 로그인 후 이동할 경로
+                    } else {
+                        alert(res.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
+                    }
+                },
+                error: function () {
+                    alert('로그인 중 오류가 발생했습니다.');
+                }
+            });
+        });
+
+    </script>
 </div>
 </html>

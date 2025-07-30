@@ -32,9 +32,18 @@
                     </li>
                 </ul>
                 <div class="header-info">
-                    <button type="button" class="btn-logout" onclick="location.href='/fo/login'">
-                        <i class="icon-logout"></i>
-                    </button>
+                    <th:block th:if="${session.loginUser != null}">
+                        <!-- 로그인된 상태 -->
+                        <button type="button" class="btn-logout" onclick="location.href='/fo/logout'">
+                            <i class="icon-logout"></i>
+                        </button>
+                    </th:block>
+                    <th:block th:if="${session.loginUser == null}">
+                        <!-- 비로그인 상태 -->
+                        <button type="button" class="btn-login" onclick="location.href='/fo/login'">
+                            로그인
+                        </button>
+                    </th:block>
                     <div class="toggle-wrapper" id="langToggle">
                         <div class="label">
                             <span class="ko">Ko</span>
@@ -103,9 +112,18 @@
             </div>
         </div>
         <div class="side-menu-footer">
-            <button type="button" class="btn-logout">
-                <i class="icon-logout"></i>
-            </button>
+            <th:block th:if="${session.loginUser != null}">
+                <!-- 로그인된 상태 -->
+                <button type="button" class="btn-logout" onclick="location.href='/fo/logout'">
+                    <i class="icon-logout"></i>
+                </button>
+            </th:block>
+            <th:block th:if="${session.loginUser == null}">
+                <!-- 비로그인 상태 -->
+                <button type="button" class="btn-login" onclick="location.href='/fo/login'">
+                    로그인
+                </button>
+            </th:block>
         </div>
     </div>
     <div class="dimmed"></div>
