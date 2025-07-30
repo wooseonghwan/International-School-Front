@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fw.core.mapper.db1.fo.FoPaymentMapper">
+    <!-- 결제(충전)내역 등록용 ilno 조회 -->
+    <select id="getIlnoForRegisterPayment" resultType="java.lang.String">
+        SELECT COALESCE(MAX(ilno), 0) + 1
+          FROM mkt_tb
+         WHERE fDate = CURDATE()
+           AND rtn = '01'
+           AND loc = 'WEB'
+         FOR UPDATE
+    </select>
+
+    <!-- 결제(충전)내역 등록 -->
+    <insert id="registerPayment" parameterType="com.fw.core.dto.fo.FoPaymentDTO">
+        INSERT INTO mkt_tb (
+               fDate
+             , rtn
+             , ilno
+             , loc
+             , custNo
+             , gbn
+             , amnt
+             , balance
+             , cDate
+        ) VALUES (
+               CURDATE()
+             , '01'
+             , #{ilno}
+             , 'WEB'
+             , #{custNo}
+             , 'CHARGE'
+             , #{amnt}
+             , 0
+             , NOW()
+        )
+    </insert>
+
+    <!-- 결제(충전)내역 상세 등록용 ilno 조회 -->
+    <select id="getSnnoForRegisterPaymentDesc" resultType="java.lang.String">
+        SELECT COALESCE(MAX(snno), 0) + 1
+          FROM mkt_desc_tb
+         WHERE fDate = CURDATE()
+           AND rtn = '01'
+           AND loc = 'WEB'
+         FOR UPDATE
+    </select>
+
+    <!-- 결제(충전)내역 상세 등록 -->
+    <insert id="registerPaymentDesc" parameterType="com.fw.core.dto.fo.FoPaymentDescDTO">
+        INSERT INTO mkt_desc_tb (
+               fDate
+             , rtn
+             , ilno
+             , snno
+             , loc
+             , custNo
+             , gbn
+             , amnt
+             , menuCd
+             , menuNm
+             , balance
+             , cDate
+        ) VALUES (
+               CURDATE()
+             , '01'
+             , #{ilno}
+             , #{snno}
+             , 'WEB'
+             , #{custNo}
+             , 'CHARGE'
+             , #{amnt}
+             , 'CHARGE'
+             , '충전'
+             , 0
+             , NOW()
+        )
+    </insert>
+</mapper>
