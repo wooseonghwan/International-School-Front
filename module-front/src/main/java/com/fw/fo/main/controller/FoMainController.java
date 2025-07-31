@@ -155,4 +155,12 @@ public class FoMainController {
 		}
 		return result;
 	}
+	@GetMapping({ "/fo/terms" })
+	public String terms() {
+		return "fo/terms";
+	}
+	@GetMapping({ "/fo/terms-en" })
+	public String termsEn() {
+		return "fo/terms-en";
+	}
 }

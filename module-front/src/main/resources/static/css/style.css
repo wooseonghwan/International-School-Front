@@ -3409,6 +3409,21 @@ input[type=number] {
   }
 }
 
+.terms-wrap {
+  margin-top: 60px;
+}
+.terms-wrap h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  margin-top: 24px;
+}
+.terms-wrap ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .payment-wrap .payment-head {
   text-align: center;
 }
