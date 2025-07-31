@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <included>
 
-    <property name="FILE_PATH" value="/www/logs/kis/fo"/><!-- 로그 파일 경로 -->
+    <property name="FILE_PATH" value="/www/logs/kis/fo/"/><!-- 로그 파일 경로 -->
     <property name="STD_FILE" value="info.log"/>
     <property name="ERROR_FILE" value="error.log"/>
 
