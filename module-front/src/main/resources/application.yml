@@ -79,8 +79,7 @@ kicc:
   mid: T0021436
   transaction-url: https://testpgapi.easypay.co.kr/api/ep9/trades/webpay
   transaction-approval-url: https://testpgapi.easypay.co.kr/api/ep9/trades/approval
-  # FIXME :: 개발 배포 시 결제 콜백URL 변경
-  transaction-callback-url: http://localhost:8079/payment/kicc/transaction/callback
+  transaction-callback-url: https://cezars.devsp.kr/payment/kicc/transaction/callback
   transaction-revise-url: https://testpgapi.easypay.co.kr/api/trades/revise
   secret-key: "easypay!KICCTEST"
 ---
@@ -106,12 +105,9 @@ service:
   upload:
     path: /upload
 kicc:
-  # FIXME :: 운영 배포 시 운영 MID 변경
-  mid: T0021436
+  mid: 05591879
   transaction-url: https://pgapi.easypay.co.kr/api/ep9/trades/webpay
   transaction-approval-url: https://pgapi.easypay.co.kr/api/ep9/trades/approval
-  # FIXME :: 운영 배포 시 결제 콜백URL 변경
-  transaction-callback-url: http://localhost:8079/payment/kicc/transaction/callback
+  transaction-callback-url: https://cafeteria-kis.co.kr/payment/kicc/transaction/callback
   transaction-revise-url: https://pgapi.easypay.co.kr/api/trades/revise
-  # FIXME :: 운영 배포 시 시크릿 키 변경
-  secret-key: "easypay!KICCTEST"
+  secret-key: "easypay!ldGep18e"
