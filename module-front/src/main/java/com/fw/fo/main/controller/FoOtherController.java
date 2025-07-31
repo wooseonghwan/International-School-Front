@@ -1,6 +1,7 @@
 package com.fw.fo.main.controller;
 
 import com.fw.core.code.ResponseCode;
+import com.fw.core.dto.fo.FoMenuDTO;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
 import com.fw.core.dto.fo.FoUserDTO;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -27,11 +29,19 @@ public class FoOtherController {
     private final FoOtherService foOtherService;
 
     @GetMapping({ "/fo/menu" })
-    public String menu(ModelMap modelMap) {
+    public String menu(ModelMap model, FoMenuDTO foMenuDTO) {
+        model.addAttribute("detail1", foOtherService.selectMenuFileDetail1(foMenuDTO));
+        model.addAttribute("detail2", foOtherService.selectMenuFileDetail2(foMenuDTO));
+        model.addAttribute("detail3", foOtherService.selectMenuFileDetail3(foMenuDTO));
+        model.addAttribute("detail4", foOtherService.selectMenuFileDetail4(foMenuDTO));
         return "fo/menu";
     }
     @GetMapping({ "/fo/menu-en" })
-    public String menuEn(ModelMap modelMap) {
+    public String menuEn(ModelMap model, FoMenuDTO foMenuDTO) {
+        model.addAttribute("detail1", foOtherService.selectMenuFileDetail1(foMenuDTO));
+        model.addAttribute("detail2", foOtherService.selectMenuFileDetail2(foMenuDTO));
+        model.addAttribute("detail3", foOtherService.selectMenuFileDetail3(foMenuDTO));
+        model.addAttribute("detail4", foOtherService.selectMenuFileDetail4(foMenuDTO));
         return "fo/menu-en";
     }
     @GetMapping({ "/fo/notice-board" })

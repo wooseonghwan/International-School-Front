@@ -10,66 +10,150 @@
                     and finger foods for events, and even simple snacks.</p>
             </div>
             <div class="menu-list">
-                <div class="menu-content">
-                    <div class="title">
-                        <div class="dot-box">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                <th:block th:if="${detail1 != null}">
+                    <div class="menu-content"
+                         th:onclick="|location.href='@{${detail1.fileUrl}}'|"
+                         style="cursor: pointer;">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Monthly Menu</p>
                         </div>
-                        <p>Monthly Menu</p>
-                    </div>
-                    <div class="img">
-                        <img src="/static/images/banner-01.svg" alt=""/>
-                    </div>
-                    <button type="button" class="move-arrow">
-                        <i class="icon-menu-arrow"></i>
-                    </button>
-                </div>
-                <div class="menu-content">
-                    <div class="title">
-                        <div class="dot-box">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                        <div class="img">
+                            <img src="/static/images/banner-01.svg" alt=""/>
                         </div>
-                        <p>Catering Menu</p>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
                     </div>
-                    <div class="img">
-                        <img src="/static/images/banner-02.svg" alt=""/>
-                    </div>
-                    <button type="button" class="move-arrow">
-                        <i class="icon-menu-arrow"></i>
-                    </button>
-                </div>
-                <div class="menu-content">
-                    <div class="title">
-                        <div class="dot-box">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                </th:block>
+                <th:block th:if="${detail1 == null}">
+                    <div class="menu-content">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Monthly Menu</p>
                         </div>
-                        <p>Finger Food Menu</p>
-                    </div>
-                    <div class="img">
-                        <img src="/static/images/banner-03.svg" alt=""/>
-                    </div>
-                    <button type="button" class="move-arrow">
-                        <i class="icon-menu-arrow"></i>
-                    </button>
-                </div>
-                <div class="menu-content">
-                    <div class="title">
-                        <div class="dot-box">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                        <div class="img">
+                            <img src="/static/images/banner-01.svg" alt=""/>
                         </div>
-                        <p>Snacks & Prices</p>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
                     </div>
-                    <div class="img">
-                        <img src="/static/images/banner-04.svg" alt=""/>
+                </th:block>
+                <th:block th:if="${detail2 != null}">
+                    <div class="menu-content"
+                         th:onclick="|location.href='@{${detail2.fileUrl}}'|"
+                         style="cursor: pointer;">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Catering Menu</p>
+                        </div>
+                        <div class="img">
+                            <img src="/static/images/banner-02.svg" alt=""/>
+                        </div>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
                     </div>
-                    <button type="button" class="move-arrow">
-                        <i class="icon-menu-arrow"></i>
-                    </button>
-                </div>
+                </th:block>
+                <th:block th:if="${detail2 == null}">
+                    <div class="menu-content">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Catering Menu</p>
+                        </div>
+                        <div class="img">
+                            <img src="/static/images/banner-02.svg" alt=""/>
+                        </div>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
+                    </div>
+                </th:block>
+                <th:block th:if="${detail3 != null}">
+                    <div class="menu-content"
+                         th:onclick="|location.href='@{${detail3.fileUrl}}'|"
+                         style="cursor: pointer;">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Finger Food Menu</p>
+                        </div>
+                        <div class="img">
+                            <img src="/static/images/banner-03.svg" alt=""/>
+                        </div>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
+                    </div>
+                </th:block>
+                <th:block th:if="${detail3 == null}">
+                    <div class="menu-content">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Finger Food Menu</p>
+                        </div>
+                        <div class="img">
+                            <img src="/static/images/banner-03.svg" alt=""/>
+                        </div>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
+                    </div>
+                </th:block>
+                <th:block th:if="${detail4 != null}">
+                    <div class="menu-content"
+                         th:onclick="|location.href='@{${detail4.fileUrl}}'|"
+                         style="cursor: pointer;">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Snacks & Prices</p>
+                        </div>
+                        <div class="img">
+                            <img src="/static/images/banner-04.svg" alt=""/>
+                        </div>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
+                    </div>
+                </th:block>
+                <th:block th:if="${detail4 == null}">
+                    <div class="menu-content">
+                        <div class="title">
+                            <div class="dot-box">
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                            <p>Snacks & Prices</p>
+                        </div>
+                        <div class="img">
+                            <img src="/static/images/banner-04.svg" alt=""/>
+                        </div>
+                        <button type="button" class="move-arrow">
+                            <i class="icon-menu-arrow"></i>
+                        </button>
+                    </div>
+                </th:block>
             </div>
         </div>
     </div>

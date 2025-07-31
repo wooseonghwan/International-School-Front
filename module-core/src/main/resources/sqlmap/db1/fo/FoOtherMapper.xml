@@ -337,4 +337,68 @@
         SET webPw = #{webPw}
         WHERE custNo = #{custNo}
     </update>
+    <select id="selectMenuFileDetail1" resultType="FoMenuDTO">
+        SELECT tm.FILE_ORDER AS fileOrder,
+               tm.FILE_SEQ   AS fileSeq,
+               tf.FILE_NM    AS fileName,
+               tf.FILE_URL   AS fileUrl
+        FROM T_MENU tm
+                 INNER JOIN T_FILE tf ON tf.FILE_ID = tm.FILE_SEQ
+        WHERE tm.FILE_ORDER = 1
+          AND tf.CREATE_DT = (
+            SELECT MAX(tf2.CREATE_DT)
+            FROM T_MENU tm2
+                     INNER JOIN T_FILE tf2 ON tf2.FILE_ID = tm2.FILE_SEQ
+            WHERE tm2.FILE_ORDER = 1
+        )
+            LIMIT 1;
+    </select>
+    <select id="selectMenuFileDetail2" resultType="FoMenuDTO">
+        SELECT tm.FILE_ORDER AS fileOrder,
+               tm.FILE_SEQ   AS fileSeq,
+               tf.FILE_NM    AS fileName,
+               tf.FILE_URL   AS fileUrl
+        FROM T_MENU tm
+                 INNER JOIN T_FILE tf ON tf.FILE_ID = tm.FILE_SEQ
+        WHERE tm.FILE_ORDER = 2
+          AND tf.CREATE_DT = (
+            SELECT MAX(tf2.CREATE_DT)
+            FROM T_MENU tm2
+                     INNER JOIN T_FILE tf2 ON tf2.FILE_ID = tm2.FILE_SEQ
+            WHERE tm2.FILE_ORDER = 2
+        )
+            LIMIT 1;
+    </select>
+    <select id="selectMenuFileDetail3" resultType="FoMenuDTO">
+        SELECT tm.FILE_ORDER AS fileOrder,
+               tm.FILE_SEQ   AS fileSeq,
+               tf.FILE_NM    AS fileName,
+               tf.FILE_URL   AS fileUrl
+        FROM T_MENU tm
+                 INNER JOIN T_FILE tf ON tf.FILE_ID = tm.FILE_SEQ
+        WHERE tm.FILE_ORDER = 3
+          AND tf.CREATE_DT = (
+            SELECT MAX(tf2.CREATE_DT)
+            FROM T_MENU tm2
+                     INNER JOIN T_FILE tf2 ON tf2.FILE_ID = tm2.FILE_SEQ
+            WHERE tm2.FILE_ORDER = 3
+        )
+            LIMIT 1;
+    </select>
+    <select id="selectMenuFileDetail4" resultType="FoMenuDTO">
+        SELECT tm.FILE_ORDER AS fileOrder,
+               tm.FILE_SEQ   AS fileSeq,
+               tf.FILE_NM    AS fileName,
+               tf.FILE_URL   AS fileUrl
+        FROM T_MENU tm
+                 INNER JOIN T_FILE tf ON tf.FILE_ID = tm.FILE_SEQ
+        WHERE tm.FILE_ORDER = 4
+          AND tf.CREATE_DT = (
+            SELECT MAX(tf2.CREATE_DT)
+            FROM T_MENU tm2
+                     INNER JOIN T_FILE tf2 ON tf2.FILE_ID = tm2.FILE_SEQ
+            WHERE tm2.FILE_ORDER = 4
+        )
+            LIMIT 1;
+    </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.fw.fo.main.service;
 
+import com.fw.core.dto.fo.FoMenuDTO;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
 import com.fw.core.mapper.db1.fo.FoOtherMapper;
@@ -75,5 +76,21 @@ public class FoOtherService {
     }
     public void updatePassword(String custNo, String newPw) {
         foOtherMapper.updatePasswordByWebId(custNo, newPw);
+    }
+    public List<FoMenuDTO> selectMenuFileList() {
+        return foOtherMapper.selectMenuFileList();
+    }
+
+    public FoMenuDTO selectMenuFileDetail1(FoMenuDTO foMenuDTO){
+        return foOtherMapper.selectMenuFileDetail1(foMenuDTO);
+    }
+    public FoMenuDTO selectMenuFileDetail2(FoMenuDTO foMenuDTO){
+        return foOtherMapper.selectMenuFileDetail2(foMenuDTO);
+    }
+    public FoMenuDTO selectMenuFileDetail3(FoMenuDTO foMenuDTO){
+        return foOtherMapper.selectMenuFileDetail3(foMenuDTO);
+    }
+    public FoMenuDTO selectMenuFileDetail4(FoMenuDTO foMenuDTO){
+        return foOtherMapper.selectMenuFileDetail4(foMenuDTO);
     }
 }

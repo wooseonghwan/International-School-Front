@@ -1,5 +1,6 @@
 package com.fw.core.mapper.db1.fo;
 
+import com.fw.core.dto.fo.FoMenuDTO;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,4 +30,9 @@ public interface FoOtherMapper {
     FoNoticeDTO selectNoticeDetail(String noticeId);
     FoNoticeDTO selectNoticeDetailEn(String noticeId);
     void updatePasswordByWebId(@Param("custNo") String custNo, @Param("webPw") String webPw);
+    List<FoMenuDTO> selectMenuFileList();
+    FoMenuDTO selectMenuFileDetail1(FoMenuDTO foMenuDTO);
+    FoMenuDTO selectMenuFileDetail2(FoMenuDTO foMenuDTO);
+    FoMenuDTO selectMenuFileDetail3(FoMenuDTO foMenuDTO);
+    FoMenuDTO selectMenuFileDetail4(FoMenuDTO foMenuDTO);
 }
