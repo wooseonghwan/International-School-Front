@@ -1,5 +1,6 @@
 package com.fw.fo.main.service;
 
+import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoPaymentDTO;
 import com.fw.core.dto.fo.FoPaymentDescDTO;
 import com.fw.core.dto.kicc.*;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -147,5 +149,17 @@ public class FoPaymentService {
             return "FAIL";
         }
         return resultCode;
+    }
+    public List<FoPaymentDTO> selectPaymentChargeList(FoPaymentDTO foPaymentDTO){
+        return foPaymentMapper.selectPaymentChargeList(foPaymentDTO);
+    }
+    public int selectPaymentChargeListCnt(FoPaymentDTO foPaymentDTO){
+        return foPaymentMapper.selectPaymentChargeListCnt(foPaymentDTO);
+    }
+    public List<FoPaymentDTO> selectPaymentUseList(FoPaymentDTO foPaymentDTO){
+        return foPaymentMapper.selectPaymentUseList(foPaymentDTO);
+    }
+    public int selectPaymentUseListCnt(FoPaymentDTO foPaymentDTO){
+        return foPaymentMapper.selectPaymentUseListCnt(foPaymentDTO);
     }
 }

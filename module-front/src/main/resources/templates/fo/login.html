@@ -53,20 +53,12 @@
                                 <p class="form-title">*이름</p>
                                 <input type="text" class="form-control form-lg" placeholder="" />
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> 이름이 일치하지 않습니다. 다시
-                          시도해주세요.
-                        </div> -->
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*카드 아이디 번호</p>
                                 <input type="text" class="form-control form-lg" placeholder="" />
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> 카드 아이디가 일치하지 않습니다. 다시
-                          시도해주세요.
-                        </div> -->
                         </div>
                     </div>
                 </div>
@@ -119,30 +111,18 @@
                                 <p class="form-title">*아이디</p>
                                 <input type="text" class="form-control form-lg" placeholder="" />
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> 아이디가 일치하지 않습니다. 다시
-                          시도해주세요.
-                        </div> -->
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*이름</p>
                                 <input type="text" class="form-control form-lg" placeholder="" />
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> 이름이 일치하지 않습니다. 다시
-                          시도해주세요.
-                        </div> -->
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*카드 아이디 번호</p>
                                 <input type="text" class="form-control form-lg" placeholder="" />
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> 카드 아이디가 일치하지 않습니다. 다시
-                          시도해주세요.
-                        </div> -->
                         </div>
                     </div>
                 </div>
@@ -180,30 +160,58 @@
         </div>
     </div>
     <script>
-        $('[data-role="login"]').on('click', function () {
-            const webId = $.trim($('input[name="webId"]').val());
-            const webPw = $.trim($('input[name="webPw"]').val());
+        $(document).ready(function () {
+            const $webIdInput = $('input[name="webId"]');
+            const $webPwInput = $('input[name="webPw"]');
+            const $saveIdCheckbox = $('#flexRadioDefault1');
 
-            if (!webId || !webPw) {
-                alert('아이디와 비밀번호를 모두 입력해주세요.');
-                return;
+            // 1. 저장된 아이디 불러오기 (sessionStorage)
+            const savedId = sessionStorage.getItem('savedWebId');
+            if (savedId) {
+                $webIdInput.val(savedId);
+                $saveIdCheckbox.prop('checked', true);
             }
 
-            $.ajax({
-                url: '/fo/login-check',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ webId, webPw }),
-                success: function (res) {
-                    if (res.result === true) {
-                        location.href = '/fo/main1'; // 로그인 후 이동할 경로
-                    } else {
-                        alert(res.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
-                    }
-                },
-                error: function () {
-                    alert('로그인 중 오류가 발생했습니다.');
+            // 2. Enter 키로 로그인
+            $('.sign-form input').on('keyup', function (e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    $('[data-role="login"]').click();
                 }
+            });
+
+            // 3. 로그인 처리
+            $('[data-role="login"]').on('click', function () {
+                const webId = $.trim($webIdInput.val());
+                const webPw = $.trim($webPwInput.val());
+
+                if (!webId || !webPw) {
+                    alert('아이디와 비밀번호를 모두 입력해주세요.');
+                    return;
+                }
+
+                // 아이디 저장 처리 (sessionStorage)
+                if ($saveIdCheckbox.is(':checked')) {
+                    sessionStorage.setItem('savedWebId', webId);
+                } else {
+                    sessionStorage.removeItem('savedWebId');
+                }
+
+                $.ajax({
+                    url: '/fo/login-check',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ webId, webPw }),
+                    success: function (res) {
+                        if (res.result === true) {
+                            location.href = '/fo/main1';
+                        } else {
+                            alert(res.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
+                        }
+                    },
+                    error: function () {
+                        alert('로그인 중 오류가 발생했습니다.');
+                    }
+                });
             });
         });
     </script>

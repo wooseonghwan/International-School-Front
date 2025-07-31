@@ -76,4 +76,66 @@
              , NOW()
         )
     </insert>
+    <select id="selectPaymentChargeList" parameterType="FoPaymentDTO" resultType="FoPaymentDTO">
+        SELECT fDate
+             , date_format(cDate, '%H:%i:%s') as createDt
+             , amnt
+            FROM mkt_tb
+        <where>
+            gbn = 'CHARGE' and custNo = #{custNo} and rtn = '01'
+            <if test="searchStart != null and searchStart != ''">
+                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+            </if>
+            <if test="searchEnd != null and searchEnd != ''">
+                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+            </if>
+        </where>
+        ORDER BY cDate DESC
+    </select>
+    <select id="selectPaymentChargeListCnt" resultType="int" parameterType="FoPaymentDTO">
+        SELECT COUNT(*)
+        FROM mkt_tb
+        <where>
+            gbn = 'CHARGE' and custNo = #{custNo} and rtn = '01'
+            <if test="searchStart != null and searchStart != ''">
+                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+            </if>
+            <if test="searchEnd != null and searchEnd != ''">
+                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPaymentUseList" parameterType="FoPaymentDTO" resultType="FoPaymentDTO">
+        SELECT fDate
+             , date_format(cDate, '%H:%i:%s') as createDt
+             , gbn
+             , amnt
+             , balance
+             , menuNm
+            FROM mkt_desc_tb
+        <where>
+            custNo = #{custNo} and rtn = '01'
+            <if test="searchStart != null and searchStart != ''">
+                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+            </if>
+            <if test="searchEnd != null and searchEnd != ''">
+                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+            </if>
+        </where>
+        ORDER BY cDate DESC
+    </select>
+    <select id="selectPaymentUseListCnt" resultType="int" parameterType="FoPaymentDTO">
+        SELECT COUNT(*)
+        FROM mkt_desc_tb
+        <where>
+            custNo = #{custNo} and rtn = '01'
+            <if test="searchStart != null and searchStart != ''">
+                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+            </if>
+            <if test="searchEnd != null and searchEnd != ''">
+                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+            </if>
+        </where>
+    </select>
 </mapper>

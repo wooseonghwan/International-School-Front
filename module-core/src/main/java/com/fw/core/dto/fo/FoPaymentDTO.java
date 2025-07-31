@@ -24,4 +24,7 @@ public class FoPaymentDTO extends CommonDTO {
     private String menuNm;
     private String syncDate;
     private String bigo;
+    private String createDt;
+    private String searchStart;
+    private String searchEnd;
 }

@@ -1,6 +1,7 @@
 package com.fw.fo.main.controller;
 
 import com.fw.core.code.ResponseCode;
+import com.fw.core.dto.fo.FoPaymentDTO;
 import com.fw.core.dto.fo.FoUserDTO;
 import com.fw.core.dto.kicc.KiccTransactionCallbackDTO;
 import com.fw.core.dto.kicc.KiccTransactionDTO;
@@ -48,34 +49,66 @@ public class FoPaymentController {
     }
 
     @GetMapping({ "/fo/lunch-payment-history" })
-    public String lunchPaymentHist(ModelMap modelMap, HttpSession session) {
-        if (session.getAttribute("loginUser") == null) {
+    public String lunchPaymentHist(ModelMap model, HttpSession session, FoPaymentDTO foPaymentDTO) {
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
             return "redirect:/fo/login";
         }
+        foPaymentDTO.setCustNo(loginUser.getCustNo());
+        int total = foPaymentService.selectPaymentChargeListCnt(foPaymentDTO);
+        foPaymentDTO.setTotalCount(total);
+        foPaymentDTO.calculatePaging();
+        model.addAttribute("paymentChargeList", foPaymentService.selectPaymentChargeList(foPaymentDTO));
+        model.addAttribute("totalCount", foPaymentService.selectPaymentChargeListCnt(foPaymentDTO));
+        model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/lunch-payment-history";
     }
 
     @GetMapping({ "/fo/lunch-payment-history-en" })
-    public String lunchPaymentHistEn(ModelMap modelMap, HttpSession session) {
-        if (session.getAttribute("loginUser") == null) {
+    public String lunchPaymentHistEn(ModelMap model, HttpSession session, FoPaymentDTO foPaymentDTO) {
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
             return "redirect:/fo/login-en";
         }
+        foPaymentDTO.setCustNo(loginUser.getCustNo());
+        int total = foPaymentService.selectPaymentChargeListCnt(foPaymentDTO);
+        foPaymentDTO.setTotalCount(total);
+        foPaymentDTO.calculatePaging();
+        model.addAttribute("paymentChargeList", foPaymentService.selectPaymentChargeList(foPaymentDTO));
+        model.addAttribute("totalCount", foPaymentService.selectPaymentChargeListCnt(foPaymentDTO));
+        model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/lunch-payment-history-en";
     }
 
     @GetMapping({ "/fo/use-history" })
-    public String useHist(ModelMap modelMap, HttpSession session) {
-        if (session.getAttribute("loginUser") == null) {
+    public String useHist(ModelMap model, HttpSession session, FoPaymentDTO foPaymentDTO) {
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
             return "redirect:/fo/login";
         }
+        foPaymentDTO.setCustNo(loginUser.getCustNo());
+        int total = foPaymentService.selectPaymentUseListCnt(foPaymentDTO);
+        foPaymentDTO.setTotalCount(total);
+        foPaymentDTO.calculatePaging();
+        model.addAttribute("paymentUseList", foPaymentService.selectPaymentUseList(foPaymentDTO));
+        model.addAttribute("totalCount", foPaymentService.selectPaymentUseListCnt(foPaymentDTO));
+        model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/use-history";
     }
 
     @GetMapping({ "/fo/use-history-en" })
-    public String useHistEn(ModelMap modelMap, HttpSession session) {
-        if (session.getAttribute("loginUser") == null) {
+    public String useHistEn(ModelMap model, HttpSession session, FoPaymentDTO foPaymentDTO) {
+        FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
+        if (loginUser == null) {
             return "redirect:/fo/login-en";
         }
+        foPaymentDTO.setCustNo(loginUser.getCustNo());
+        int total = foPaymentService.selectPaymentUseListCnt(foPaymentDTO);
+        foPaymentDTO.setTotalCount(total);
+        foPaymentDTO.calculatePaging();
+        model.addAttribute("paymentUseList", foPaymentService.selectPaymentUseList(foPaymentDTO));
+        model.addAttribute("totalCount", foPaymentService.selectPaymentUseListCnt(foPaymentDTO));
+        model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/use-history-en";
     }
 

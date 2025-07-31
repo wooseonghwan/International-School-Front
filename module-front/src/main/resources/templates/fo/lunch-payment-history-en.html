@@ -7,18 +7,20 @@
             <div class="payment-wrap">
                 <div class="payment-head">
                     <p class="title">Charge Breakdown</p>
-                    <div class="daterange-wrap">
-                        <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date"/>
-                        <div class="hyphen"></div>
-                        <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date"/>
-                        <button type="button" class="btn btn-dark">Search</button>
-                    </div>
+                    <form name="searchForm">
+                        <div class="daterange-wrap">
+                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart"/>
+                            <div class="hyphen"></div>
+                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd"/>
+                            <button type="button" class="btn btn-dark" data-role="btn-search-form">Search</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="table-container">
                     <div class="table-top">
                         <div class="d-flex align-items-center gap-3">
                             <p class="table-top-title">Total Payment Records</p>
-                            <p class="table-top-desc">Total <span>26</span></p>
+                            <p class="table-top-desc">Total <span th:text="${searchInfo.totalCount}">26</span></p>
                         </div>
                     </div>
                     <table class="table border-table payment">
@@ -35,151 +37,64 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center">
-                                <p class="">2025-06-30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>10:18:30</p>
-                            </td>
-                            <td class="text-center">
-                                <p>91,100</p>
-                            </td>
-                        </tr>
+                            <th:block th:if="${#lists.isEmpty(paymentChargeList)}">
+                                <tr>
+                                    <td colspan="6" class="text-center">There is no history.</td>
+                                </tr>
+                            </th:block>
+                            <tr th:each="list : ${paymentChargeList}">
+                                <td class="text-center" th:text="${list.fDate}">
+                                    <p class="">2025-06-30</p>
+                                </td>
+                                <td class="text-center" th:text="${list.createDt}">
+                                    <p>10:18:30</p>
+                                </td>
+                                <td class="text-center" th:text="${list.amnt}">
+                                    <p>91,100</p>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
-                    <nav>
+                    <nav th:if="${searchInfo.totalPage != null and searchInfo.totalPage >= 1}">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="First">
+                            <!-- 첫 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/lunch-payment-history-en(page=1, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="First">
                                     <i class="icon-pagination-first"></i>
                                 </a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
+                            <!-- 이전 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == 1} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/lunch-payment-history-en(page=${searchInfo.page - 1}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Previous">
                                     <i class="icon-pagination-prev"></i>
                                 </a>
                             </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+                            <!-- 페이지 번호 -->
+                            <li class="page-item"
+                                th:each="i : ${#numbers.sequence(searchInfo.startPage, searchInfo.endPage)}"
+                                th:classappend="${i == searchInfo.page} ? 'active' : ''"
+                                th:attr="aria-current=${i == searchInfo.page ? 'page' : null}">
+                                <a class="page-link"
+                                   th:href="@{/fo/lunch-payment-history-en(page=${i}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   th:text="${i}">1</a>
+                            </li>
+                            <!-- 다음 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == searchInfo.totalPage} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/lunch-payment-history-en(page=${searchInfo.page + 1}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Next">
                                     <i class="icon-pagination-next"></i>
                                 </a>
                             </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Last">
+                            <!-- 마지막 페이지 -->
+                            <li class="page-item" th:classappend="${searchInfo.page == searchInfo.totalPage} ? 'disabled'">
+                                <a class="page-link"
+                                   th:href="@{/fo/lunch-payment-history-en(page=${searchInfo.totalPage}, searchType=${searchInfo.searchType}, searchValue=${searchInfo.searchValue})}"
+                                   aria-label="Last">
                                     <i class="icon-pagination-last"></i>
                                 </a>
                             </li>
