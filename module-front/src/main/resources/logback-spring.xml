@@ -14,8 +14,8 @@
         <include resource="config/logback/logback-dev.xml" />
     </springProfile>
     
-    <springProfile name="prod">
-        <include resource="config/logback/logback-prod.xml" />
+    <springProfile name="real">
+        <include resource="config/logback/logback-real.xml" />
     </springProfile>
 
 </configuration>
