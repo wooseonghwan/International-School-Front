@@ -12,4 +12,8 @@ public class KiccTransactionApprovalResDTO {
     private String resMsg;
     // 총 결제금액
     private int amount;
+    // 가맹점 트랜젝션ID
+    private String shopTransactionId;
+    // PG 승인거래번호
+    private String pgCno;
 }

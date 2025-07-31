@@ -18,4 +18,6 @@ public class KiccTransactionCallbackDTO {
     private String shopValue1;
     // 필드2, 결제등록 요청 시 전달받은 값 - 언어
     private String shopValue2;
+    // 필드3, 결제등록 요청 시 전달받은 값 - 사이트 내 결제금액
+    private String shopValue3;
 }

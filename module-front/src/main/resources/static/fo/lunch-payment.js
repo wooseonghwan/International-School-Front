@@ -30,7 +30,8 @@ $(() => {
             },
             shopValueInfo: {
                 value1: $('input[name=custNo]').data('value'),
-                value2: "KOR"
+                value2: "KOR",
+                value3: amount
             }
         };
 

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -118,6 +120,12 @@ public class FoPaymentController {
     public ResponseEntity<ResponseVO> paymentKiccTransaction(@RequestBody KiccTransactionDTO kiccTransactionDTO, HttpServletRequest request) {
         ResponseCode code = ResponseCode.SUCCESS;
         try {
+            // 결제 가능한 금액 리스트
+            List<Integer> validAmounts = Arrays.asList(10000, 20000, 30000);
+            // 결제 금액 유효성 검증 실패 시
+            if (!validAmounts.contains(kiccTransactionDTO.getAmount())) {
+                return ResponseEntity.status(code.getHttpStatus()).body(ResponseVO.builder(code).message("INVALID_AMOUNT").build());
+            }
             // 결제고객 단말구분
             kiccTransactionDTO.setDeviceTypeCode(KiccUtil.getDeviceType(request));
             // 거래등록
