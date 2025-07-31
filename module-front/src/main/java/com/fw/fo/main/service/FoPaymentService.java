@@ -138,6 +138,24 @@ public class FoPaymentService {
             return "FAIL";
         }
 
+        // 관리자 처리용 취소 페이로드 로그
+        String shopTransactionIdForCancel = KiccUtil.generateShopTransactionId();
+        log.info("[Transaction Cancel Payload] {}", String.format(
+                "{\n" +
+                        "    \"mallId\": \"%s\",\n" +
+                        "    \"shopTransactionId\": \"%s\",\n" +
+                        "    \"pgCno\": \"%s\",\n" +
+                        "    \"reviseTypeCode\": \"40\",\n" +
+                        "    \"cancelReqDate\": \"%s\",\n" +
+                        "    \"msgAuthValue\": \"%s\"\n" +
+                        "}",
+                KICC_MID,
+                shopTransactionIdForCancel,
+                kiccTransactionApprovalRes.getPgCno(),
+                today,
+                KiccUtil.generateHmac(String.format("%s|%s", kiccTransactionApprovalRes.getPgCno(), shopTransactionIdForCancel), KICC_SECRET_KEY)
+        ));
+
         // =================================================
         //     승인 정상 처리 이후 결제 요청 금액 <-> 승인 금액 비교
         // =================================================
