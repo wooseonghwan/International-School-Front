@@ -32,5 +32,10 @@ public class FoMainService {
     public FoUserDTO getCardInfo(String cardId) {
         return foMainMapper.selectCardInfo(cardId);
     }
-
+    public FoUserDTO findWebIdByNameAndCardId(FoUserDTO dto) {
+        return foMainMapper.selectWebIdByNameAndCardId(dto);
+    }
+    public FoUserDTO findPassword(FoUserDTO dto) {
+        return foMainMapper.findPassword(dto);
+    }
 }

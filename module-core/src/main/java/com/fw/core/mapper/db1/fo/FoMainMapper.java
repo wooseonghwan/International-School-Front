@@ -15,4 +15,6 @@ public interface FoMainMapper {
     int updateUserByCustNo(FoUserDTO foUserDTO);
     FoUserDTO selectUserByCredentials(FoUserDTO foUserDTO);
     FoUserDTO selectCardInfo(String cardId);
+    FoUserDTO selectWebIdByNameAndCardId(FoUserDTO dto);
+    FoUserDTO findPassword(FoUserDTO dto);
 }

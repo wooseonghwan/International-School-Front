@@ -53,26 +53,20 @@
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*Name</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="custName"/>
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> Name does not match. Please try again.
-                        </div> -->
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*Card ID number</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="cardId"/>
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> Card ID does not match. Please try again.
-                        </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-columns">
-                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">Confirm</button>
+                        <button type="button" class="btn btn-lg btn-primary" data-role="findId" style="background-color: #ff974d;">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -91,13 +85,13 @@
                     <div class="sign-form">
                         <div class="success-form">
                             <p class="title">ID</p>
-                            <p class="result-txt">kljsfkjlksj</p>
+                            <p class="result-txt" id="foundWebId">kljsfkjlksj</p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-columns">
-                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">Confirm</button>
+                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="close-success-modal">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -117,35 +111,26 @@
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*ID</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="webId"/>
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> ID does not match. Please try again.
-                        </div> -->
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*Name</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="custName" />
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> Name does not match. Please try again.
-                        </div> -->
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*Card ID number</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="cardId"/>
                             </div>
-                            <!-- <div class="invalid-feedback">
-                          <i class="icon-error"></i> Card ID does not match. Please try again.
-                        </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-columns">
-                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">Confirm</button>
+                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="findPw">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -164,7 +149,7 @@
                     <div class="sign-form">
                         <div class="success-form">
                             <p class="title">Password</p>
-                            <p class="result-txt">kljsfkjlksj</p>
+                            <p class="result-txt" id="webPw">kljsfkjlksj</p>
                         </div>
                     </div>
                 </div>
@@ -178,31 +163,140 @@
     </div>
 
     <script>
-        $('[data-role="login"]').on('click', function () {
-            const webId = $.trim($('input[name="webId"]').val());
-            const webPw = $.trim($('input[name="webPw"]').val());
+        $(document).ready(function () {
+            const $webIdInput = $('input[name="webId"]');
+            const $webPwInput = $('input[name="webPw"]');
+            const $saveIdCheckbox = $('#flexRadioDefault1');
 
-            if (!webId || !webPw) {
-                alert('Please enter both your ID and password.');
+            // 1. 저장된 아이디 불러오기 (sessionStorage)
+            const savedId = sessionStorage.getItem('savedWebId');
+            if (savedId) {
+                $webIdInput.val(savedId);
+                $saveIdCheckbox.prop('checked', true);
+            }
+
+            // 2. Enter 키로 로그인
+            $('.sign-form input').on('keyup', function (e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    $('[data-role="login"]').click();
+                }
+            });
+
+            // 3. 로그인 처리
+            $('[data-role="login"]').on('click', function () {
+                const webId = $.trim($webIdInput.val());
+                const webPw = $.trim($webPwInput.val());
+
+                if (!webId || !webPw) {
+                    alert('Please enter both ID and password.');
+                    return;
+                }
+
+                // 아이디 저장 처리 (sessionStorage)
+                if ($saveIdCheckbox.is(':checked')) {
+                    sessionStorage.setItem('savedWebId', webId);
+                } else {
+                    sessionStorage.removeItem('savedWebId');
+                }
+
+                $.ajax({
+                    url: '/fo/login-check',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ webId, webPw }),
+                    success: function (res) {
+                        if (res.result === true) {
+                            location.href = '/fo/main1';
+                        } else {
+                            alert(res.message || 'Incorrect ID or password.');
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred during login.');
+                    }
+                });
+            });
+        });
+        // 아이디 찾기
+        $('button[data-role=findId]').on('click', function () {
+            const custName = $('#modal-find-id input[name="custName"]').val().trim();
+            const cardId = $('#modal-find-id input[name="cardId"]').val().trim();
+
+            if (!custName || !cardId) {
+                alert('Please enter both name and card ID.');
                 return;
             }
 
             $.ajax({
-                url: '/fo/login-check',
+                url: '/fo/find-web-id',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ webId, webPw }),
+                data: JSON.stringify({ custName, cardId }),
                 success: function (res) {
-                    if (res.result === true) {
-                        location.href = '/fo/main1-en'; // 로그인 후 이동할 경로
+                    if (res.webId) {
+                        // 아이디 표시 텍스트에 삽입
+                        $('#foundWebId').text(res.webId);
+
+                        // 기존 모달 닫기, 결과 모달 열기
+                        $('#modal-find-id').modal('hide');
+                        $('#modal-id-success').modal('show');
                     } else {
-                        alert(res.message || 'The ID or password you entered is incorrect.');
+                        alert('No matching user information found.');
                     }
                 },
                 error: function () {
-                    alert('An error occurred during login. Please try again.');
+                    alert('An error occurred while trying to find the ID.');
                 }
             });
+        });
+        // 아이디 찾기 모달 닫힐 때: 입력값 초기화
+        $('#modal-find-id').on('hidden.bs.modal', function () {
+            $(this).find('input[type="text"]').val('');
+        });
+        $('[data-role="close-success-modal"]').on('click', function () {
+            $('#modal-id-success').modal('hide');
+        });
+        // 아이디 찾기 결과 모달 닫힐 때: 결과 텍스트 초기화
+        $('#modal-id-success').on('hidden.bs.modal', function () {
+            $('#foundWebId').text('');
+        });
+        // 비밀번호 찾기
+        $('button[data-role=findPw]').on('click', function () {
+            const webId = $('#modal-find-pw input[name="webId"]').val().trim();
+            const custName = $('#modal-find-pw input[name="custName"]').val().trim();
+            const cardId = $('#modal-find-pw input[name="cardId"]').val().trim();
+
+            if (!webId || !custName || !cardId) {
+                alert('Please enter ID, name, and card ID.');
+                return;
+            }
+
+            $.ajax({
+                url: '/fo/find-password',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ webId, custName, cardId }),
+                success: function (res) {
+                    if (res.webPw) {
+                        $('#modal-pw-success .result-txt').text(res.webPw);
+
+                        $('#modal-find-pw input[name="webId"]').val('');
+                        $('#modal-find-pw input[name="custName"]').val('');
+                        $('#modal-find-pw input[name="cardId"]').val('');
+
+                        $('#modal-find-pw').modal('hide');
+                        $('#modal-pw-success').modal('show');
+                    } else {
+                        alert('No matching user information found.');
+                    }
+                },
+                error: function () {
+                    alert('An error occurred while trying to find the password.');
+                }
+            });
+        });
+        $('#modal-pw-success button.btn-primary').on('click', function () {
+            $('#modal-pw-success').modal('hide');
         });
     </script>
 </div>

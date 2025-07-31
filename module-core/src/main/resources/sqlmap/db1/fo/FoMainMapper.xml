@@ -35,4 +35,16 @@
         FROM user_tb
         WHERE cardId = #{cardId}
     </select>
+
+    <select id="selectWebIdByNameAndCardId" parameterType="FoUserDTO" resultType="FoUserDTO">
+        SELECT webId
+        FROM user_tb
+        WHERE custName = #{custName} AND cardId = #{cardId}
+    </select>
+
+    <select id="findPassword" parameterType="FoUserDTO" resultType="FoUserDTO">
+        SELECT webPw
+        FROM user_tb
+        WHERE webId = #{webId} AND custName = #{custName} AND cardId = #{cardId}
+    </select>
 </mapper>

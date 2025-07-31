@@ -133,4 +133,26 @@ public class FoMainController {
 	public String signupEn() {
 		return "fo/signup-en";
 	}
+	// 아이디 찾기
+	@PostMapping("/fo/find-web-id")
+	@ResponseBody
+	public Map<String, Object> findWebId(@RequestBody FoUserDTO dto) {
+		FoUserDTO user = foMainService.findWebIdByNameAndCardId(dto);
+		Map<String, Object> result = new HashMap<>();
+		if (user != null) {
+			result.put("webId", user.getWebId());
+		}
+		return result;
+	}
+	// 비밀번호 찾기
+	@PostMapping("/fo/find-password")
+	@ResponseBody
+	public Map<String, Object> findPassword(@RequestBody FoUserDTO dto) {
+		Map<String, Object> result = new HashMap<>();
+		FoUserDTO user = foMainService.findPassword(dto);
+		if (user != null && user.getWebPw() != null) {
+			result.put("webPw", user.getWebPw());
+		}
+		return result;
+	}
 }

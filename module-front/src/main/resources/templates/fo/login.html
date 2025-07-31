@@ -51,20 +51,20 @@
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*이름</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" name="custName" placeholder="이름을 입력해주세요" />
                             </div>
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*카드 아이디 번호</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" name="cardId" placeholder="카드 ID 번호를 입력해주세요" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-columns">
-                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">확인</button>
+                        <button type="button" class="btn btn-lg btn-primary" data-role="findId" style="background-color: #ff974d;">확인</button>
                     </div>
                 </div>
             </div>
@@ -83,13 +83,13 @@
                     <div class="sign-form">
                         <div class="success-form">
                             <p class="title">아이디</p>
-                            <p class="result-txt">kljsfkjlksj</p>
+                            <p class="result-txt" id="foundWebId"></p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-columns">
-                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">확인</button>
+                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="close-success-modal">확인</button>
                     </div>
                 </div>
             </div>
@@ -109,26 +109,26 @@
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*아이디</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="webId"/>
                             </div>
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*이름</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="custName"/>
                             </div>
                         </div>
                         <div class="form-field">
                             <div class="form-wrap">
                                 <p class="form-title">*카드 아이디 번호</p>
-                                <input type="text" class="form-control form-lg" placeholder="" />
+                                <input type="text" class="form-control form-lg" placeholder="" name="cardId"/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <div class="btn-columns">
-                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;">확인</button>
+                        <button type="button" class="btn btn-lg btn-primary" style="background-color: #ff974d;" data-role="findPw">확인</button>
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
                     <div class="sign-form">
                         <div class="success-form">
                             <p class="title">비밀번호</p>
-                            <p class="result-txt">kljsfkjlksj</p>
+                            <p class="result-txt" id="webPw">kljsfkjlksj</p>
                         </div>
                     </div>
                 </div>
@@ -213,6 +213,87 @@
                     }
                 });
             });
+        });
+        // 아이디 찾기
+        $('button[data-role=findId]').on('click', function () {
+            const custName = $('#modal-find-id input[name="custName"]').val().trim();
+            const cardId = $('#modal-find-id input[name="cardId"]').val().trim();
+
+            if (!custName || !cardId) {
+                alert('이름과 카드 ID를 모두 입력해주세요.');
+                return;
+            }
+
+            $.ajax({
+                url: '/fo/find-web-id',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ custName, cardId }),
+                success: function (res) {
+                    if (res.webId) {
+                        // 아이디 표시 텍스트에 삽입
+                        $('#foundWebId').text(res.webId);
+
+                        // 기존 모달 닫기, 결과 모달 열기
+                        $('#modal-find-id').modal('hide');
+                        $('#modal-id-success').modal('show');
+                    } else {
+                        alert('일치하는 회원 정보를 찾을 수 없습니다.');
+                    }
+                },
+                error: function () {
+                    alert('아이디 찾기 요청 중 오류가 발생했습니다.');
+                }
+            });
+        });
+        // 아이디 찾기 모달 닫힐 때: 입력값 초기화
+        $('#modal-find-id').on('hidden.bs.modal', function () {
+            $(this).find('input[type="text"]').val('');
+        });
+        $('[data-role="close-success-modal"]').on('click', function () {
+            $('#modal-id-success').modal('hide');
+        });
+        // 아이디 찾기 결과 모달 닫힐 때: 결과 텍스트 초기화
+        $('#modal-id-success').on('hidden.bs.modal', function () {
+            $('#foundWebId').text('');
+        });
+        // 비밀번호 찾기
+        $('button[data-role=findPw]').on('click', function () {
+            const webId = $('#modal-find-pw input[name="webId"]').val().trim();
+            const custName = $('#modal-find-pw input[name="custName"]').val().trim();
+            const cardId = $('#modal-find-pw input[name="cardId"]').val().trim();
+
+            if (!webId || !custName || !cardId) {
+                alert('아이디, 이름, 카드 ID를 모두 입력해주세요.');
+                return;
+            }
+
+            $.ajax({
+                url: '/fo/find-password',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ webId, custName, cardId }),
+                success: function (res) {
+                    if (res.webPw) {
+                        $('#modal-pw-success .result-txt').text(res.webPw);
+
+                        $('#modal-find-pw input[name="webId"]').val('');
+                        $('#modal-find-pw input[name="custName"]').val('');
+                        $('#modal-find-pw input[name="cardId"]').val('');
+
+                        $('#modal-find-pw').modal('hide');
+                        $('#modal-pw-success').modal('show');
+                    } else {
+                        alert('일치하는 회원 정보를 찾을 수 없습니다.');
+                    }
+                },
+                error: function () {
+                    alert('비밀번호 찾기 요청 중 오류가 발생했습니다.');
+                }
+            });
+        });
+        $('#modal-pw-success button.btn-primary').on('click', function () {
+            $('#modal-pw-success').modal('hide');
         });
     </script>
 </div>
