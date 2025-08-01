@@ -36,21 +36,27 @@ public class FoMainController {
 	 * Front 메인 페이지
 	 */
 	@GetMapping({ "/" })	
-	public String main(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO) {
+	public String main(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
+		FoUserDTO loginUser = (FoUserDTO) httpSession.getAttribute("loginUser");
+		model.addAttribute("user", loginUser);
 		model.addAttribute("noticeList", foOtherService.selectNoticeListMain(foNoticeDTO));
 		model.addAttribute("noticeBoardList", foOtherService.selectNoticeBoardListMain(foNoticeBoardDTO));
 		return "fo/main1";
 	}
 
 	@GetMapping({ "/fo/main1" })
-	public String main1(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO) {
+	public String main1(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
+		FoUserDTO loginUser = (FoUserDTO) httpSession.getAttribute("loginUser");
+		model.addAttribute("user", loginUser);
 		model.addAttribute("noticeList", foOtherService.selectNoticeListMain(foNoticeDTO));
 		model.addAttribute("noticeBoardList", foOtherService.selectNoticeBoardListMain(foNoticeBoardDTO));
 		return "fo/main1";
 	}
 
 	@GetMapping({ "/fo/main1-en" })
-	public String main1En(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO) {
+	public String main1En(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
+		FoUserDTO loginUser = (FoUserDTO) httpSession.getAttribute("loginUser");
+		model.addAttribute("user", loginUser);
 		model.addAttribute("noticeListEn", foOtherService.selectNoticeListEnMain(foNoticeDTO));
 		model.addAttribute("noticeBoardListEn", foOtherService.selectNoticeBoardListEnMain(foNoticeBoardDTO));
 		return "fo/main1-en";

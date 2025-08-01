@@ -92,6 +92,11 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
+                                    <th:block th:if="${#lists.isEmpty(noticeList)}">
+                                        <tr>
+                                            <td colspan="3" class="text-center">등록된 공지사항이 없습니다.</td>
+                                        </tr>
+                                    </th:block>
                                     <tr th:each="noticeList : ${noticeList}">
                                         <td class="text-start">
                                             <p class="text-truncate" th:text="${noticeList.title}">8월 급식 운영 일정 안내</p>
@@ -117,14 +122,33 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <tr th:each="noticeBoardList : ${noticeBoardList}">
-                                        <td class="text-start" th:text="${noticeBoardList.title}">
-                                            <p class="text-truncate">요즘 우리 아이는 이 반찬에 푹 빠졌어요 :)</p>
-                                        </td>
-                                        <td class="text-center" th:text="${noticeBoardList.createDt}">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
+                                    <th:block th:if="${user != null}">
+                                        <th:block th:if="${#lists.isEmpty(noticeBoardList)}">
+                                            <tr>
+                                                <td colspan="3" class="text-center">내역이 없습니다.</td>
+                                            </tr>
+                                        </th:block>
+                                        <tr th:each="noticeBoardList : ${noticeBoardList}">
+                                            <th:block th:if="${noticeBoardList.passwordYn == 'N'}">
+                                                <td class="text-start" th:text="${noticeBoardList.title}">
+                                                    <p class="text-truncate">요즘 우리 아이는 이 반찬에 푹 빠졌어요 :)</p>
+                                                </td>
+                                            </th:block>
+                                            <th:block th:if="${noticeBoardList.passwordYn == 'Y'}">
+                                                <td class="text-start">
+                                                    <p class="text-truncate"><i class="icon-lock"></i>비밀글 입니다.</p>
+                                                </td>
+                                            </th:block>
+                                            <td class="text-center" th:text="${noticeBoardList.createDt}">
+                                                <p class="date">2025.07.04</p>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    <th:block th:if="${user == null}">
+                                        <tr>
+                                            <td colspan="3" class="text-center">로그인 후 확인 가능합니다.</td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>

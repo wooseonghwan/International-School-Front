@@ -103,6 +103,11 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
+                                    <th:block th:if="${#lists.isEmpty(noticeListEn)}">
+                                        <tr>
+                                            <td colspan="3" class="text-center">There is no history.</td>
+                                        </tr>
+                                    </th:block>
                                     <tr th:each="noticeListEn : ${noticeListEn}">
                                         <td class="text-start" th:text="${noticeListEn.title}">
                                             <p class="text-truncate">August Meal Service Schedule</p>
@@ -128,15 +133,34 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <tr th:each="noticeBoard : ${noticeBoardListEn}">
-                                        <td class="text-start"  th:text="${noticeBoard.title}">
-                                            <p class="text-truncate">These days, my child is completely obsessed with
-                                                this side dish :)</p>
-                                        </td>
-                                        <td class="text-center" th:text="${noticeBoard.createDt}">
-                                            <p class="date">2025.07.04</p>
-                                        </td>
-                                    </tr>
+                                    <th:block th:if="${user != null}">
+                                        <th:block th:if="${#lists.isEmpty(noticeBoardListEn)}">
+                                            <tr>
+                                                <td colspan="3" class="text-center">There is no history.</td>
+                                            </tr>
+                                        </th:block>
+                                        <tr th:each="noticeBoard : ${noticeBoardListEn}">
+                                            <th:block th:if="${noticeBoard.passwordYn == 'N'}">
+                                                <td class="text-start"  th:text="${noticeBoard.title}">
+                                                    <p class="text-truncate">These days, my child is completely obsessed with
+                                                        this side dish :)</p>
+                                                </td>
+                                            </th:block>
+                                            <th:block th:if="${noticeBoard.passwordYn == 'Y'}">
+                                                <td class="text-start">
+                                                    <p class="text-truncate"><i class="icon-lock"></i>This is a secret post.</p>
+                                                </td>
+                                            </th:block>
+                                            <td class="text-center" th:text="${noticeBoard.createDt}">
+                                                <p class="date">2025.07.04</p>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    <th:block th:if="${user == null}">
+                                        <tr>
+                                            <td colspan="3" class="text-center">Please log in to view this content.</td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>

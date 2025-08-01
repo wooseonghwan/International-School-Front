@@ -28,6 +28,7 @@
         SELECT QNA_ID
              , TITLE
              , date_format(CREATE_DT, '%Y-%m-%d') as createDt
+             , PASSWORD_YN
         FROM t_qna
         ORDER BY CREATE_DT DESC
             LIMIT 3
@@ -37,6 +38,7 @@
         SELECT QNA_ID
              , TITLE
              , date_format(CREATE_DT, '%Y-%m-%d') as createDt
+             , PASSWORD_YN
         FROM t_qna
         ORDER BY CREATE_DT DESC
             LIMIT 3
@@ -256,7 +258,7 @@
              , tq.REPLY
              , tq.VIEW_CNT
              , ta.admin_nm
-             , tq.REPLY_DT
+             , date_format(tq.REPLY_DT, '%Y-%m-%d') as replyDt
              , date_format(tq.CREATE_DT, '%Y-%m-%d') as createDt
              , tu.custName
         FROM t_qna tq
@@ -271,7 +273,7 @@
              , tq.REPLY
              , tq.VIEW_CNT
              , ta.admin_nm
-             , tq.REPLY_DT
+             , date_format(tq.REPLY_DT, '%Y-%m-%d') as replyDt
              , date_format(tq.CREATE_DT, '%Y-%m-%d') as createDt
              , tu.custName
         FROM t_qna tq
