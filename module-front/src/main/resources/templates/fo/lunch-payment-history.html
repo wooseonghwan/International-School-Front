@@ -49,7 +49,7 @@
                                 <td class="text-center" th:text="${list.createDt}">
                                     <p>10:18:30</p>
                                 </td>
-                                <td class="text-center" th:text="${list.amnt}">
+                                <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 3, 'COMMA')} : '0'">
                                     <p>91,100</p>
                                 </td>
                             </tr>

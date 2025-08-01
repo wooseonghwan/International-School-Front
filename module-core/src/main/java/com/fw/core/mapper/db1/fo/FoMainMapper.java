@@ -13,7 +13,7 @@ public interface FoMainMapper {
     FoUserDTO selectUserByCardId(String cardId);
     int countByWebId(@Param("webId") String webId);
     int updateUserByCustNo(FoUserDTO foUserDTO);
-    FoUserDTO selectUserByCredentials(FoUserDTO foUserDTO);
+    FoUserDTO selectUserByWebId(String webId);
     FoUserDTO selectCardInfo(String cardId);
     FoUserDTO selectWebIdByNameAndCardId(FoUserDTO dto);
     FoUserDTO findPassword(FoUserDTO dto);

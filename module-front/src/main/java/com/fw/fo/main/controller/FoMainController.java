@@ -4,6 +4,7 @@ import com.fw.core.code.ResponseCode;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
 import com.fw.core.dto.fo.FoUserDTO;
+import com.fw.core.util.AesUtil;
 import com.fw.core.vo.ResponseVO;
 import com.fw.fo.main.service.FoMainService;
 import com.fw.fo.main.service.FoOtherService;
@@ -110,24 +111,57 @@ public class FoMainController {
 	@PostMapping("/fo/insert-user")
 	@ResponseBody
 	public ResponseEntity<ResponseVO> updateUser(@RequestBody FoUserDTO foUserDTO) {
-		boolean result = foMainService.updateUserByCustNo(foUserDTO); // ← update 방식
-		return ResponseEntity.ok(ResponseVO.builder(result ? ResponseCode.SUCCESS : ResponseCode.LOGIN_FAIL).build());
+		try {
+			// 비밀번호가 존재하면 암호화 후 설정
+			if (foUserDTO.getWebPw() != null && !foUserDTO.getWebPw().trim().isEmpty()) {
+				String encryptedPw = AesUtil.encrypt(foUserDTO.getWebPw());
+				foUserDTO.setWebPw(encryptedPw);
+			}
+			boolean result = foMainService.updateUserByCustNo(foUserDTO);
+			return ResponseEntity.ok(ResponseVO.builder(result ? ResponseCode.SUCCESS : ResponseCode.LOGIN_FAIL).build());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(ResponseVO.builder(ResponseCode.LOGIN_FAIL).message("비밀번호 암호화 실패").build());
+		}
 	}
 	@PostMapping("/fo/login-check")
 	@ResponseBody
 	public Map<String, Object> loginCheck(@RequestBody FoUserDTO foUserDTO, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
-		FoUserDTO loginUser = foMainService.login(foUserDTO);
-		// 세션에 저장
-		if (loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
-			result.put("result", true);
-		} else {
-			result.put("result", false);
-			result.put("message", "아이디 또는 비밀번호가 올바르지 않습니다.");
+		FoUserDTO userInDb = foMainService.findUserByWebId(foUserDTO.getWebId());
+
+		if (userInDb != null) {
+			String inputPw = foUserDTO.getWebPw();
+			String encryptedPwInDb = userInDb.getWebPw();
+
+			// 1. 입력값이 암호화된 상태일 경우 (그대로 비교)
+			if (inputPw.equals(encryptedPwInDb)) {
+				session.setAttribute("loginUser", userInDb);
+				result.put("result", true);
+				return result;
+			}
+			// 2. 입력값이 평문인 경우 (복호화 후 비교)
+			try {
+				String decryptedPw = AesUtil.decrypt(encryptedPwInDb);
+				if (decryptedPw.equals(inputPw)) {
+					session.setAttribute("loginUser", userInDb);
+					result.put("result", true);
+					return result;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.put("result", false);
+				result.put("message", "비밀번호 복호화 실패");
+				return result;
+			}
 		}
+
+		result.put("result", false);
+		result.put("message", "아이디 또는 비밀번호가 올바르지 않습니다.");
 		return result;
 	}
+
 	@GetMapping("/fo/logout")
 	public String logout(HttpSession session) {
 		// 세션 전체 무효화
@@ -156,8 +190,17 @@ public class FoMainController {
 	public Map<String, Object> findPassword(@RequestBody FoUserDTO dto) {
 		Map<String, Object> result = new HashMap<>();
 		FoUserDTO user = foMainService.findPassword(dto);
+
 		if (user != null && user.getWebPw() != null) {
-			result.put("webPw", user.getWebPw());
+			try {
+				String decryptedPw = AesUtil.decrypt(user.getWebPw());
+				result.put("webPw", decryptedPw);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.put("error", "비밀번호 복호화 실패");
+			}
+		} else {
+			result.put("error", "일치하는 회원이 없습니다.");
 		}
 		return result;
 	}

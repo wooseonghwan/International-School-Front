@@ -26,8 +26,8 @@ public class FoMainService {
     public boolean updateUserByCustNo(FoUserDTO foUserDTO) {
         return foMainMapper.updateUserByCustNo(foUserDTO) > 0;
     }
-    public FoUserDTO login(FoUserDTO foUserDTO) {
-        return foMainMapper.selectUserByCredentials(foUserDTO);
+    public FoUserDTO findUserByWebId(String webId) {
+        return foMainMapper.selectUserByWebId(webId);
     }
     public FoUserDTO getCardInfo(String cardId) {
         return foMainMapper.selectCardInfo(cardId);

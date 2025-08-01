@@ -22,10 +22,10 @@
         WHERE custNo = #{custNo}
     </update>
 
-    <select id="selectUserByCredentials" parameterType="FoUserDTO" resultType="FoUserDTO">
+    <select id="selectUserByWebId" parameterType="String" resultType="FoUserDTO">
         SELECT *
         FROM user_tb
-        WHERE webId = #{webId} AND webPw = #{webPw}
+        WHERE webId = #{webId}
     </select>
 
     <select id="selectCardInfo" parameterType="String" resultType="FoUserDTO">

@@ -5,6 +5,7 @@ import com.fw.core.dto.fo.FoMenuDTO;
 import com.fw.core.dto.fo.FoNoticeBoardDTO;
 import com.fw.core.dto.fo.FoNoticeDTO;
 import com.fw.core.dto.fo.FoUserDTO;
+import com.fw.core.util.AesUtil;
 import com.fw.core.vo.ResponseVO;
 import com.fw.fo.main.service.FoOtherService;
 import lombok.RequiredArgsConstructor;
@@ -155,15 +156,26 @@ public class FoOtherController {
         if (loginUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
+
         String newPw = body.get("newPw");
         if (newPw == null || newPw.trim().isEmpty()) {
             return ResponseEntity.badRequest().body("새 비밀번호가 유효하지 않습니다.");
         }
-        foOtherService.updatePassword(loginUser.getCustNo(), newPw);
-        // 세션 무효화
-        session.invalidate();
-        return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+        try {
+            // 비밀번호 AES 암호화
+            String encryptedPw = AesUtil.encrypt(newPw);
+            // 암호화된 비밀번호 저장
+            foOtherService.updatePassword(loginUser.getCustNo(), encryptedPw);
+            // 세션 무효화
+            session.invalidate();
+            return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace(); // 서버 로그 확인용
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("비밀번호 암호화 중 오류가 발생했습니다.");
+        }
     }
+
     @GetMapping({ "/fo/myinfo-en" })
     public String myinfoEn(HttpSession session, Model model, FoUserDTO foUserDTO) {
         if (session.getAttribute("loginUser") == null) {
