@@ -1,0 +1,53 @@
+name: Deploy WAR to Server
+
+on:
+  workflow_dispatch:  # 수동 트리거
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Build WAR only for module-front
+        run: ./gradlew :module-front:clean :module-front:bootWar
+
+      - name: Rename WAR to ROOT.war
+        run: mv module-front/build/libs/*.war ROOT.war
+
+      - name: Delete old WAR via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            rm -f /www/sites/web/webapps/ROOT.war
+
+      - name: Upload WAR via SCP
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "ROOT.war"
+          target: "/www/sites/web/webapps/"
+
+      - name: Run deploy.sh via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /www/sites/web
+            chmod +x deploy.sh
+            ./deploy.sh
