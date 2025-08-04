@@ -121,7 +121,7 @@ public class FoPaymentController {
         ResponseCode code = ResponseCode.SUCCESS;
         try {
             // 결제 가능한 금액 리스트
-            List<Integer> validAmounts = Arrays.asList(10000, 20000, 30000);
+            List<Integer> validAmounts = Arrays.asList(10000, 20000, 30000, 50000, 100000, 200000);
             // 결제 금액 유효성 검증 실패 시
             if (!validAmounts.contains(kiccTransactionDTO.getAmount())) {
                 return ResponseEntity.status(code.getHttpStatus()).body(ResponseVO.builder(code).message("INVALID_AMOUNT").build());

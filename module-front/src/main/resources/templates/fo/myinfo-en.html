@@ -29,6 +29,10 @@
                                 <p class="form-title">ID</p>
                                 <input type="text" class="form-control form-lg" placeholder="" th:value="${session.loginUser.webId}" disabled/>
                             </div>
+                            <div class="form-wrap disabled">
+                                <p class="form-title">Balance</p>
+                                <input type="text" class="form-control form-lg" placeholder="" th:value="${#numbers.formatInteger(balance, 1, 'COMMA')}" disabled/>
+                            </div>
                             <div class="form-wrap">
                                 <p class="form-title">Password</p>
                                 <input type="password" class="form-control form-lg" placeholder="Enter your password." value="" name="webPw"/>

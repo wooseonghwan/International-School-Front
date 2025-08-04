@@ -29,6 +29,10 @@
                                 <p class="form-title">아이디</p>
                                 <input type="text" class="form-control form-lg" placeholder="" th:value="${session.loginUser.webId}" disabled/>
                             </div>
+                            <div class="form-wrap disabled">
+                                <p class="form-title">잔액</p>
+                                <input type="text" class="form-control form-lg" placeholder="" th:value="${#numbers.formatInteger(balance, 1, 'COMMA')}" disabled/>
+                            </div>
                             <div class="form-wrap">
                                 <p class="form-title">새 비밀번호</p>
                                 <input type="password" class="form-control form-lg" placeholder="새 비밀번호를 입력해주세요." value="" name="webPw"/>

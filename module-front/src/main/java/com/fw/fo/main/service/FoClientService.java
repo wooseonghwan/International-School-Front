@@ -296,4 +296,8 @@ public class FoClientService {
         }
         return foClientDTO.getClientSeq();
     }
+
+    public int getClientBalance(String custNo) {
+        return foClientMapper.getClientBalance(custNo);
+    }
 }

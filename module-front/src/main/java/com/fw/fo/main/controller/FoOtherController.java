@@ -7,6 +7,7 @@ import com.fw.core.dto.fo.FoNoticeDTO;
 import com.fw.core.dto.fo.FoUserDTO;
 import com.fw.core.util.AesUtil;
 import com.fw.core.vo.ResponseVO;
+import com.fw.fo.main.service.FoClientService;
 import com.fw.fo.main.service.FoOtherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class FoOtherController {
 
     private final FoOtherService foOtherService;
+    private final FoClientService foClientService;
 
     @GetMapping({ "/fo/menu" })
     public String menu(ModelMap model, FoMenuDTO foMenuDTO) {
@@ -147,6 +149,7 @@ public class FoOtherController {
         }
         FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
         model.addAttribute("user", loginUser);
+        model.addAttribute("balance", foClientService.getClientBalance(loginUser.getCustNo()));
         return "fo/myinfo";
     }
     @PostMapping("/fo/update-password")
@@ -183,6 +186,7 @@ public class FoOtherController {
         }
         FoUserDTO loginUser = (FoUserDTO) session.getAttribute("loginUser");
         model.addAttribute("user", loginUser);
+        model.addAttribute("balance", foClientService.getClientBalance(loginUser.getCustNo()));
         return "fo/myinfo-en";
     }
 }

@@ -39,7 +39,8 @@ public class FoMainController {
 	 * Front 메인 페이지
 	 */
 	@GetMapping({ "/" })	
-	public String main(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) {
+	public String main(ModelMap model, FoNoticeDTO foNoticeDTO, FoNoticeBoardDTO foNoticeBoardDTO, HttpSession httpSession) throws Exception {
+        log.info(AesUtil.encrypt("1234"));
 		FoUserDTO loginUser = (FoUserDTO) httpSession.getAttribute("loginUser");
 		model.addAttribute("user", loginUser);
 		model.addAttribute("noticeList", foOtherService.selectNoticeListMain(foNoticeDTO));

@@ -158,4 +158,10 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+    <select id="getClientBalance" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT ipkm - chkm
+          FROM balance_tb
+         WHERE custNo = #{custNo}
+    </select>
 </mapper>

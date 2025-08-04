@@ -13,4 +13,5 @@ public interface FoClientMapper {
     void inserExpertNeed(FoClientDTO foClientDTO);
     void inserConsultingMethod(FoClientDTO foClientDTO);
     void inserEtcRequest(FoClientDTO foClientDTO);
+    int getClientBalance(String custNo);
 }
