@@ -107,34 +107,36 @@
     </select>
 
     <select id="selectPaymentUseList" parameterType="FoPaymentDTO" resultType="FoPaymentDTO">
-        SELECT fDate
-             , date_format(cDate, '%H:%i:%s') as createDt
-             , gbn
-             , amnt
-             , balance
-             , menuNm
-            FROM mkt_desc_tb
+        SELECT mdt.fDate
+             , date_format(mdt.cDate, '%H:%i:%s') as createDt
+             , mdt.gbn
+             , mdt.amnt
+             , (bt.ipkm - bt.chkm) as balance
+             , mdt.menuNm
+            FROM mkt_desc_tb mdt
+        LEFT JOIN balance_tb bt ON bt.custNo = mdt.custNo
         <where>
-            custNo = #{custNo} and rtn = '01'
+            mdt.custNo = #{custNo} and mdt.rtn = '01'
             <if test="searchStart != null and searchStart != ''">
-                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+                AND date_format(mdt.cDate, '%Y-%m-%d') >= #{searchStart}
             </if>
             <if test="searchEnd != null and searchEnd != ''">
-                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+                AND date_format(mdt.cDate, '%Y-%m-%d') &lt;= #{searchEnd}
             </if>
         </where>
-        ORDER BY cDate DESC
+        ORDER BY mdt.cDate DESC
     </select>
     <select id="selectPaymentUseListCnt" resultType="int" parameterType="FoPaymentDTO">
         SELECT COUNT(*)
-        FROM mkt_desc_tb
+        FROM mkt_desc_tb mdt
+    LEFT JOIN balance_tb bt ON bt.custNo = mdt.custNo
         <where>
-            custNo = #{custNo} and rtn = '01'
+            mdt.custNo = #{custNo} and mdt.rtn = '01'
             <if test="searchStart != null and searchStart != ''">
-                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+                AND date_format(mdt.cDate, '%Y-%m-%d') >= #{searchStart}
             </if>
             <if test="searchEnd != null and searchEnd != ''">
-                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+                AND date_format(mdt.cDate, '%Y-%m-%d') &lt;= #{searchEnd}
             </if>
         </where>
     </select>

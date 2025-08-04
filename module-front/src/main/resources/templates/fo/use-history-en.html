@@ -79,8 +79,8 @@
                                         <p>-</p>
                                     </td>
                                 </th:block>
-                                <td class="text-center">
-                                    <p>632,450</p>
+                                <td class="text-center" th:text="${list.balance != null and list.balance != 0} ? ${#numbers.formatInteger(list.balance, 3, 'COMMA')} : '0'">
+                                    <p>-</p>
                                 </td>
                             </tr>
                             </tbody>
