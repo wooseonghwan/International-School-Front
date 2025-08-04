@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.apache.commons.codec.binary.Base64.isBase64;
+
 /**
  * Main Controller
  */
@@ -192,18 +194,28 @@ public class FoMainController {
 		FoUserDTO user = foMainService.findPassword(dto);
 
 		if (user != null && user.getWebPw() != null) {
+			String webPw = user.getWebPw();
 			try {
-				String decryptedPw = AesUtil.decrypt(user.getWebPw());
-				result.put("webPw", decryptedPw);
+				// 1. Base64 형식인지 먼저 체크 (4의 배수 길이 등)
+				if (isBase64(webPw)) {
+					// 2. 복호화 시도
+					String decryptedPw = AesUtil.decrypt(webPw);
+					result.put("webPw", decryptedPw);
+				} else {
+					// 암호화되어 있지 않다면 그대로 사용
+					result.put("webPw", webPw);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				result.put("error", "비밀번호 복호화 실패");
+				// 복호화 실패 시에도 원본 반환 (암호화되지 않은 걸로 간주)
+				result.put("webPw", webPw);
 			}
 		} else {
 			result.put("error", "일치하는 회원이 없습니다.");
 		}
 		return result;
 	}
+
 	@GetMapping({ "/fo/terms" })
 	public String terms() {
 		return "fo/terms";
