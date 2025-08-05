@@ -21,7 +21,6 @@
              , custNo
              , gbn
              , amnt
-             , balance
              , cDate
         ) VALUES (
                CURDATE()
@@ -31,7 +30,6 @@
              , #{custNo}
              , 'CHARGE'
              , #{amnt}
-             , 0
              , NOW()
         )
     </insert>
@@ -59,7 +57,6 @@
              , amnt
              , menuCd
              , menuNm
-             , balance
              , cDate
         ) VALUES (
                CURDATE()
@@ -72,7 +69,6 @@
              , #{amnt}
              , 'CHARGE'
              , '충전'
-             , 0
              , NOW()
         )
     </insert>
