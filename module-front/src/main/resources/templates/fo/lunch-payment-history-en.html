@@ -6,7 +6,7 @@
         <div class="container">
             <div class="payment-wrap">
                 <div class="payment-head">
-                    <p class="title">Charge Breakdown</p>
+                    <p class="title">Charge History</p>
                     <form name="searchForm">
                         <div class="daterange-wrap">
                             <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart"/>
@@ -19,7 +19,7 @@
                 <div class="table-container">
                     <div class="table-top">
                         <div class="d-flex align-items-center gap-3">
-                            <p class="table-top-title">Total Payment Records</p>
+                            <p class="table-top-title">Total Charging History</p>
                             <p class="table-top-desc">Total <span th:text="${searchInfo.totalCount}">26</span></p>
                         </div>
                     </div>
@@ -32,8 +32,8 @@
                         <thead>
                         <tr>
                             <th class="text-center">Date</th>
-                            <th class="text-center">Views</th>
-                            <th class="text-center">Payment Amount</th>
+                            <th class="text-center">Time</th>
+                            <th class="text-center">Charging Amount</th>
                         </tr>
                         </thead>
                         <tbody>
