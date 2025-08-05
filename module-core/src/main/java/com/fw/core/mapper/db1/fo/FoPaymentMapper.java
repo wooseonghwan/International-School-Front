@@ -17,4 +17,6 @@ public interface FoPaymentMapper {
     int selectPaymentChargeListCnt(FoPaymentDTO foPaymentDTO);
     List<FoPaymentDTO> selectPaymentUseList(FoPaymentDTO foPaymentDTO);
     int selectPaymentUseListCnt(FoPaymentDTO foPaymentDTO);
+    List<FoPaymentDTO> getTargeListtForSyncBalance();
+    void syncBalance(FoPaymentDTO foPaymentDTO);
 }

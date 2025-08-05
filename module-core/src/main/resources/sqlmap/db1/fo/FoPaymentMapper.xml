@@ -107,10 +107,9 @@
              , date_format(mdt.cDate, '%H:%i:%s') as createDt
              , mdt.gbn
              , mdt.amnt
-             , (bt.ipkm - bt.chkm) as balance
+             , mdt.balance
              , mdt.menuNm
-            FROM mkt_desc_tb mdt
-        LEFT JOIN balance_tb bt ON bt.custNo = mdt.custNo
+          FROM mkt_desc_tb mdt
         <where>
             mdt.custNo = #{custNo} and mdt.rtn = '01'
             <if test="searchStart != null and searchStart != ''">
@@ -124,8 +123,7 @@
     </select>
     <select id="selectPaymentUseListCnt" resultType="int" parameterType="FoPaymentDTO">
         SELECT COUNT(*)
-        FROM mkt_desc_tb mdt
-    LEFT JOIN balance_tb bt ON bt.custNo = mdt.custNo
+          FROM mkt_desc_tb mdt
         <where>
             mdt.custNo = #{custNo} and mdt.rtn = '01'
             <if test="searchStart != null and searchStart != ''">
@@ -136,4 +134,33 @@
             </if>
         </where>
     </select>
+
+    <!-- 잔액 동기화 대상 조회 -->
+    <select id="getTargeListtForSyncBalance" resultType="com.fw.core.dto.fo.FoPaymentDTO">
+        SELECT A.fDate
+             , A.rtn
+             , A.ilno
+             , A.snno
+             , A.loc
+             , A.custNo
+             , A.gbn
+             , A.amnt
+             , IFNULL(B.ipkm - B.chkm, 0) AS currentBalance
+          FROM mkt_desc_tb A
+     LEFT JOIN balance_tb B ON A.custNo = B.custNo
+         WHERE A.balance IS NULL
+           AND A.cDate > '2025-08-05 23:59:59'
+    </select>
+
+    <!-- 잔액 동기화 -->
+    <update id="syncBalance" parameterType="com.fw.core.dto.fo.FoPaymentDTO">
+        UPDATE mkt_desc_tb
+           SET balance = #{balance}
+         WHERE fDate = #{fDate}
+           AND rtn = #{rtn}
+           AND ilno = #{ilno}
+           AND snno = #{snno}
+           AND loc = #{loc}
+    </update>
+
 </mapper>

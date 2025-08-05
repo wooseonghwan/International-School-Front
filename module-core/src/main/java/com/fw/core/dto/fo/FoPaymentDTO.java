@@ -13,7 +13,7 @@ public class FoPaymentDTO extends CommonDTO {
     private String cDate;
     private String custName;
     private String custNo;
-    private int balance;
+    private Integer balance;
     private String gbn;
     private String rtn;
     private int amnt;
@@ -27,4 +27,5 @@ public class FoPaymentDTO extends CommonDTO {
     private String createDt;
     private String searchStart;
     private String searchEnd;
+    private int currentBalance;
 }
