@@ -57,7 +57,7 @@
                                     <p>09:22:44</p>
                                 </td>
                                 <th:block th:if="${list.gbn == 'CHARGE'}">
-                                    <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 3, 'COMMA')} : '0'">
+                                    <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 1, 'COMMA')} : '0'">
                                         <p>-</p>
                                     </td>
                                 </th:block>
@@ -75,13 +75,20 @@
                                     </td>
                                 </th:block>
                                 <th:block th:if="${list.gbn != 'CHARGE'}">
-                                    <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 3, 'COMMA')} : '0'">
+                                    <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 1, 'COMMA')} : '0'">
                                         <p>-</p>
                                     </td>
                                 </th:block>
-                                <td class="text-center" th:text="${list.balance != null and list.balance != 0} ? ${#numbers.formatInteger(list.balance, 3, 'COMMA')} : '0'">
-                                    <p>-</p>
-                                </td>
+                                <th:block th:if="${list.balance == null}">
+                                    <td class="text-center">
+                                        <p>-</p>
+                                    </td>
+                                </th:block>
+                                <th:block th:if="${list.balance != null}">
+                                    <td class="text-center" th:text="${#numbers.formatInteger(list.balance, 1, 'COMMA')}">
+                                        <p>-</p>
+                                    </td>
+                                </th:block>
                             </tr>
                             </tbody>
                         </table>
