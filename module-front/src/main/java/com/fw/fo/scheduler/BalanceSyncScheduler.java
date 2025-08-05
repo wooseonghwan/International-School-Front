@@ -29,12 +29,8 @@ public class BalanceSyncScheduler {
         isRunning = true;
 
         try {
-            // 잔액 동기화 대상 조회
-            List<FoPaymentDTO> targetList = foPaymentService.getTargeListtForSyncBalance();
-            // 대상 없으면 종료
-            if (targetList.isEmpty()) return;
             // 잔액 동기화
-            foPaymentService.syncBalance(targetList);
+            foPaymentService.syncBalance();
         } catch (Exception e) {
             log.error("잔액 동기화 스케쥴 처리 중 오류발생", e);
         } finally {

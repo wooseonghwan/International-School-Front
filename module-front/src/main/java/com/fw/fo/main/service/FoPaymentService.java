@@ -277,20 +277,8 @@ public class FoPaymentService {
         return foPaymentMapper.selectPaymentUseListCnt(foPaymentDTO);
     }
 
-    public List<FoPaymentDTO> getTargeListtForSyncBalance() {
-        return foPaymentMapper.getTargeListtForSyncBalance();
-    }
-
-    @Transactional
-    public void syncBalance(List<FoPaymentDTO> targetList) {
-        // 잔액 동기화 처리
-        targetList.forEach(target -> {
-            // balance 설정 (gbn - CHARGE 충전이외 모두 사용)
-            int balance = "CHARGE".equals(target.getGbn()) ? (target.getCurrentBalance() + target.getAmnt()) : (target.getCurrentBalance() - target.getAmnt());
-            // 잔액 동기화
-            target.setBalance(balance);
-            foPaymentMapper.syncBalance(target);
-        });
+    public void syncBalance() {
+        foPaymentMapper.syncBalance();
     }
 
 }

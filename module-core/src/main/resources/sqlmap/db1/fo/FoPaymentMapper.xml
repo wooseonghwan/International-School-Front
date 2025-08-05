@@ -135,32 +135,25 @@
         </where>
     </select>
 
-    <!-- 잔액 동기화 대상 조회 -->
-    <select id="getTargeListtForSyncBalance" resultType="com.fw.core.dto.fo.FoPaymentDTO">
-        SELECT A.fDate
-             , A.rtn
-             , A.ilno
-             , A.snno
-             , A.loc
-             , A.custNo
-             , A.gbn
-             , A.amnt
-             , IFNULL(B.ipkm - B.chkm, 0) AS currentBalance
-          FROM mkt_desc_tb A
-     LEFT JOIN balance_tb B ON A.custNo = B.custNo
-         WHERE A.balance IS NULL
-           AND A.cDate > '2025-08-05 23:59:59'
-    </select>
-
     <!-- 잔액 동기화 -->
-    <update id="syncBalance" parameterType="com.fw.core.dto.fo.FoPaymentDTO">
-        UPDATE mkt_desc_tb
-           SET balance = #{balance}
-         WHERE fDate = #{fDate}
-           AND rtn = #{rtn}
-           AND ilno = #{ilno}
-           AND snno = #{snno}
-           AND loc = #{loc}
+    <update id="syncBalance">
+        <![CDATA[
+        UPDATE mkt_desc_tb m
+          JOIN (
+                 SELECT m1.fDate
+                      , m1.rtn
+                      , m1.ilno
+                      , m1.snno
+                      , m1.loc
+                      , COALESCE(ubi.balance, 0) + SUM(CASE WHEN m2.gbn = 'CHARGE' THEN m2.amnt ELSE -m2.amnt END) AS calculatedBalance
+                   FROM mkt_desc_tb m1
+                   JOIN mkt_desc_tb m2 ON m1.custNo = m2.custNo AND m2.cDate <= m1.cDate
+              LEFT JOIN user_balance_init ubi ON m1.custNo = ubi.custNo
+                  WHERE m1.balance IS NULL
+              GROUP BY m1.fDate, m1.rtn, m1.ilno, m1.snno, m1.loc
+        ) AS sub ON m.fDate = sub.fDate AND m.rtn = sub.rtn AND m.ilno = sub.ilno AND m.snno = sub.snno AND m.loc = sub.loc
+        SET m.balance = sub.calculatedBalance
+        ]]>
     </update>
 
 </mapper>
