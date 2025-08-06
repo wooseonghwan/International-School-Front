@@ -15,7 +15,9 @@ public interface FoPaymentMapper {
     String getSnnoForRegisterPaymentDesc();
     List<FoPaymentDTO> selectPaymentChargeList(FoPaymentDTO foPaymentDTO);
     int selectPaymentChargeListCnt(FoPaymentDTO foPaymentDTO);
+    int selectTotalChargeAmount(FoPaymentDTO foPaymentDTO);
     List<FoPaymentDTO> selectPaymentUseList(FoPaymentDTO foPaymentDTO);
     int selectPaymentUseListCnt(FoPaymentDTO foPaymentDTO);
+    int selectTotalUseAmount(FoPaymentDTO foPaymentDTO);
     void syncBalance();
 }

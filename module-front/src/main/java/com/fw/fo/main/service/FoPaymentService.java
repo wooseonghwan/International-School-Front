@@ -268,6 +268,9 @@ public class FoPaymentService {
     public int selectPaymentChargeListCnt(FoPaymentDTO foPaymentDTO){
         return foPaymentMapper.selectPaymentChargeListCnt(foPaymentDTO);
     }
+    public int selectTotalChargeAmount(FoPaymentDTO foPaymentDTO) {
+        return foPaymentMapper.selectTotalChargeAmount(foPaymentDTO);
+    }
 
     public List<FoPaymentDTO> selectPaymentUseList(FoPaymentDTO foPaymentDTO){
         return foPaymentMapper.selectPaymentUseList(foPaymentDTO);
@@ -275,6 +278,10 @@ public class FoPaymentService {
 
     public int selectPaymentUseListCnt(FoPaymentDTO foPaymentDTO){
         return foPaymentMapper.selectPaymentUseListCnt(foPaymentDTO);
+    }
+
+    public int selectTotalUseAmount(FoPaymentDTO foPaymentDTO) {
+        return foPaymentMapper.selectTotalUseAmount(foPaymentDTO);
     }
 
     public void syncBalance() {

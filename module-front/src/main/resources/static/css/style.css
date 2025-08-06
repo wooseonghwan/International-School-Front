@@ -577,6 +577,7 @@ img {
   min-width: 340px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Pretendard", "NanumGothic", system-ui, -apple-system, arial;
+  z-index: 1050 !important;
 }
 .ui-datepicker.ui-widget-content {
   border: 1px solid #e7e7e7;
@@ -2298,7 +2299,7 @@ input[type=number] {
 .pc-header .header-top .gnb {
   display: flex;
   align-items: center;
-  gap: 44px;
+  gap: 30px;
 }
 @media (max-width: 1299.98px) {
   .pc-header .header-top .gnb {
@@ -2307,7 +2308,7 @@ input[type=number] {
 }
 .pc-header .header-top .gnb li a {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 150%;
   color: #6D6B69;
 }

@@ -9,9 +9,9 @@
                     <p class="title">Charge History</p>
                     <form name="searchForm">
                         <div class="daterange-wrap">
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart"/>
+                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart" th:value="${searchInfo.searchStart}"/>
                             <div class="hyphen"></div>
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd"/>
+                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd" th:value="${searchInfo.searchEnd}"/>
                             <button type="button" class="btn btn-dark" data-role="btn-search-form">Search</button>
                         </div>
                     </form>
@@ -21,19 +21,24 @@
                         <div class="d-flex align-items-center gap-3">
                             <p class="table-top-title">Total Charging History</p>
                             <p class="table-top-desc">Total <span th:text="${searchInfo.totalCount}">26</span></p>
+                            <p class="table-top-desc">
+                                Total Charging Amount : <span th:text="${totalChargeAmount != null ? #numbers.formatInteger(totalChargeAmount, 1, 'COMMA') : '0'}"></span>
+                            </p>
                         </div>
                     </div>
                     <table class="table border-table payment">
                         <colgroup>
-                            <col width="33.3%"/>
-                            <col width="33.3%"/>
-                            <col width="33.3%"/>
+                            <col width="25%"/>
+                            <col width="25%"/>
+                            <col width="25%"/>
+                            <col width="25%"/>
                         </colgroup>
                         <thead>
                         <tr>
                             <th class="text-center">Date</th>
                             <th class="text-center">Time</th>
                             <th class="text-center">Charging Amount</th>
+                            <th class="text-center">Charging Method</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,6 +56,9 @@
                                 </td>
                                 <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 3, 'COMMA')} : '0'">
                                     <p>91,100</p>
+                                </td>
+                                <td class="text-center" th:text="${list.loc}">
+                                    <p>WEB</p>
                                 </td>
                             </tr>
                         </tbody>

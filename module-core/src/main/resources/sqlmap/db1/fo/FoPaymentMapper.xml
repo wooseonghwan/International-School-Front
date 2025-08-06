@@ -76,28 +76,29 @@
         SELECT fDate
              , date_format(cDate, '%H:%i:%s') as createDt
              , amnt
-            FROM mkt_tb
+             , loc
+            FROM mkt_desc_tb
         <where>
             gbn = 'CHARGE' and custNo = #{custNo} and rtn = '01'
             <if test="searchStart != null and searchStart != ''">
-                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+                AND date_format(fDate, '%Y-%m-%d') >= #{searchStart}
             </if>
             <if test="searchEnd != null and searchEnd != ''">
-                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+                AND date_format(fDate, '%Y-%m-%d') &lt;= #{searchEnd}
             </if>
         </where>
         ORDER BY cDate DESC
     </select>
     <select id="selectPaymentChargeListCnt" resultType="int" parameterType="FoPaymentDTO">
         SELECT COUNT(*)
-        FROM mkt_tb
+        FROM mkt_desc_tb
         <where>
             gbn = 'CHARGE' and custNo = #{custNo} and rtn = '01'
             <if test="searchStart != null and searchStart != ''">
-                AND date_format(cDate, '%Y-%m-%d') >= #{searchStart}
+                AND date_format(fDate, '%Y-%m-%d') >= #{searchStart}
             </if>
             <if test="searchEnd != null and searchEnd != ''">
-                AND date_format(cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+                AND date_format(fDate, '%Y-%m-%d') &lt;= #{searchEnd}
             </if>
         </where>
     </select>
@@ -111,12 +112,12 @@
              , mdt.menuNm
           FROM mkt_desc_tb mdt
         <where>
-            mdt.custNo = #{custNo} and mdt.rtn = '01'
+            gbn != 'CHARGE' and mdt.custNo = #{custNo} and mdt.rtn = '01'
             <if test="searchStart != null and searchStart != ''">
-                AND date_format(mdt.cDate, '%Y-%m-%d') >= #{searchStart}
+                AND date_format(mdt.fDate, '%Y-%m-%d') >= #{searchStart}
             </if>
             <if test="searchEnd != null and searchEnd != ''">
-                AND date_format(mdt.cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+                AND date_format(mdt.fDate, '%Y-%m-%d') &lt;= #{searchEnd}
             </if>
         </where>
         ORDER BY mdt.cDate DESC
@@ -125,12 +126,12 @@
         SELECT COUNT(*)
           FROM mkt_desc_tb mdt
         <where>
-            mdt.custNo = #{custNo} and mdt.rtn = '01'
+            gbn != 'CHARGE' and mdt.custNo = #{custNo} and mdt.rtn = '01'
             <if test="searchStart != null and searchStart != ''">
-                AND date_format(mdt.cDate, '%Y-%m-%d') >= #{searchStart}
+                AND date_format(mdt.fDate, '%Y-%m-%d') >= #{searchStart}
             </if>
             <if test="searchEnd != null and searchEnd != ''">
-                AND date_format(mdt.cDate, '%Y-%m-%d') &lt;= #{searchEnd}
+                AND date_format(mdt.fDate, '%Y-%m-%d') &lt;= #{searchEnd}
             </if>
         </where>
     </select>
@@ -155,5 +156,29 @@
         SET m.balance = sub.calculatedBalance
         ]]>
     </update>
+
+    <select id="selectTotalChargeAmount" resultType="int">
+        SELECT IFNULL(SUM(amnt), 0)
+        FROM mkt_desc_tb
+        WHERE gbn = 'CHARGE' and custNo = #{custNo} and rtn = '01'
+        <if test="searchStart != null and searchStart != ''">
+            AND DATE(fDate) &gt;= #{searchStart}
+        </if>
+        <if test="searchEnd != null and searchEnd != ''">
+            AND DATE(fDate) &lt;= #{searchEnd}
+        </if>
+    </select>
+
+    <select id="selectTotalUseAmount" resultType="int">
+        SELECT IFNULL(SUM(amnt), 0)
+        FROM mkt_desc_tb
+        WHERE gbn != 'CHARGE' and custNo = #{custNo} and rtn = '01'
+        <if test="searchStart != null and searchStart != ''">
+            AND DATE(fDate) &gt;= #{searchStart}
+        </if>
+        <if test="searchEnd != null and searchEnd != ''">
+            AND DATE(fDate) &lt;= #{searchEnd}
+        </if>
+    </select>
 
 </mapper>

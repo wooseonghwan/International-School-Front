@@ -92,19 +92,26 @@
                                         <col width="20%"/>
                                     </colgroup>
                                     <tbody>
-                                    <th:block th:if="${#lists.isEmpty(noticeList)}">
-                                        <tr>
-                                            <td colspan="3" class="text-center">등록된 공지사항이 없습니다.</td>
+                                    <th:block th:if="${user != null}">
+                                        <th:block th:if="${#lists.isEmpty(noticeList)}">
+                                            <tr>
+                                                <td colspan="3" class="text-center">등록된 공지사항이 없습니다.</td>
+                                            </tr>
+                                        </th:block>
+                                        <tr th:each="noticeList : ${noticeList}">
+                                            <td class="text-start">
+                                                <p class="text-truncate" th:text="${noticeList.title}">8월 급식 운영 일정 안내</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="date" th:text="${noticeList.createDt}">2025.07.04</p>
+                                            </td>
                                         </tr>
                                     </th:block>
-                                    <tr th:each="noticeList : ${noticeList}">
-                                        <td class="text-start">
-                                            <p class="text-truncate" th:text="${noticeList.title}">8월 급식 운영 일정 안내</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="date" th:text="${noticeList.createDt}">2025.07.04</p>
-                                        </td>
-                                    </tr>
+                                    <th:block th:if="${user == null}">
+                                        <tr>
+                                            <td colspan="3" class="text-center">로그인 후 확인 가능합니다.</td>
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
                             </div>

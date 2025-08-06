@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -32,7 +31,10 @@ public class FoOtherController {
     private final FoClientService foClientService;
 
     @GetMapping({ "/fo/menu" })
-    public String menu(ModelMap model, FoMenuDTO foMenuDTO) {
+    public String menu(ModelMap model, FoMenuDTO foMenuDTO, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         model.addAttribute("detail1", foOtherService.selectMenuFileDetail1(foMenuDTO));
         model.addAttribute("detail2", foOtherService.selectMenuFileDetail2(foMenuDTO));
         model.addAttribute("detail3", foOtherService.selectMenuFileDetail3(foMenuDTO));
@@ -40,7 +42,10 @@ public class FoOtherController {
         return "fo/menu";
     }
     @GetMapping({ "/fo/menu-en" })
-    public String menuEn(ModelMap model, FoMenuDTO foMenuDTO) {
+    public String menuEn(ModelMap model, FoMenuDTO foMenuDTO, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         model.addAttribute("detail1", foOtherService.selectMenuFileDetail1(foMenuDTO));
         model.addAttribute("detail2", foOtherService.selectMenuFileDetail2(foMenuDTO));
         model.addAttribute("detail3", foOtherService.selectMenuFileDetail3(foMenuDTO));
@@ -115,7 +120,10 @@ public class FoOtherController {
         return "fo/notice-board-detail-en";
     }
     @GetMapping({ "/fo/notice-announcement" })
-    public String notice(ModelMap model, FoNoticeDTO foNoticeDTO) {
+    public String notice(ModelMap model, FoNoticeDTO foNoticeDTO, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         int total = foOtherService.selectNoticeListCnt(foNoticeDTO);
         foNoticeDTO.setTotalCount(total);
         foNoticeDTO.calculatePaging();
@@ -124,7 +132,10 @@ public class FoOtherController {
         return "fo/notice-announcement";
     }
     @GetMapping({ "/fo/notice-announcement-en" })
-    public String noticeEn(ModelMap model, FoNoticeDTO foNoticeDTO) {
+    public String noticeEn(ModelMap model, FoNoticeDTO foNoticeDTO, HttpSession session) {
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/fo/login";
+        }
         int total = foOtherService.selectNoticeListCnt(foNoticeDTO);
         foNoticeDTO.setTotalCount(total);
         foNoticeDTO.calculatePaging();

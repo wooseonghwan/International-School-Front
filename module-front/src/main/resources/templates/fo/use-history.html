@@ -9,9 +9,9 @@
                     <p class="title">사용내역</p>
                     <form name="searchForm">
                         <div class="daterange-wrap">
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart"/>
+                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart" th:value="${searchInfo.searchStart}"/>
                             <div class="hyphen"></div>
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd"/>
+                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd" th:value="${searchInfo.searchEnd}"/>
                             <button type="button" class="btn btn-dark" data-role="btn-search-form">조회하기</button>
                         </div>
                     </form>
@@ -21,26 +21,27 @@
                         <div class="d-flex align-items-center gap-3">
                             <p class="table-top-title">전체 사용내역</p>
                             <p class="table-top-desc">총 <span th:text="${searchInfo.totalCount}">26</span>개</p>
+                            <p class="table-top-desc ms-auto">
+                                총 사용금액 : <span th:text="${totalUseAmount != null ? #numbers.formatInteger(totalUseAmount, 1, 'COMMA') : '0'}"></span>
+                            </p>
                         </div>
                     </div>
                     <div class="scroll-layout">
                         <table class="table border-table payment">
                             <colgroup>
-                                <col width="16.6%"/>
-                                <col width="16.6%"/>
-                                <col width="16.6%"/>
-                                <col width="16.6%"/>
-                                <col width="16.6%"/>
-                                <col width="16.6%"/>
+                                <col width="20%"/>
+                                <col width="20%"/>
+                                <col width="20%"/>
+                                <col width="20%"/>
+                                <col width="20%"/>
                             </colgroup>
                             <thead>
                             <tr>
                                 <th class="text-center">날짜</th>
                                 <th class="text-center">시간</th>
-                                <th class="text-center">충전 금액</th>
                                 <th class="text-center">사용항목</th>
+                                <th class="text-center">메뉴명</th>
                                 <th class="text-center">사용금액</th>
-                                <th class="text-center">잔액</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,39 +57,15 @@
                                 <td class="text-center" th:text="${list.createDt}">
                                     <p>09:22:44</p>
                                 </td>
-                                <th:block th:if="${list.gbn == 'CHARGE'}">
-                                    <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 1, 'COMMA')} : '0'">
-                                        <p>-</p>
-                                    </td>
-                                </th:block>
-                                <th:block th:if="${list.gbn != 'CHARGE'}">
-                                    <td class="text-center">
-                                        <p>-</p>
-                                    </td>
-                                </th:block>
+                                <td class="text-center" th:text="${list.gbn}">
+                                    <p>아메리카노 Ice</p>
+                                </td>
                                 <td class="text-center" th:text="${list.menuNm}">
                                     <p>아메리카노 Ice</p>
                                 </td>
-                                <th:block th:if="${list.gbn == 'CHARGE'}">
-                                    <td class="text-center">
-                                        <p>-</p>
-                                    </td>
-                                </th:block>
-                                <th:block th:if="${list.gbn != 'CHARGE'}">
-                                    <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 1, 'COMMA')} : '0'">
-                                        <p>-</p>
-                                    </td>
-                                </th:block>
-                                <th:block th:if="${list.balance == null}">
-                                    <td class="text-center">
-                                        <p>-</p>
-                                    </td>
-                                </th:block>
-                                <th:block th:if="${list.balance != null}">
-                                    <td class="text-center" th:text="${#numbers.formatInteger(list.balance, 1, 'COMMA')}">
-                                        <p>-</p>
-                                    </td>
-                                </th:block>
+                                <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 1, 'COMMA')} : '0'">
+                                    <p>-</p>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
