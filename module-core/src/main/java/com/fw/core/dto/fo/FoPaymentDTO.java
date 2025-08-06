@@ -20,6 +20,7 @@ public class FoPaymentDTO extends CommonDTO {
     private String ilno;
     private String snno;
     private String loc;
+    private String locNm;
     private String menuCd;
     private String menuNm;
     private String syncDate;

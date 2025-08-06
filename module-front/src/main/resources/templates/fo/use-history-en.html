@@ -9,10 +9,20 @@
                     <p class="title">Details Of Usage</p>
                     <form name="searchForm">
                         <div class="daterange-wrap">
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart" th:value="${searchInfo.searchStart}" style="z-index: 1050 !important;position: relative;"/>
+                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" data-picker="date" name="searchStart" th:value="${searchInfo.searchStart}" />
                             <div class="hyphen"></div>
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd" th:value="${searchInfo.searchEnd}" style="z-index: 1050 !important;position: relative;"/>
+                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" data-picker="date" name="searchEnd" th:value="${searchInfo.searchEnd}"/>
                             <button type="button" class="btn btn-dark" data-role="btn-search-form">Search</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p class="table-top-desc fw-bold">
+                                Current Balance : <span th:text="${totalAmount != null ? #numbers.formatInteger(totalAmount, 1, 'COMMA') : '0'}"></span>
+                            </p>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p class="table-top-desc fw-bold">
+                                Total Usage Amount : <span th:text="${totalUseAmount != null ? #numbers.formatInteger(totalUseAmount, 1, 'COMMA') : '0'}"></span>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -21,9 +31,6 @@
                         <div class="d-flex align-items-center gap-3">
                             <p class="table-top-title">Total Usage History</p>
                             <p class="table-top-desc">Total <span th:text="${searchInfo.totalCount}">26</span></p>
-                            <p class="table-top-desc ms-auto">
-                                Total Usage Amount : <span th:text="${totalUseAmount != null ? #numbers.formatInteger(totalUseAmount, 1, 'COMMA') : '0'}"></span>
-                            </p>
                         </div>
                     </div>
                     <div class="scroll-layout">

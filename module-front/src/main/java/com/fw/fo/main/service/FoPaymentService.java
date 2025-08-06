@@ -271,6 +271,9 @@ public class FoPaymentService {
     public int selectTotalChargeAmount(FoPaymentDTO foPaymentDTO) {
         return foPaymentMapper.selectTotalChargeAmount(foPaymentDTO);
     }
+    public int selectTotalAmount(FoPaymentDTO foPaymentDTO) {
+        return foPaymentMapper.selectTotalAmount(foPaymentDTO);
+    }
 
     public List<FoPaymentDTO> selectPaymentUseList(FoPaymentDTO foPaymentDTO){
         return foPaymentMapper.selectPaymentUseList(foPaymentDTO);

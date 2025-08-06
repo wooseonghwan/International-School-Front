@@ -77,6 +77,9 @@
              , date_format(cDate, '%H:%i:%s') as createDt
              , amnt
              , loc
+            , CASE WHEN loc = 'WEB' THEN '웹사이트 결제'
+                   WHEN loc IN ('K01', 'K02', 'K03') THEN '현장 키오스크 결제'
+                   WHEN loc BETWEEN '00' AND '99' THEN '관리자 PC 충전 결제' END AS locNm
             FROM mkt_desc_tb
         <where>
             gbn = 'CHARGE' and custNo = #{custNo} and rtn = '01'
@@ -179,6 +182,12 @@
         <if test="searchEnd != null and searchEnd != ''">
             AND DATE(fDate) &lt;= #{searchEnd}
         </if>
+    </select>
+
+    <select id="selectTotalAmount" resultType="int">
+        SELECT IFNULL(SUM(ipkm), 0) - IFNULL(SUM(chkm), 0) AS balance
+        FROM balance_tb
+        WHERE custNo = #{custNo}
     </select>
 
 </mapper>

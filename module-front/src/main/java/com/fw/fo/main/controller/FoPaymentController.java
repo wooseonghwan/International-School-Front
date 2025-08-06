@@ -61,9 +61,11 @@ public class FoPaymentController {
         foPaymentDTO.setTotalCount(total);
         foPaymentDTO.calculatePaging();
         int totalChargeAmount = foPaymentService.selectTotalChargeAmount(foPaymentDTO);
+        int totalAmount = foPaymentService.selectTotalAmount(foPaymentDTO);
         model.addAttribute("paymentChargeList", foPaymentService.selectPaymentChargeList(foPaymentDTO));
         model.addAttribute("totalCount", foPaymentService.selectPaymentChargeListCnt(foPaymentDTO));
         model.addAttribute("totalChargeAmount", totalChargeAmount);
+        model.addAttribute("totalAmount", totalAmount);
         model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/lunch-payment-history";
     }
@@ -79,9 +81,11 @@ public class FoPaymentController {
         foPaymentDTO.setTotalCount(total);
         foPaymentDTO.calculatePaging();
         int totalChargeAmount = foPaymentService.selectTotalChargeAmount(foPaymentDTO);
+        int totalAmount = foPaymentService.selectTotalAmount(foPaymentDTO);
         model.addAttribute("paymentChargeList", foPaymentService.selectPaymentChargeList(foPaymentDTO));
         model.addAttribute("totalCount", foPaymentService.selectPaymentChargeListCnt(foPaymentDTO));
         model.addAttribute("totalChargeAmount", totalChargeAmount);
+        model.addAttribute("totalAmount", totalAmount);
         model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/lunch-payment-history-en";
     }
@@ -97,9 +101,11 @@ public class FoPaymentController {
         foPaymentDTO.setTotalCount(total);
         foPaymentDTO.calculatePaging();
         int totalUseAmount = foPaymentService.selectTotalUseAmount(foPaymentDTO);
+        int totalAmount = foPaymentService.selectTotalAmount(foPaymentDTO);
         model.addAttribute("paymentUseList", foPaymentService.selectPaymentUseList(foPaymentDTO));
         model.addAttribute("totalCount", foPaymentService.selectPaymentUseListCnt(foPaymentDTO));
         model.addAttribute("totalUseAmount", totalUseAmount);
+        model.addAttribute("totalAmount", totalAmount);
         model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/use-history";
     }
@@ -115,9 +121,11 @@ public class FoPaymentController {
         foPaymentDTO.setTotalCount(total);
         foPaymentDTO.calculatePaging();
         int totalUseAmount = foPaymentService.selectTotalUseAmount(foPaymentDTO);
+        int totalAmount = foPaymentService.selectTotalAmount(foPaymentDTO);
         model.addAttribute("paymentUseList", foPaymentService.selectPaymentUseList(foPaymentDTO));
         model.addAttribute("totalCount", foPaymentService.selectPaymentUseListCnt(foPaymentDTO));
         model.addAttribute("totalUseAmount", totalUseAmount);
+        model.addAttribute("totalAmount", totalAmount);
         model.addAttribute("searchInfo", foPaymentDTO);
         return "fo/use-history-en";
     }

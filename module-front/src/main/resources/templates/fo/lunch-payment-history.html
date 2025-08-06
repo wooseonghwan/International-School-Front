@@ -9,10 +9,20 @@
                     <p class="title">충전내역</p>
                     <form name="searchForm">
                         <div class="daterange-wrap">
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchStart" th:value="${searchInfo.searchStart}"/>
+                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" data-picker="date" name="searchStart" th:value="${searchInfo.searchStart}"/>
                             <div class="hyphen"></div>
-                            <input type="text" class="form-control" placeholder="YYYY.MM.DD" data-picker="date" name="searchEnd" th:value="${searchInfo.searchEnd}"/>
+                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" data-picker="date" name="searchEnd" th:value="${searchInfo.searchEnd}"/>
                             <button type="button" class="btn btn-dark" data-role="btn-search-form">조회하기</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p class="table-top-desc fw-bold">
+                                현재 잔액 : <span th:text="${totalAmount != null ? #numbers.formatInteger(totalAmount, 1, 'COMMA') : '0'}"></span>
+                            </p>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p class="table-top-desc fw-bold">
+                                총 충전금액 : <span th:text="${totalChargeAmount != null ? #numbers.formatInteger(totalChargeAmount, 1, 'COMMA') : '0'}"></span>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -22,9 +32,6 @@
                             <div class="d-flex align-items-center gap-3">
                                 <p class="table-top-title">전체 충전내역</p>
                                 <p class="table-top-desc">총 <span th:text="${searchInfo.totalCount}">26</span>개</p>
-                                <p class="table-top-desc ms-auto">
-                                    총 충전금액 : <span th:text="${totalChargeAmount != null ? #numbers.formatInteger(totalChargeAmount, 1, 'COMMA') : '0'}"></span>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -59,7 +66,7 @@
                                 <td class="text-center" th:text="${list.amnt != null and list.amnt != 0} ? ${#numbers.formatInteger(list.amnt, 3, 'COMMA')} : '0'">
                                     <p>91,100</p>
                                 </td>
-                                <td class="text-center" th:text="${list.loc}">
+                                <td class="text-center" th:text="${list.locNm}">
                                     <p>WEB</p>
                                 </td>
                             </tr>
