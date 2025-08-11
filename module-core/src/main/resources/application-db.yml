@@ -6,7 +6,7 @@ spring:
       on-profile: local
   datasource-db1:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    jdbc-url: jdbc:log4jdbc:mariadb://112.172.85.94:4902/tkis_pangyo
+    jdbc-url: jdbc:log4jdbc:mariadb://49.247.31.100:3306/tkis_pangyo
     username: pangyo
     password: pangyo12!@
     hikari:
@@ -32,7 +32,7 @@ spring:
       on-profile: dev
   datasource-db1:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    jdbc-url: jdbc:log4jdbc:mariadb://112.172.85.94:4902/tkis_pangyo
+    jdbc-url: jdbc:log4jdbc:mariadb://49.247.31.100:3306/tkis_pangyo
     username: pangyo
     password: pangyo12!@
     hikari:

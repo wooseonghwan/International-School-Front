@@ -22,13 +22,11 @@
                             <span class="value" th:text="${detailEn.createDt}">2025-10-25</span>
                         </div>
                     </div>
-                    <div class="desc-txt">
-                        <p th:utext="${detailEn.content}">
-                            The system is blah blah blah<br/>
-                            … omitted …<br/>
-                            Please check.
-                        </p>
-                    </div>
+                    <iframe
+                            th:attr="srcdoc=${detailEn.content}"
+                            style="width:100%;border:0;"
+                            onload="this.style.height = this.contentDocument.documentElement.scrollHeight + 'px';">
+                    </iframe>
                 </div>
                 <div class="btns d-flex align-items-center justify-content-end gap-2 mt-4">
                     <button type="button" class="btn btn-dark btn-md" onclick="location.href='/fo/notice-announcement-en'">List</button>
